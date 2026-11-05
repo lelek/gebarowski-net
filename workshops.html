@@ -161,6 +161,17 @@
             background: var(--mark);
         }
 
+        .marked .marked {
+            margin-top: 8px;
+            gap: 6px;
+        }
+
+        .marked .marked li::before {
+            box-sizing: border-box;
+            background: none;
+            border: 1.5px solid var(--mark);
+        }
+
         .program {
             display: grid;
             margin: 0;
@@ -295,11 +306,16 @@
         <section>
             <h2>Z czym wychodzisz</h2>
             <ul class="marked">
+                <li>Z lepszym rozeznaniem w sobie i w tym, czego szukasz na swojej ścieżce zawodowej:
+                    <ul class="marked">
+                        <li>jakie masz predyspozycje i preferencje,</li>
+                        <li>czego oczekujesz od miejsca pracy.</li>
+                    </ul>
+                </li>
                 <li>Kodem zainteresowań RIASEC: trzy litery opisujące, jakie rodzaje zadań lubisz.</li>
                 <li>Dwiema wartościami pracy, które są dla Ciebie najważniejsze.</li>
-                <li>Jednym zawodem sprawdzonym od strony zarobków, zmęczenia, gorszych stron i planu B.</li>
                 <li>Trzema konkretnymi krokami: na najbliższe 72 godziny, tydzień i miesiąc.</li>
-                <li>Metodą, którą możesz potem powtórzyć sam(a) dla kolejnych zawodów.</li>
+                <li>Metodą sprawdzania, czy dany zawód jest dla Ciebie. Możesz ją potem powtórzyć sam(a) dla kolejnych pomysłów.</li>
             </ul>
         </section>
 
