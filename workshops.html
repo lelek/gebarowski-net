@@ -282,9 +282,38 @@
             color: var(--muted);
         }
 
+        .host {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .host > div {
+            display: grid;
+            gap: 16px;
+            min-width: 0;
+        }
+
+        .portrait {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--mark);
+        }
+
         @media (max-width: 520px) {
             .downloads li {
                 grid-template-columns: 1fr;
+            }
+
+            .host {
+                grid-template-columns: 1fr;
+            }
+
+            .portrait {
+                width: 112px;
+                height: 112px;
             }
         }
     </style>
@@ -394,8 +423,13 @@
 
         <section>
             <h2>Prowadzący</h2>
-            <p>Paweł Gębarowski. Od ponad 15 lat pracuję w branży technologicznej, a dziś kieruję pracą zespołu inżynierów w Ocado Technology. Prowadzę też warsztaty o informacji zwrotnej.</p>
-            <p>Nie jestem psychologiem ani doradcą zawodowym. Wnoszę doświadczenie z rynku pracy i prostą metodę sprawdzania zawodu, którą każdy może powtórzyć samodzielnie.</p>
+            <div class="host">
+                <img class="portrait" src="images/portrait.jpg" width="140" height="140" alt="Paweł Gębarowski">
+                <div>
+                    <p>Paweł Gębarowski. Od ponad 15 lat pracuję w branży technologicznej, a dziś kieruję pracą zespołu inżynierów w Ocado Technology. Prowadzę też warsztaty o informacji zwrotnej.</p>
+                    <p>Nie jestem psychologiem ani doradcą zawodowym. Wnoszę doświadczenie z rynku pracy i prostą metodę sprawdzania zawodu, którą każdy może powtórzyć samodzielnie.</p>
+                </div>
+            </div>
         </section>
 
         <section>

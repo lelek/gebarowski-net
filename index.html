@@ -91,6 +91,25 @@
             margin: 0 0 12px;
         }
 
+        .card-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 0 40px 16px 0;
+        }
+
+        .card-head h2 {
+            margin: 0;
+        }
+
+        .portrait {
+            flex: none;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px #22d3ff;
+        }
+
         .card-list {
             margin: 0;
             padding: 0;
@@ -180,7 +199,10 @@
     <dialog class="card" id="card-about" aria-labelledby="card-about-title">
         <div class="card-body">
             <button class="card-close" type="button" aria-label="Zamknij">×</button>
-            <h2 id="card-about-title">Paweł Gębarowski</h2>
+            <div class="card-head">
+                <img class="portrait" src="images/portrait.jpg" width="72" height="72" alt="">
+                <h2 id="card-about-title">Paweł Gębarowski</h2>
+            </div>
             <p>Od ponad 15 lat pracuję w branży technologicznej, a dziś kieruję pracą zespołu inżynierów w Ocado Technology.</p>
             <p>Bardzo ważne są dla mnie relacje w miejscu pracy. Dużą przyjemność sprawia mi praca nad rozwojem zawodowym moich koleżanek i kolegów.</p>
             <ul class="card-list">
