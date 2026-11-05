@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Warsztat o wyborze drogi zawodowej</title>
+    <meta name="description" content="Czterogodzinny warsztat dla licealistów: zainteresowania, wartości pracy i sprawdzenie jednego zawodu. Program, prowadzący i materiały do pobrania.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #ffffff;
+            --fg: #222222;
+            --muted: #56636b;
+            --line: #e2e9ed;
+            --mark: #22d3ff;
+            --link: #08799e;
+            --break: #f3f8fa;
+            --font: 'Quicksand', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font);
+            font-size: 1.0625rem;
+            line-height: 1.6;
+            animation: arrive 0.35s ease-out;
+        }
+
+        @keyframes arrive {
+            from { opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body { animation: none; }
+        }
+
+        .page {
+            max-width: 46rem;
+            margin: 0 auto;
+            padding-block: 24px 48px;
+            padding-left: max(16px, env(safe-area-inset-left, 0px));
+            padding-right: max(16px, env(safe-area-inset-right, 0px));
+            display: grid;
+            gap: 56px;
+        }
+
+        .site-header a {
+            display: inline-block;
+        }
+
+        .site-header img {
+            display: block;
+            height: 30px;
+            width: auto;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            font-weight: 600;
+            line-height: 1.25;
+            text-wrap: balance;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 2.75rem);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.0625rem;
+        }
+
+        p {
+            margin: 0;
+            max-width: 65ch;
+        }
+
+        a {
+            color: var(--link);
+            text-underline-offset: 3px;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--mark);
+            outline-offset: 3px;
+        }
+
+        section, .intro {
+            display: grid;
+            gap: 16px;
+        }
+
+        .eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .lead {
+            font-size: 1.2rem;
+        }
+
+        .facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+            gap: 12px 32px;
+            margin: 8px 0 0;
+        }
+
+        .facts div {
+            display: grid;
+            gap: 2px;
+            padding-top: 10px;
+            border-top: 1px solid var(--line);
+        }
+
+        .facts dt {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .facts dd {
+            margin: 0;
+        }
+
+        .marked {
+            display: grid;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .marked li {
+            position: relative;
+            padding-left: 22px;
+            max-width: 65ch;
+        }
+
+        .marked li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.62em;
+            width: 7px;
+            height: 7px;
+            background: var(--mark);
+        }
+
+        .program {
+            display: grid;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border-top: 1px solid var(--line);
+        }
+
+        .program li {
+            display: grid;
+            grid-template-columns: 4.5rem 1fr;
+            gap: 4px 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .program .minutes {
+            grid-row: span 2;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .program p {
+            color: var(--muted);
+        }
+
+        .program .pause {
+            background: var(--break);
+            padding-left: 10px;
+            padding-right: 10px;
+            margin: 0 -10px;
+        }
+
+        .program .pause h3 {
+            font-weight: 400;
+        }
+
+        .note {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .downloads {
+            display: grid;
+            gap: 12px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .downloads li {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 6px 20px;
+            padding: 16px 18px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+        }
+
+        .downloads li > div {
+            display: grid;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .downloads .meta {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .download {
+            justify-self: start;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: var(--fg);
+            color: var(--bg);
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .download:hover {
+            background: var(--link);
+        }
+
+        .licenses {
+            font-size: 0.95rem;
+        }
+
+        .licenses p {
+            color: var(--muted);
+        }
+
+        footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        @media (max-width: 520px) {
+            .downloads li {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <header class="site-header">
+            <a href="index.html" aria-label="gebarowski.net, strona główna"><img src="logo.svg" alt="gebarowski.net"></a>
+        </header>
+
+        <div class="intro">
+            <p class="eyebrow">Warsztat dla licealistów</p>
+            <h1>Wybór drogi zawodowej</h1>
+            <p class="lead">Czterogodzinny warsztat dla uczniów, którzy zastanawiają się, co dalej po szkole. Nie wybieramy za nikogo zawodu. Ćwiczymy, jak sprawdzić jeden pomysł, zanim zainwestuje się w niego kilka lat nauki.</p>
+            <dl class="facts">
+                <div><dt>Dla kogo</dt><dd>uczniowie szkół średnich, ok. 17–18 lat</dd></div>
+                <div><dt>Grupa</dt><dd>do ok. 10 osób</dd></div>
+                <div><dt>Czas</dt><dd>4 godziny, w tym dwie przerwy</dd></div>
+                <div><dt>Forma</dt><dd>praca na papierze, bez telefonów i ekranów</dd></div>
+                <div><dt>Pierwsza edycja</dt><dd>grudzień 2026, bezpłatnie</dd></div>
+            </dl>
+        </div>
+
+        <section>
+            <h2>Z czym wychodzisz</h2>
+            <ul class="marked">
+                <li>Kodem zainteresowań RIASEC: trzy litery opisujące, jakie rodzaje zadań lubisz.</li>
+                <li>Dwiema wartościami pracy, które są dla Ciebie najważniejsze.</li>
+                <li>Jednym zawodem sprawdzonym od strony zarobków, zmęczenia, gorszych stron i planu B.</li>
+                <li>Trzema konkretnymi krokami: na najbliższe 72 godziny, tydzień i miesiąc.</li>
+                <li>Metodą, którą możesz potem powtórzyć sam(a) dla kolejnych zawodów.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Czego warsztat nie robi</h2>
+            <ul class="marked">
+                <li>Nie mówi, jaki zawód jest dla Ciebie.</li>
+                <li>Nie jest testem psychologicznym. Narzędzia nie mają polskich norm i służą do rozmowy, nie do diagnozy.</li>
+                <li>Nie zastępuje rozmowy z doradcą zawodowym ani z psychologiem.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Program</h2>
+            <ol class="program">
+                <li>
+                    <span class="minutes">25 min</span>
+                    <h3>Otwarcie</h3>
+                    <p>Poznajemy się, ustalamy zasady pracy, a każdy mówi, jakiego zawodu nie chciałby wykonywać.</p>
+                </li>
+                <li>
+                    <span class="minutes">25 min</span>
+                    <h3>Szkoła a rynek pracy</h3>
+                    <p>Częste pułapki przy wyborze kierunku i pytania, które warto zadać, zanim złożysz dokumenty.</p>
+                </li>
+                <li>
+                    <span class="minutes">25 min</span>
+                    <h3>Zainteresowania</h3>
+                    <p>Lista 60 czynności na podstawie O*NET® Interest Profiler. Wynikiem jest trzyliterowy kod RIASEC.</p>
+                </li>
+                <li>
+                    <span class="minutes">25 min</span>
+                    <h3>Wartości pracy</h3>
+                    <p>Układasz 20 zdań o idealnej pracy od najważniejszego do najmniej ważnego i liczysz, które dwie wartości wychodzą najwyżej.</p>
+                </li>
+                <li class="pause">
+                    <span class="minutes">20 min</span>
+                    <h3>Przerwa z jedzeniem</h3>
+                </li>
+                <li>
+                    <span class="minutes">50 min</span>
+                    <h3>Laboratorium zawodu</h3>
+                    <p>Jeden zawód sprawdzony na arkuszu: zarobki, zmęczenie, najgorszy zwykły dzień, próg wejścia i plan B. Potem rozmowa w parach i wspólna matryca na tablicy.</p>
+                </li>
+                <li class="pause">
+                    <span class="minutes">10 min</span>
+                    <h3>Przerwa</h3>
+                </li>
+                <li>
+                    <span class="minutes">35 min</span>
+                    <h3>Trzy kroki</h3>
+                    <p>Każdy planuje jeden krok na 72 godziny, jeden na tydzień i jeden na miesiąc, a potem sprawdza w małej grupie, czy są konkretne i wykonalne.</p>
+                </li>
+                <li>
+                    <span class="minutes">25 min</span>
+                    <h3>Pytania i zamknięcie</h3>
+                    <p>Odpowiedzi na pytania zebrane na początku warsztatu i krótka anonimowa ankieta.</p>
+                </li>
+            </ol>
+            <p class="note">Po zakończeniu zostaję jeszcze do 30 minut dla osób, które chcą porozmawiać. Program pierwszej edycji może się zmienić po próbie.</p>
+        </section>
+
+        <section>
+            <h2>Zasady na sali</h2>
+            <ul class="marked">
+                <li>To, co osobiste, zostaje na sali.</li>
+                <li>Każdy może powiedzieć „pas” i nie brać udziału w ćwiczeniu, bez tłumaczenia się.</li>
+                <li>Nie oceniamy cudzych planów ani obaw.</li>
+                <li>Telefony są schowane. W pilnej sprawie można wyjść bez pytania.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Prowadzący</h2>
+            <p>Paweł Gębarowski. Od ponad 15 lat pracuję w branży technologicznej, a dziś kieruję pracą zespołu inżynierów w Ocado Technology. Prowadzę też warsztaty o informacji zwrotnej.</p>
+            <p>Nie jestem psychologiem ani doradcą zawodowym. Wnoszę doświadczenie z rynku pracy i prostą metodę sprawdzania zawodu, którą każdy może powtórzyć samodzielnie.</p>
+        </section>
+
+        <section>
+            <h2>Kontakt</h2>
+            <p>Chcesz zorganizować warsztat w swojej szkole lub organizacji albo masz pytanie? Napisz: <a data-email-user="pawelgebarowski" data-email-domain="gmail.com" data-email-show>e-mail</a>.</p>
+        </section>
+
+        <section id="materials">
+            <h2>Materiały do pobrania</h2>
+            <ul class="downloads">
+                <li>
+                    <div>
+                        <h3>Laboratorium zawodu i bilet 72 h</h3>
+                        <p class="meta">Arkusz do sprawdzenia jednego zawodu. PDF, A4. Licencja CC BY-NC 4.0.</p>
+                    </div>
+                    <a class="download" href="materials/career-lab.pdf" download>Pobierz PDF</a>
+                </li>
+                <li>
+                    <div>
+                        <h3>Wartości pracy</h3>
+                        <p class="meta">20 zdań do ułożenia i liczenie wyniku z kluczem. PDF, A4, dwie strony. Licencja CC BY 4.0.</p>
+                    </div>
+                    <a class="download" href="materials/work-values.pdf" download>Pobierz PDF</a>
+                </li>
+            </ul>
+            <p class="note">Polskie tłumaczenie listy zainteresowań udostępnię po pierwszej edycji warsztatu. Do tego czasu możesz skorzystać z oryginalnej wersji internetowej po angielsku, podanej niżej.</p>
+
+            <h3>Gdzie sprawdzać dalej</h3>
+            <ul class="marked">
+                <li><a href="https://www.mynextmove.org/explore/ip" target="_blank" rel="noopener noreferrer">O*NET® Interest Profiler w serwisie My Next Move</a>, po angielsku, dane z rynku USA.</li>
+                <li><a href="https://www.careeronestop.org/Toolkit/Careers/work-values-matcher.aspx" target="_blank" rel="noopener noreferrer">Work Values Matcher w serwisie CareerOneStop</a>, po angielsku.</li>
+                <li><a href="https://mapakarier.org/strefa-mlodziezy/" target="_blank" rel="noopener noreferrer">Mapa Karier</a>, opisy zawodów po polsku.</li>
+                <li><a href="https://ela.nauka.gov.pl/" target="_blank" rel="noopener noreferrer">Ekonomiczne Losy Absolwentów</a>, dane o zarobkach i zatrudnieniu absolwentów polskich uczelni.</li>
+            </ul>
+        </section>
+
+        <section class="licenses" id="licenses">
+            <h2>Prawa autorskie i licencje</h2>
+            <p><strong>Laboratorium zawodu i bilet 72 h.</strong> © 2026 Paweł Gębarowski. Licencja <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.pl" target="_blank" rel="noopener noreferrer">CC BY-NC 4.0</a>: możesz kopiować, drukować i przerabiać arkusz do celów niekomercyjnych, podając autora. Do użycia komercyjnego, np. na płatnych zajęciach, potrzebna jest moja zgoda.</p>
+            <p><strong>Wartości pracy.</strong> Polskie tłumaczenie i wersja papierowa narzędzia <a href="https://www.careeronestop.org/Toolkit/Careers/work-values-matcher.aspx" target="_blank" rel="noopener noreferrer">Work Values Matcher</a> z serwisu CareerOneStop, sponsorowanego przez U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). Narzędzie opiera się na O*NET® Work Importance Locator™ i jest udostępniane na licencji <a href="https://creativecommons.org/licenses/by/4.0/deed.pl" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Na tej samej licencji udostępniam arkusz. Zmiany: tłumaczenie na polski i wpisywanie numerów zdań do tabeli zamiast układania kart. USDOL/ETA i CareerOneStop nie zatwierdziły tej wersji.</p>
+            <p><strong>Lista zainteresowań używana na warsztacie</strong> to tłumaczenie O*NET® Interest Profiler Short Form na licencji <a href="https://www.onetcenter.org/license_tools.html" target="_blank" rel="noopener noreferrer">O*NET Tools Developer License</a>. Nie jest jeszcze udostępniana do pobrania.</p>
+            <p>O*NET® jest znakiem towarowym USDOL/ETA. Użycie tej nazwy nie oznacza, że USDOL/ETA popiera ten warsztat. Treść tej strony: © 2026 Paweł Gębarowski.</p>
+        </section>
+
+        <footer>
+            <span>© 2026 Paweł Gębarowski</span>
+            <a href="index.html">Strona główna</a>
+            <a href="https://www.linkedin.com/in/pawel-gebarowski/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </footer>
+
+    </div>
+    <script src="email.js" defer></script>
+</body>
+</html>

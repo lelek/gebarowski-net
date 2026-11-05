@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wartości pracy</title>
+  <meta name="description" content="Arkusz do wydruku: sortowanie 20 zdań o idealnej pracy i dwie najważniejsze wartości.">
+  <link rel="stylesheet" href="styl.css">
+  <style>
+    .sentences, .grid, .score {
+      width: 100%;
+      margin-top: 8px;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .sentences td, .grid td, .grid th, .score td, .score th {
+      padding: 5px 8px;
+      border: 1px solid var(--color-border-strong);
+      text-align: left;
+    }
+    .sentences td:first-child { width: 2.5em; text-align: center; }
+    .grid th { text-align: center; font-size: 0.85rem; }
+    .grid td { height: 2.2em; }
+    .score th { font-size: 0.85rem; }
+    .score td:nth-child(n+3) { width: 5.5em; text-align: center; }
+    .back { break-before: page; }
+    @media print {
+      .sentences, .grid, .score { font-size: 9.5pt; }
+      .sentences td, .score td, .score th { padding: 3px 6px; }
+      .notice { font-size: 7.5pt; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page sheet">
+
+    <nav class="no-print sheet-nav">
+      <a href="workshops.html">← Wróć</a>
+      <button class="btn btn-primary" type="button" onclick="window.print()">Drukuj</button>
+    </nav>
+
+    <h1>Wartości pracy</h1>
+    <p class="fill">Imię albo pseudonim: <span class="line"></span></p>
+
+    <h2>Instrukcja</h2>
+    <ol class="steps">
+      <li>Przeczytaj 20 zdań i zastanów się, jak ważne byłoby każde z nich w Twojej idealnej pracy.</li>
+      <li>Wpisz numer każdego zdania do jednej z kolumn w tabeli. W każdej kolumnie mieszczą się dokładnie 4 numery, więc musisz wybierać.</li>
+      <li>Możesz zmieniać zdanie: skreśl numer i wpisz go w innej kolumnie.</li>
+      <li>Gdy każdy numer jest w tabeli, przejdź na drugą stronę i policz wynik.</li>
+    </ol>
+
+    <h2>Zdania: w mojej idealnej pracy…</h2>
+    <table class="sentences">
+      <tr><td>1</td><td>Wykorzystuję swoje talenty i zdolności.</td></tr>
+      <tr><td>2</td><td>Pracodawca traktuje mnie uczciwie.</td></tr>
+      <tr><td>3</td><td>Cały czas mam co robić.</td></tr>
+      <tr><td>4</td><td>Mam możliwości awansu.</td></tr>
+      <tr><td>5</td><td>Mogę wydawać innym polecenia lub instrukcje.</td></tr>
+      <tr><td>6</td><td>Mogę czuć, że coś osiągam.</td></tr>
+      <tr><td>7</td><td>Zarabiam dobrze w porównaniu z innymi pracownikami.</td></tr>
+      <tr><td>8</td><td>Ze współpracownikami łatwo się dogadać.</td></tr>
+      <tr><td>9</td><td>Mogę wypróbowywać własne pomysły.</td></tr>
+      <tr><td>10</td><td>Mogę pracować w pojedynkę.</td></tr>
+      <tr><td>11</td><td>Nikt nie naciska, żebym działał(a) wbrew swoim zasadom.</td></tr>
+      <tr><td>12</td><td>Mogę otrzymywać uznanie za swoją pracę.</td></tr>
+      <tr><td>13</td><td>Mogę samodzielnie podejmować decyzje.</td></tr>
+      <tr><td>14</td><td>Ta praca daje stałe zatrudnienie.</td></tr>
+      <tr><td>15</td><td>Mogę wykonywać pracę, która pomaga innym ludziom.</td></tr>
+      <tr><td>16</td><td>Przełożeni stają po stronie pracowników wobec kierownictwa.</td></tr>
+      <tr><td>17</td><td>Moi przełożeni dobrze szkolą pracowników.</td></tr>
+      <tr><td>18</td><td>Każdego dnia mogę robić coś innego.</td></tr>
+      <tr><td>19</td><td>Ta praca ma bezpieczne warunki.</td></tr>
+      <tr><td>20</td><td>Mogę sam(a) planować swoją pracę przy niewielkim nadzorze.</td></tr>
+    </table>
+
+    <h2>Tabela: wpisz numery zdań</h2>
+    <table class="grid">
+      <tr><th>Najważniejsze<br>5 pkt</th><th>Bardziej ważne<br>4 pkt</th><th>Średnio ważne<br>3 pkt</th><th>Mniej ważne<br>2 pkt</th><th>Najmniej ważne<br>1 pkt</th></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+
+    <section class="back">
+      <h2>Liczenie wyniku</h2>
+      <p>Przy każdym numerze zdania wpisz punkty kolumny, w której ten numer stoi. Dodaj punkty w wierszu i pomnóż przez mnożnik. Każda wartość ma wynik od 6 do 30.</p>
+      <table class="score">
+        <tr><th>Wartość</th><th>Zdania i ich punkty</th><th>Suma</th><th>Mnożnik</th><th>Wynik</th></tr>
+        <tr><td>Osiągnięcia</td><td>1: ___ &nbsp; 6: ___</td><td></td><td>× 3</td><td></td></tr>
+        <tr><td>Niezależność</td><td>9: ___ &nbsp; 13: ___ &nbsp; 20: ___</td><td></td><td>× 2</td><td></td></tr>
+        <tr><td>Uznanie</td><td>4: ___ &nbsp; 5: ___ &nbsp; 12: ___</td><td></td><td>× 2</td><td></td></tr>
+        <tr><td>Relacje</td><td>8: ___ &nbsp; 11: ___ &nbsp; 15: ___</td><td></td><td>× 2</td><td></td></tr>
+        <tr><td>Wsparcie</td><td>2: ___ &nbsp; 16: ___ &nbsp; 17: ___</td><td></td><td>× 2</td><td></td></tr>
+        <tr><td>Warunki pracy</td><td>3: ___ &nbsp; 7: ___ &nbsp; 10: ___ &nbsp; 14: ___ &nbsp; 18: ___ &nbsp; 19: ___</td><td></td><td>× 1</td><td></td></tr>
+      </table>
+      <p><strong>Sprawdzenie:</strong> sumy przed mnożeniem mają dać razem 60.</p>
+
+      <h2>Moje dwie najważniejsze wartości</h2>
+      <p class="fill">1. <span class="line"></span> wynik <span class="line short"></span></p>
+      <p class="fill">2. <span class="line"></span> wynik <span class="line short"></span></p>
+
+      <p class="notice">Na podstawie narzędzia Work Values Matcher z serwisu CareerOneStop (careeronestop.org/Toolkit/Careers/work-values-matcher.aspx), sponsorowanego przez U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). Narzędzie opiera się na O*NET® Work Importance Locator™ (USDOL/ETA) i jest udostępniane na licencji CC BY 4.0 (creativecommons.org/licenses/by/4.0). O*NET® jest znakiem towarowym USDOL/ETA. Zmiany: tłumaczenie na polski i wersja papierowa z wpisywaniem numerów zamiast kart, Paweł Gębarowski. USDOL/ETA i CareerOneStop nie zatwierdziły tej wersji. Nie ma polskich norm: arkusz służy do rozmowy, nie do diagnozy. Ten arkusz jest udostępniany na licencji CC BY 4.0.</p>
+    </section>
+
+  </main>
+</body>
+</html>

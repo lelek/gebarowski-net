@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gebarowski.net</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #ffffff;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        #logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(2rem, 5vw, 4rem);
+            height: 1.368em;
+            z-index: 10;
+        }
+
+        #logo-g {
+            fill: #222;
+        }
+
+        #logo-dot {
+            fill: #22d3ff;
+        }
+
+        #logo-net {
+            fill: #3a3a3a;
+        }
+
+        .link {
+            position: absolute;
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            color: #222;
+            text-decoration: none;
+            z-index: 10;
+            transition: color 0.3s, transform 0.2s;
+        }
+        
+        .link:hover {
+            color: #22d3ff;
+            transform: scale(1.05);
+        }
+
+        #link-about { top: 20%; left: 15%; }
+        #link-contact { top: 75%; right: 20%; }
+        #link-workshops { bottom: 15%; left: 30%; }
+
+        .card {
+            border: none;
+            padding: 0;
+            width: min(420px, calc(100vw - 32px));
+            max-height: calc(100dvh - 32px);
+            overflow: auto;
+            border-radius: 20px;
+            background: #fff;
+            color: #222;
+            font-family: inherit;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(34, 211, 255, 0.35);
+        }
+
+        .card::backdrop {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(2px);
+        }
+
+        .card-body {
+            position: relative;
+            padding: 32px 28px 28px;
+        }
+
+        .card h2 {
+            margin: 0 40px 12px 0;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+
+        .card p {
+            margin: 0 0 12px;
+        }
+
+        .card-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .card-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .card-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 6px;
+            height: 6px;
+            background: #22d3ff;
+        }
+
+        .card-list a {
+            color: #222;
+            text-decoration-color: #22d3ff;
+            text-underline-offset: 4px;
+            overflow-wrap: anywhere;
+        }
+
+        .card-list a:hover {
+            color: #0aa6d6;
+        }
+
+        .card-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: transparent;
+            color: #222;
+            font: inherit;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .card-close:hover {
+            background: rgba(34, 211, 255, 0.15);
+        }
+
+        .card-close:focus-visible,
+        .link:focus-visible,
+        .card-list a:focus-visible {
+            outline: 2px solid #22d3ff;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 600px) {
+            #link-about { top: 18%; left: auto; right: 10%; }
+            #link-workshops { top: 66%; bottom: auto; left: 8%; }
+            #link-contact { top: auto; bottom: 12%; right: auto; left: 10%; }
+        }
+
+        #svg-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <svg id="logo" viewBox="0 0 699.88 136.8" role="img" aria-label="gebarowski.net"><g id="logo-g"><path d="M18.9 116.55Q14.1 114.4 10.5 110.6L14.6 108.2Q17.4 111.1 21.15 112.65Q24.9 114.2 29.2 114.2Q33.4 114.2 37.2 112.65Q41 111.1 43.8 108.3Q46.6 105.6 48.2 101.85Q49.8 98.1 49.8 94L49.8 85.9Q42.2 97.2 29.1 97.2Q24.1 97.2 19.45 95.15Q14.8 93.1 11.4 89.5Q7.9 85.9 5.95 81.3Q4 76.7 4 71.8Q4 66.8 5.95 62.25Q7.9 57.7 11.4 54.4Q14.8 51.1 19.4 49.25Q24 47.4 29.1 47.4Q36 47.4 41.4 50.4Q46.8 53.4 49.8 58.9L49.8 48.7L54.4 48.7L54.4 94Q54.4 99 52.45 103.5Q50.5 108 47 111.4Q43.6 114.8 38.95 116.75Q34.3 118.7 29.2 118.7Q23.7 118.7 18.9 116.55ZM21.15 53.55Q17.3 55.1 14.5 57.9Q11.7 60.6 10.05 64.5Q8.4 68.4 8.4 72.5Q8.4 76.6 10 80.25Q11.6 83.9 14.5 86.8Q17.3 89.6 21.15 91.2Q25 92.8 29.1 92.8Q33.2 92.8 36.95 91.2Q40.7 89.6 43.6 86.8Q46.4 84 48.05 80.3Q49.7 76.6 49.7 72.5Q49.7 68.4 48.05 64.5Q46.4 60.6 43.6 57.9Q40.8 55.1 37 53.55Q33.2 52 29.1 52Q25 52 21.15 53.55Z"/><path d="M68.1 75Q69.7 83.3 75.4 88.3Q81 93.3 88.6 93.3Q93.8 93.3 98.1 91Q102.4 88.7 105.4 84.7L109.4 86.9Q105.8 92 100.4 94.95Q95 97.9 88.6 97.9Q83.5 97.9 78.9 95.95Q74.3 94 70.8 90.5Q67.3 87 65.35 82.4Q63.4 77.8 63.4 72.7Q63.4 67.6 65.35 62.95Q67.3 58.3 70.8 54.8Q74.2 51.3 78.85 49.4Q83.5 47.5 88.6 47.5Q93.7 47.5 98.35 49.4Q103 51.3 106.4 54.8Q109.6 58.1 111.75 63.3Q113.9 68.5 113.9 73.4L113.8 75L68.1 75ZM75.4 57Q69.7 62 68.1 70.3L109.1 70.3Q107.5 62 101.8 57Q96.2 52 88.6 52Q81 52 75.4 57Z"/><path d="M135.9 95.4Q130.6 92.9 127.3 87L127.3 97.4L122.9 97.4L122.9 31L127.3 31L127.3 59.2Q130.7 53.2 135.85 50.55Q141 47.9 148.3 47.9Q153.4 47.9 158.1 49.9Q162.8 51.9 166.2 55.3Q169.7 58.8 171.65 63.35Q173.6 67.9 173.6 72.9Q173.6 77.9 171.65 82.45Q169.7 87 166.2 90.5Q162.8 93.9 158.1 95.9Q153.4 97.9 148.3 97.9Q141.2 97.9 135.9 95.4ZM140.35 54.1Q136.6 55.7 133.7 58.5Q130.8 61.3 129.15 65.05Q127.5 68.8 127.5 72.9Q127.5 77 129.15 80.8Q130.8 84.6 133.6 87.4Q136.4 90.2 140.25 91.8Q144.1 93.4 148.3 93.4Q152.5 93.4 156.3 91.8Q160.1 90.2 162.9 87.4Q165.7 84.6 167.35 80.8Q169 77 169 72.9Q169 68.8 167.4 65.1Q165.8 61.4 162.9 58.5Q160.1 55.7 156.3 54.1Q152.5 52.5 148.3 52.5Q144.1 52.5 140.35 54.1Z"/><path d="M225.5 97.4L225.5 85.9Q221.7 92.1 216.55 95Q211.4 97.9 204.8 97.9Q199.6 97.9 195.05 96Q190.5 94.1 187 90.6Q183.5 87.2 181.55 82.55Q179.6 77.9 179.6 72.8Q179.6 67.7 181.55 63.05Q183.5 58.4 187 54.9Q190.5 51.4 195.05 49.5Q199.6 47.6 204.8 47.6Q212 47.6 217.25 50.4Q222.5 53.2 225.5 58.7L225.5 48.8L230.1 48.8L230.1 97.4L225.5 97.4ZM196.75 53.7Q192.9 55.3 190.1 58.1Q187.3 60.9 185.7 64.75Q184.1 68.6 184.1 72.8Q184.1 77 185.7 80.8Q187.3 84.6 190.1 87.4Q192.9 90.2 196.75 91.8Q200.6 93.4 204.8 93.4Q208.9 93.4 212.7 91.8Q216.5 90.2 219.3 87.4Q222.1 84.6 223.75 80.8Q225.4 77 225.4 72.8Q225.4 68.6 223.8 64.75Q222.2 60.9 219.4 58.1Q216.6 55.3 212.8 53.7Q209 52.1 204.8 52.1Q200.6 52.1 196.75 53.7Z"/><path d="M263.6 52.4Q260.9 51.5 258.7 51.5Q253 51.5 248.9 55.4Q247 57.3 245.9 59.8Q244.8 62.3 244.8 64.9L244.8 97.4L240.1 97.4L240.1 64.9Q240.1 59.6 242.95 55.35Q245.8 51.1 250.8 48.7Q254.4 47 258.7 47Q264.2 47 268.6 49.7L263.6 52.4Z"/><path d="M283.2 95.9Q278.6 93.9 275.1 90.4Q271.6 86.9 269.6 82.3Q267.6 77.7 267.6 72.6Q267.6 67.4 269.6 62.7Q271.6 58 275.1 54.5Q278.6 51 283.2 49.05Q287.8 47.1 292.9 47.1Q298.1 47.1 302.8 49.05Q307.5 51 311 54.5Q314.5 58 316.45 62.7Q318.4 67.4 318.4 72.6Q318.4 77.7 316.45 82.3Q314.5 86.9 311 90.4Q307.5 93.9 302.8 95.9Q298.1 97.9 292.9 97.9Q287.8 97.9 283.2 95.9ZM284.95 53.2Q281.2 54.8 278.3 57.7Q275.4 60.6 273.75 64.5Q272.1 68.4 272.1 72.6Q272.1 76.8 273.75 80.6Q275.4 84.4 278.3 87.3Q281.2 90.2 284.95 91.85Q288.7 93.5 292.9 93.5Q297.1 93.5 301 91.85Q304.9 90.2 307.7 87.3Q310.6 84.4 312.2 80.6Q313.8 76.8 313.8 72.6Q313.8 68.4 312.15 64.5Q310.5 60.6 307.7 57.7Q304.9 54.8 301 53.2Q297.1 51.6 292.9 51.6Q288.7 51.6 284.95 53.2Z"/><path d="M376.4 97.4L370.7 97.4L359.2 67.9L347.7 97.4L342 97.4L322.4 47.4L327.3 47.4L344.8 92.3L356.8 61.8L351.2 47.4L356 47.4L373.6 92.3L391 47.4L395.8 47.4L376.4 97.4Z"/><path d="M415.7 97.9Q407 97.9 402.2 93.4Q399 90.3 397.9 85.8L402.8 85.8Q404 89.5 407.5 91.45Q411 93.4 415.4 93.4Q421.1 93.4 424.7 90.5Q428 87.8 428 83.8Q428 78.2 424.1 76.2Q420.9 74.7 414.7 74.7Q408.6 74.7 405.8 73.45Q403 72.2 401 70Q397.9 66.3 397.9 61.2Q397.9 57.8 399.3 54.75Q400.7 51.7 403.3 49.9Q407.8 46.8 415 46.8Q421.1 46.8 425.2 49.2Q428 50.8 430.1 54Q431.6 56.4 432.2 59.1L427.3 59.1Q426.7 57.1 426.1 56.2Q423.1 51.6 415.6 51.3Q411 51.3 408.3 52.4Q405.6 53.6 404.1 55.9Q402.6 58.2 402.6 60.9Q402.6 62.4 403 63.6Q404.2 68 408.2 69.2Q410.1 69.9 412.45 70Q414.8 70.1 415.2 70.1Q419.1 70.3 421.5 70.7Q423.9 71.1 426.5 72.4Q432.7 75.6 432.7 83.9Q432.6 89.4 428.3 93.5Q423.5 97.9 415.7 97.9Z"/><path d="M468.2 97.4L446.5 73.1L446.5 97.4L441.8 97.4L441.8 30.9L446.5 30.9L446.5 65.1L466.1 48.1L473.2 48.1L449 69L474.4 97.4L468.2 97.4Z"/><path d="M481.2 41.25Q480.4 40.4 480.4 39.1Q480.4 37.8 481.2 36.95Q482 36.1 483.3 36.1Q484.6 36.1 485.5 36.95Q486.4 37.8 486.4 39.1Q486.4 40.4 485.5 41.25Q484.6 42.1 483.3 42.1Q482 42.1 481.2 41.25ZM481 97.4L481 47.4L485.6 47.4L485.6 97.4L481 97.4Z"/></g><g id="logo-dot"><path d="M534.11 97.4L514.5 97.4L514.5 74.02L534.11 74.02L534.11 97.4Z"/></g><g id="logo-net"><path d="M599.17 97.4L599.17 67.4Q599.17 62.9 595.88 59.6Q592.67 56.4 588.07 56.4Q583.57 56.4 580.27 59.7Q578.77 61.2 577.88 63.25Q576.98 65.3 576.98 67.4L576.98 97.4L568.27 97.4L568.27 48.6L576.98 48.6L576.98 52.7Q578.88 50.4 581.98 48.9Q585.07 47.4 588.07 47.4Q592.07 47.4 595.73 48.95Q599.38 50.5 602.17 53.3Q604.88 56 606.42 59.65Q607.98 63.3 607.98 67.4L607.98 97.4L599.17 97.4Z"/><path d="M625.58 76.2Q625.58 78.6 627.33 81.2Q629.08 83.8 631.38 85.6Q635.58 88.9 641.18 88.9Q650.08 88.9 655.68 80.3L663.27 84.8Q659.38 91.1 653.68 94.5Q647.98 97.9 641.18 97.9Q636.08 97.9 631.48 95.95Q626.88 94 623.38 90.5Q619.88 87 617.93 82.4Q615.98 77.8 615.98 72.7Q615.98 67.6 617.93 62.95Q619.88 58.3 623.38 54.8Q626.77 51.3 631.43 49.4Q636.08 47.5 641.18 47.5Q646.27 47.5 650.93 49.4Q655.58 51.3 658.98 54.8Q666.38 62.4 666.38 72.4Q666.38 74.2 666.08 76.2L625.58 76.2ZM633.48 57.5Q629.88 59.3 627.73 62.25Q625.58 65.2 625.58 68.5L656.77 68.5Q656.77 65.2 654.62 62.25Q652.48 59.3 648.88 57.5Q645.27 55.7 641.18 55.7Q637.08 55.7 633.48 57.5Z"/><path d="M688.38 56.4L688.38 97.4L679.88 97.4L679.88 56.4L672.38 56.4L672.38 47.4L679.88 47.4L679.88 30.9L688.38 30.9L688.38 47.4L695.88 47.4L695.88 56.4L688.38 56.4Z"/></g></svg>
+
+    <a href="#about" class="link" id="link-about" data-card="card-about">o mnie</a>
+    <a href="#contact" class="link" id="link-contact" data-card="card-contact">kontakt</a>
+    <a href="workshops.html" class="link" id="link-workshops">warsztaty</a>
+
+    <dialog class="card" id="card-about" aria-labelledby="card-about-title">
+        <div class="card-body">
+            <button class="card-close" type="button" aria-label="Zamknij">×</button>
+            <h2 id="card-about-title">Paweł Gębarowski</h2>
+            <p>Od ponad 15 lat pracuję w branży technologicznej, a dziś kieruję pracą zespołu inżynierów w Ocado Technology.</p>
+            <p>Bardzo ważne są dla mnie relacje w miejscu pracy. Dużą przyjemność sprawia mi praca nad rozwojem zawodowym moich koleżanek i kolegów.</p>
+            <ul class="card-list">
+                <li>Tworzę aplikacje i narzędzia dla inżynierów.</li>
+                <li>Prowadzę warsztaty o informacji zwrotnej.</li>
+                <li>Lubię muzykę, po godzinach gram na gitarze i pianinie.</li>
+            </ul>
+        </div>
+    </dialog>
+
+    <dialog class="card" id="card-contact" aria-labelledby="card-contact-title">
+        <div class="card-body">
+            <button class="card-close" type="button" aria-label="Zamknij">×</button>
+            <h2 id="card-contact-title">Kontakt</h2>
+            <ul class="card-list">
+                <li><a data-email-user="pawelgebarowski" data-email-domain="gmail.com" data-email-show>e-mail</a></li>
+                <li><a href="https://www.linkedin.com/in/pawel-gebarowski/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+            </ul>
+        </div>
+    </dialog>
+
+    <svg id="svg-canvas">
+        <defs>
+            <linearGradient id="grad-contact" gradientUnits="userSpaceOnUse"></linearGradient>
+            <linearGradient id="grad-about" gradientUnits="userSpaceOnUse"></linearGradient>
+            <linearGradient id="grad-workshops" gradientUnits="userSpaceOnUse"></linearGradient>
+        </defs>
+        <path id="path-contact" fill="none" stroke="url(#grad-contact)" stroke-width="2" stroke-linecap="round" stroke-dasharray="0, 10" />
+        <path id="path-about" fill="none" stroke="url(#grad-about)" stroke-width="2" stroke-linecap="round" stroke-dasharray="0, 10" />
+        <path id="path-workshops" fill="none" stroke="url(#grad-workshops)" stroke-width="2" stroke-linecap="round" stroke-dasharray="0, 10" />
+    </svg>
+
+    <script>
+        const LOGO_LINE_GAP = 20;
+        const CORNER_RADIUS = 24;
+        const LINK_GAP = 15;
+        const LETTER_K = 8;
+
+        function letterBounds(word, letterIndex) {
+            return word.children[letterIndex].getBoundingClientRect();
+        }
+
+        function logoTextLevels(name) {
+            const flatLetter = letterBounds(name, LETTER_K);
+            return { top: flatLetter.top, baseline: flatLetter.bottom };
+        }
+
+        function letterCenterX(word, letterIndex) {
+            const bounds = letterBounds(word, letterIndex);
+            return bounds.left + bounds.width / 2;
+        }
+
+        function linkEndpoint(link, lineX) {
+            const linkIsOnLeft = link.left + link.width / 2 < lineX;
+            const x = linkIsOnLeft ? link.right + LINK_GAP : link.left - LINK_GAP;
+            return { x, y: link.top + link.height / 2 };
+        }
+
+        function moveToward(from, to, distance) {
+            const length = Math.hypot(to.x - from.x, to.y - from.y);
+            const ratio = length ? Math.min(distance, length / 2) / length : 0;
+            return { x: from.x + (to.x - from.x) * ratio, y: from.y + (to.y - from.y) * ratio };
+        }
+
+        function roundedPath(points) {
+            const lastIndex = points.length - 1;
+            const corners = points.slice(1, lastIndex).map((corner, index) => {
+                const entry = moveToward(corner, points[index], CORNER_RADIUS);
+                const exit = moveToward(corner, points[index + 2], CORNER_RADIUS);
+                return `L ${entry.x} ${entry.y} Q ${corner.x} ${corner.y} ${exit.x} ${exit.y}`;
+            });
+            const start = `M ${points[0].x} ${points[0].y}`;
+            const end = `L ${points[lastIndex].x} ${points[lastIndex].y}`;
+            return [start, ...corners, end].join(' ');
+        }
+
+        function drawLineToLink(target, start) {
+            const link = document.getElementById(`link-${target}`).getBoundingClientRect();
+            const end = linkEndpoint(link, start.x);
+            document.getElementById(`path-${target}`).setAttribute('d', roundedPath([start, { x: start.x, y: end.y }, end]));
+            setGradient(`grad-${target}`, start, end);
+        }
+
+        function drawLines() {
+            const name = document.getElementById('logo-g');
+            const domain = document.getElementById('logo-net');
+            const levels = logoTextLevels(name);
+            drawLineToLink('about', { x: letterCenterX(name, 2), y: levels.top - LOGO_LINE_GAP });
+            drawLineToLink('contact', { x: letterCenterX(domain, 0), y: levels.baseline + LOGO_LINE_GAP });
+            drawLineToLink('workshops', { x: letterCenterX(name, 6), y: levels.baseline + LOGO_LINE_GAP });
+        }
+
+        function setGradient(id, startPoint, endPoint) {
+            const gradient = document.getElementById(id);
+            gradient.setAttribute('x1', startPoint.x);
+            gradient.setAttribute('y1', startPoint.y);
+            gradient.setAttribute('x2', endPoint.x);
+            gradient.setAttribute('y2', endPoint.y);
+            gradient.innerHTML = `
+                <stop offset="0%" stop-color="#22d3ff" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#22d3ff" stop-opacity="0.15"/>
+            `;
+        }
+
+        const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+        function motionDuration(milliseconds) {
+            return reducedMotion.matches ? 0 : milliseconds;
+        }
+
+        function flightFromLink(link, card) {
+            const from = link.getBoundingClientRect();
+            const to = card.getBoundingClientRect();
+            const dx = from.left + from.width / 2 - (to.left + to.width / 2);
+            const dy = from.top + from.height / 2 - (to.top + to.height / 2);
+            return [
+                { transform: `translate(${dx}px, ${dy}px) scale(0.1)`, opacity: 0 },
+                { transform: 'none', opacity: 1 }
+            ];
+        }
+
+        function openCard(link, card) {
+            card.showModal();
+            card.animate(flightFromLink(link, card), {
+                duration: motionDuration(450),
+                easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)'
+            });
+        }
+
+        async function closeCard(link, card) {
+            if (card.dataset.closing) return;
+            card.dataset.closing = 'true';
+            const flightBack = card.animate(flightFromLink(link, card).reverse(), {
+                duration: motionDuration(300),
+                easing: 'ease-in',
+                fill: 'forwards'
+            });
+            await flightBack.finished;
+            card.close();
+            flightBack.cancel();
+            delete card.dataset.closing;
+            link.focus();
+        }
+
+        function connectCard(link) {
+            const card = document.getElementById(link.dataset.card);
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                openCard(link, card);
+            });
+            card.querySelector('.card-close').addEventListener('click', () => closeCard(link, card));
+            card.addEventListener('cancel', event => {
+                event.preventDefault();
+                closeCard(link, card);
+            });
+            card.addEventListener('click', event => {
+                const clickedBackdrop = event.target === card;
+                if (clickedBackdrop) closeCard(link, card);
+            });
+        }
+
+        async function leaveThroughLine(link) {
+            const dots = document.getElementById('path-workshops');
+            dots.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -40 }], {
+                duration: motionDuration(700),
+                easing: 'ease-in'
+            });
+            const fadeOut = document.body.animate([{ opacity: 1 }, { opacity: 0 }], {
+                duration: motionDuration(450),
+                delay: motionDuration(250),
+                easing: 'ease-in',
+                fill: 'forwards'
+            });
+            await fadeOut.finished;
+            window.location.href = link.href;
+        }
+
+        document.querySelectorAll('[data-card]').forEach(connectCard);
+
+        document.getElementById('link-workshops').addEventListener('click', event => {
+            event.preventDefault();
+            leaveThroughLine(event.currentTarget);
+        });
+
+        window.addEventListener('pageshow', event => {
+            if (event.persisted) document.body.getAnimations().forEach(animation => animation.cancel());
+        });
+
+        window.addEventListener('resize', drawLines);
+        document.fonts.ready.then(drawLines);
+        window.addEventListener('load', drawLines);
+    </script>
+    <script src="email.js" defer></script>
+</body>
+</html>
