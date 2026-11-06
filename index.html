@@ -25,7 +25,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: clamp(2.4rem, 6vw, 4.8rem);
             height: 1.368em;
             z-index: 10;
         }
@@ -44,7 +44,7 @@
 
         .link {
             position: absolute;
-            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-size: clamp(1.44rem, 3vw, 2.4rem);
             color: #222;
             text-decoration: none;
             z-index: 10;
@@ -63,14 +63,14 @@
         .card {
             border: none;
             padding: 0;
-            width: min(420px, calc(100vw - 32px));
+            width: min(504px, calc(100vw - 32px));
             max-height: calc(100dvh - 32px);
             overflow: auto;
-            border-radius: 20px;
+            border-radius: 24px;
             background: #fff;
             color: #222;
             font-family: inherit;
-            font-size: 1.05rem;
+            font-size: 1.26rem;
             line-height: 1.5;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(34, 211, 255, 0.35);
         }
@@ -82,12 +82,12 @@
 
         .card-body {
             position: relative;
-            padding: 32px 28px 28px;
+            padding: 38px 34px 34px;
         }
 
         .card h2 {
-            margin: 0 40px 12px 0;
-            font-size: 1.6rem;
+            margin: 0 48px 14px 0;
+            font-size: 1.92rem;
             font-weight: 400;
         }
 
@@ -99,7 +99,7 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            margin: 0 40px 16px 0;
+            margin: 0 48px 19px 0;
         }
 
         .card-head h2 {
@@ -108,8 +108,8 @@
 
         .portrait {
             flex: none;
-            width: 72px;
-            height: 72px;
+            width: 86px;
+            height: 86px;
             border-radius: 50%;
             box-shadow: 0 0 0 2px #fff, 0 0 0 4px #22d3ff;
         }
@@ -122,8 +122,8 @@
 
         .card-list li {
             position: relative;
-            padding-left: 20px;
-            margin-top: 8px;
+            padding-left: 24px;
+            margin-top: 10px;
         }
 
         .card-list li::before {
@@ -131,8 +131,8 @@
             position: absolute;
             left: 0;
             top: 0.6em;
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             background: #22d3ff;
         }
 
@@ -204,7 +204,7 @@
         <div class="card-body">
             <button class="card-close" type="button" aria-label="Zamknij">×</button>
             <div class="card-head">
-                <img class="portrait" src="images/portrait.jpg" width="72" height="72" alt="Paweł Gębarowski">
+                <img class="portrait" src="images/portrait.jpg" width="86" height="86" alt="Paweł Gębarowski">
                 <h2 id="card-about-title">Paweł Gębarowski</h2>
             </div>
             <p>Od ponad 15 lat pracuję w branży technologicznej, a dziś kieruję pracą zespołu inżynierów w Ocado Technology.</p>
@@ -234,15 +234,15 @@
             <linearGradient id="grad-about" gradientUnits="userSpaceOnUse"></linearGradient>
             <linearGradient id="grad-workshops" gradientUnits="userSpaceOnUse"></linearGradient>
         </defs>
-        <path id="path-contact" fill="none" stroke="url(#grad-contact)" stroke-width="2" stroke-linecap="round" stroke-dasharray="0, 10" />
-        <path id="path-about" fill="none" stroke="url(#grad-about)" stroke-width="2" stroke-linecap="round" stroke-dasharray="0, 10" />
-        <path id="path-workshops" fill="none" stroke="url(#grad-workshops)" stroke-width="2" stroke-linecap="round" stroke-dasharray="0, 10" />
+        <path id="path-contact" fill="none" stroke="url(#grad-contact)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0, 12" />
+        <path id="path-about" fill="none" stroke="url(#grad-about)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0, 12" />
+        <path id="path-workshops" fill="none" stroke="url(#grad-workshops)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0, 12" />
     </svg>
 
     <script>
-        const LOGO_LINE_GAP = 20;
-        const CORNER_RADIUS = 24;
-        const LINK_GAP = 15;
+        const LOGO_LINE_GAP = 24;
+        const CORNER_RADIUS = 29;
+        const LINK_GAP = 18;
         const LETTER_K = 8;
 
         function letterBounds(word, letterIndex) {
@@ -370,7 +370,7 @@
 
         async function leaveThroughLine(link) {
             const dots = document.getElementById('path-workshops');
-            dots.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -40 }], {
+            dots.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -48 }], {
                 duration: motionDuration(700),
                 easing: 'ease-in'
             });
