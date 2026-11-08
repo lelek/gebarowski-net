@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="referrer" content="no-referrer">
+    <title>Materiały warsztatu | Paweł Gębarowski</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #ffffff;
+            --fg: #222222;
+            --muted: #56636b;
+            --line: #e2e9ed;
+            --mark: #22d3ff;
+            --link: #08799e;
+            --font: 'Quicksand', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font);
+            font-size: 1.0625rem;
+            line-height: 1.6;
+        }
+
+        main {
+            max-width: 40rem;
+            margin: 0 auto;
+            padding-block: 3rem;
+            padding-left: max(16px, env(safe-area-inset-left, 0px));
+            padding-right: max(16px, env(safe-area-inset-right, 0px));
+        }
+
+        h1 {
+            margin: 0 0 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 600;
+            text-wrap: balance;
+        }
+
+        .lead {
+            margin: 0 0 2rem;
+            color: var(--muted);
+        }
+
+        ul {
+            display: grid;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--mark);
+            border-radius: 8px;
+        }
+
+        a {
+            color: var(--link);
+            font-weight: 600;
+        }
+
+        .kind {
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+
+        li p {
+            margin: 0.25rem 0 0;
+        }
+
+        footer {
+            margin-top: 2.5rem;
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Laboratorium Twojej przyszłości</h1>
+    <p class="lead">Materiały warsztatu o wyborze drogi zawodowej dla młodzieży 17–18 lat, 4 godziny, do 12 osób. Wersja robocza do rozmowy z CAM Krosno.</p>
+    <ul>
+        <li>
+            <a href="prezentacja.html">Prezentacja warsztatu</a> <span class="kind">strona w przeglądarce</span>
+            <p>35 slajdów prowadzących przez cały warsztat. Najlepiej oglądać na komputerze: strzałki lub spacja zmieniają slajdy, F włącza pełny ekran.</p>
+        </li>
+        <li>
+            <a href="wartosci-w-pracy.pdf">Wartości w pracy</a> <span class="kind">PDF, 2 strony A4</span>
+            <p>Arkusz do ćwiczenia: uczestnicy układają 20 zdań o idealnej pracy od najważniejszych do najmniej ważnych i liczą swoje dwie najważniejsze wartości.</p>
+        </li>
+        <li>
+            <a href="laboratorium-zawodu.pdf">Laboratorium zawodu</a> <span class="kind">PDF, 2 strony A4</span>
+            <p>Arkusz do pracy indywidualnej: każdy sprawdza jeden wybrany zawód (zarobki, zmęczenie, ciemne strony, próg wejścia, plan B), umieszcza go na matrycy 2×2 i zapisuje jeden mały krok na najbliższe 72 godziny.</p>
+        </li>
+    </ul>
+    <footer>Paweł Gębarowski</footer>
+</main>
+</body>
+</html>

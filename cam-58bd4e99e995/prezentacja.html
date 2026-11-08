@@ -1,0 +1,1558 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laboratorium Twojej przyszłości</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Onest:wght@400;500;600;700&family=Sulphur+Point:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   PALETA: pastele wzięte ze swetrów na ilustracji z kontraktu
+   Zasada: pastel tylko jako duże pole, tekst zawsze ciemny (czytelność z rzutnika)
+   Płótno 1600×900, treść min. 28 px (ok. 17–18 pt), tytuły 64–120 px
+   ========================================================================== */
+:root {
+  --bg: #F5F4FA;
+  --surface: #FFFFFF;
+  --ink: #26233D;
+  --ink-2: #4A4663;
+  --mute: #6E6A87;
+  --line: #DEDBEA;
+
+  --butter: #F9E3A3;  --butter-d: #E2B53C;
+  --sage:   #CBE6C7;  --sage-d:   #5FA06D;
+  --sky:    #C8DDF3;  --sky-d:    #4F86C6;
+  --peach:  #FBD0B9;  --peach-d:  #E2825A;
+  --rose:   #F6CAD8;  --rose-d:   #D06A8B;
+  --lilac:  #DCD3F5;  --lilac-d:  #8573D2;
+  --fog:    #E7E4EF;
+
+  --mod: var(--lilac); --mod-d: var(--lilac-d);
+
+  --display: "Unbounded", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --text: "Onest", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --r-xl: 40px; --r-l: 28px; --r-m: 18px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--text); overflow: hidden; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 4px solid var(--lilac-d); outline-offset: 3px; }
+img { display: block; max-width: 100%; }
+
+/* ---------- scena 16:9 ---------- */
+#viewport { position: relative; width: 100%; height: 100vh; height: 100dvh; overflow: hidden; }
+#stage {
+  width: 1600px; height: 900px; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%); transform-origin: center center;
+  background: var(--bg); overflow: hidden;
+}
+#camera { position: absolute; top: 0; left: 0; width: 0; height: 0; transform-origin: 0 0; }
+#camera.flying { will-change: transform; }
+
+/* ---------- moduły: kolor przypisany do części warsztatu ---------- */
+.m1 { --mod: var(--peach);  --mod-d: var(--peach-d); }
+.m2 { --mod: var(--sky);    --mod-d: var(--sky-d); }
+.m3 { --mod: var(--lilac);  --mod-d: var(--lilac-d); }
+.m4 { --mod: var(--sage);   --mod-d: var(--sage-d); }
+.m5 { --mod: var(--butter); --mod-d: var(--butter-d); }
+.m6 { --mod: var(--rose);   --mod-d: var(--rose-d); }
+
+/* ---------- slajd ---------- */
+.slide {
+  position: absolute; top: 0; left: 0; width: 1600px; height: 824px;
+  padding: 52px 96px 28px;
+  display: flex; flex-direction: column;
+}
+
+.head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 34px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 14px;
+  background: var(--mod); border-radius: 999px; padding: 10px 22px 10px 10px;
+  font-size: 22px; font-weight: 600; color: var(--ink);
+}
+.pill b {
+  font-family: var(--display); font-weight: 600; font-size: 17px;
+  background: var(--surface); border-radius: 999px; padding: 6px 14px;
+}
+.slot { font-size: 22px; font-weight: 500; color: var(--mute); font-variant-numeric: tabular-nums; }
+
+h1, h2 { font-family: var(--display); font-weight: 600; color: var(--ink); text-wrap: balance; }
+h2 { font-size: 64px; line-height: 1.08; letter-spacing: -0.02em; max-width: 24ch; }
+.lead { font-size: 32px; line-height: 1.35; color: var(--ink-2); margin-top: 18px; max-width: 46ch; }
+.body { flex: 1; min-height: 0; margin-top: 40px; display: flex; flex-direction: column; }
+
+p { font-size: 30px; line-height: 1.38; }
+h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
+.muted { color: var(--ink-2); }
+.small { font-size: 26px; line-height: 1.38; color: var(--mute); }
+
+/* ---------- panele ---------- */
+.panel { background: var(--surface); border-radius: var(--r-xl); padding: 40px 44px; }
+.panel.tint { background: var(--mod); }
+.panel h3 + p { margin-top: 12px; }
+
+.row { display: grid; gap: 28px; }
+.row-2 { grid-template-columns: 1fr 1fr; }
+.row-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* lista punktów z kropką w kolorze modułu */
+.dots { list-style: none; display: flex; flex-direction: column; gap: 26px; }
+.dots li { display: grid; grid-template-columns: 22px 1fr; column-gap: 22px; align-items: baseline; }
+.dots li::before { content: ""; width: 22px; height: 22px; border-radius: 50%; background: var(--mod-d); transform: translateY(3px); }
+.dots h3 { font-size: 34px; }
+.dots p { font-size: 28px; color: var(--ink-2); margin-top: 4px; }
+
+/* kroki (prawdziwa sekwencja) */
+.steps { list-style: none; counter-reset: s; display: flex; flex-direction: column; gap: 24px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 64px 1fr; column-gap: 22px; align-items: start; }
+.steps li::before {
+  content: counter(s); width: 64px; height: 64px; border-radius: 50%;
+  background: var(--mod); display: grid; place-items: center;
+  font-family: var(--display); font-weight: 600; font-size: 28px;
+}
+.steps h3 { font-size: 34px; padding-top: 10px; }
+.steps h3 small { font-family: var(--text); font-size: 26px; font-weight: 500; color: var(--mute); margin-left: 12px; white-space: nowrap; }
+.steps p { font-size: 28px; color: var(--ink-2); margin-top: 6px; }
+
+/* obrazki */
+.pic { border-radius: var(--r-xl); overflow: hidden; background: var(--mod); padding: 14px; }
+.pic img { border-radius: calc(var(--r-xl) - 12px); width: 100%; height: 100%; object-fit: cover; }
+
+/* duże liczby */
+.fig { font-family: var(--display); font-weight: 600; font-size: 104px; line-height: 1; letter-spacing: -0.03em; }
+.fig-l { font-size: 32px; font-weight: 700; margin-top: 16px; line-height: 1.2; }
+.src { font-size: 22px; color: var(--mute); margin-top: auto; padding-top: 18px; }
+
+/* ==========================================================================
+   SLAJD 0
+   ========================================================================== */
+.s0 { padding-top: 64px; }
+.s0-copy { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; position: relative; }
+.s0 .tag { position: absolute; top: 0; left: 0; font-size: 22px; font-weight: 400; color: var(--ink-2); }
+.s0-title { display: flex; flex-direction: column; }
+.s0 h1 { font-size: 92px; line-height: 1.02; letter-spacing: -0.03em; }
+.s0 h1 span { display: block; color: var(--lilac-d); }
+.s0 .author { align-self: flex-end; margin-top: 20px; font-size: 28px; font-style: italic; font-weight: 500; line-height: 1.2; color: var(--ink-2); }
+/* partytura: sześć nut w kolorach sześciu części warsztatu, jak pasek postępu w stopce */
+.s0-score { position: absolute; right: 96px; bottom: 28px; display: flex; align-items: flex-end; gap: 11px; }
+.s0-score i { position: relative; display: block; width: 80px; height: var(--h); border-radius: 40px; background: var(--mod); }
+.s0-score i::before { content: ""; position: absolute; left: 20px; top: -56px; width: 40px; height: 40px; border-radius: 50%; background: var(--mod-d); }
+.s0.active .s0-score i { animation: s0-rise .7s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d); }
+@keyframes s0-rise { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .s0.active .s0-score i { animation: none; } }
+
+/* ==========================================================================
+   OŚ CZASU (slajd 2) i PASEK POSTĘPU
+   ========================================================================== */
+.tl { display: flex; gap: 8px; height: 96px; }
+.tl > div { border-radius: var(--r-m); background: var(--mod); display: grid; place-items: center; font-family: var(--display); font-weight: 600; font-size: 26px; }
+.tl > div.brk-t { background: repeating-linear-gradient(-45deg, var(--butter) 0 12px, #FCEFC6 12px 24px); font-family: var(--text); font-size: 22px; }
+.tl-t { display: flex; justify-content: space-between; font-size: 22px; color: var(--mute); margin-top: 12px; font-variant-numeric: tabular-nums; }
+.tl-d { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 40px; margin-top: 38px; }
+.tl-d > div { display: grid; grid-template-columns: 20px 1fr; column-gap: 16px; }
+.tl-d > div::before { content: ""; width: 20px; height: 20px; border-radius: 6px; background: var(--mod); margin-top: 8px; }
+.tl-d h3 { font-size: 30px; }
+.tl-d p { font-size: 26px; color: var(--ink-2); }
+
+/* ==========================================================================
+   RIASEC (slajd 12)
+   ========================================================================== */
+.letters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.letters > div { border-radius: var(--r-l); padding: 22px 22px 24px; }
+.letters b { font-family: var(--display); font-size: 80px; font-weight: 600; line-height: 1; display: block; }
+.letters h3 { font-size: 22px; margin: 12px 0 4px; }
+.letters p { font-size: 21px; color: var(--ink-2); line-height: 1.3; }
+.l-r { background: var(--peach); } .l-i { background: var(--sky); } .l-a { background: var(--lilac); }
+.l-s { background: var(--rose); } .l-e { background: var(--butter); } .l-c { background: var(--sage); }
+.codes { display: grid; grid-template-columns: 1fr 520px; gap: 40px; margin-top: 34px; align-items: start; }
+.codes dl { display: grid; grid-template-columns: 140px 1fr; row-gap: 12px; }
+.codes dt { font-family: var(--display); font-weight: 600; font-size: 24px; padding-top: 3px; }
+.codes dd { font-size: 27px; color: var(--ink-2); }
+.links { display: flex; flex-direction: column; gap: 12px; }
+.links a {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  background: var(--surface); border-radius: 999px; padding: 16px 28px;
+  color: var(--ink); text-decoration: none; font-size: 24px; font-weight: 600;
+}
+.links a span { font-size: 20px; font-weight: 500; color: var(--mute); }
+.links a:hover { background: var(--mod); }
+
+/* ==========================================================================
+   TIMER
+   ========================================================================== */
+.ex { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 600px; gap: 56px; }
+.lab-part { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.next-up { margin-top: auto; font-size: 28px; color: var(--mute); }
+.next-up strong { color: var(--ink); }
+.key-stack { position: relative; min-width: 0; }
+.key-stack:has(.value-key.shown) .steps { visibility: hidden; }
+.value-key { position: absolute; inset: 0; }
+.value-key:not(.shown) { visibility: hidden; }
+.value-key table { width: 100%; border-collapse: collapse; font-size: 30px; }
+.value-key th { text-align: left; font-size: 26px; font-weight: 500; color: var(--mute); padding: 0 16px 12px 0; }
+.value-key td { padding: 12px 16px 12px 0; border-top: 2px solid var(--line); }
+.value-key td:nth-child(2) { font-weight: 700; }
+.value-key th:last-child, .value-key td:last-child { text-align: right; padding-right: 0; white-space: nowrap; }
+.timer {
+  background: var(--mod); border-radius: var(--r-xl); padding: 32px 40px 30px;
+  display: flex; flex-direction: column; align-self: start;
+}
+.t-label { display: flex; justify-content: space-between; font-size: 24px; font-weight: 700; }
+.t-label span:last-child { font-weight: 500; color: var(--ink-2); }
+.t-digits { font-family: var(--display); font-weight: 600; font-size: 132px; line-height: 1; margin: 22px 0 24px; white-space: nowrap; }
+.t-digits .d { display: inline-block; width: .78em; text-align: center; }
+.t-digits .c { display: inline-block; width: .34em; text-align: center; }
+.t-track { height: 14px; border-radius: 999px; background: rgba(38,35,61,.12); overflow: hidden; }
+.t-track i { display: block; height: 100%; width: 100%; border-radius: 999px; background: var(--ink); transition: width .25s linear; }
+.t-ctrl { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+.t-ctrl button {
+  border: 2px solid var(--ink); background: transparent; border-radius: 999px;
+  padding: 12px 20px; font-size: 20px; font-weight: 700; line-height: 1;
+}
+.t-ctrl button.go { background: var(--ink); color: var(--surface); min-width: 136px; }
+.t-ctrl button:hover { background: rgba(255,255,255,.45); }
+.t-ctrl button.go:hover { background: #3A3658; }
+.t-hint { font-size: 17px; color: var(--ink-2); margin-top: 14px; }
+.timer.paused .t-digits { opacity: .5; }
+.timer.ended { background: var(--ink); color: var(--mod); }
+.timer.ended .t-label span:last-child, .timer.ended .t-hint { color: var(--mod); opacity: .8; }
+.timer.ended .t-track { background: rgba(255,255,255,.15); }
+.timer.ended button { border-color: var(--mod); color: var(--mod); }
+.timer.ended button.go { background: var(--mod); color: var(--ink); }
+
+.slide.brk { --mod: var(--butter); --mod-d: var(--butter-d); }
+.brk-grid { flex: 1; display: grid; grid-template-columns: 1fr 470px; gap: 48px; align-items: center; }
+.brk .timer { padding: 40px 52px 36px; align-self: center; }
+.brk .t-digits { font-size: 210px; margin: 14px 0 28px; }
+.brk .timer.ended { background: var(--ink); color: var(--butter); }
+.brk-side h2 { font-size: 72px; }
+.brk-side p { margin-top: 20px; font-size: 32px; color: var(--ink-2); }
+
+/* ==========================================================================
+   MATRYCA 2x2 (slajd 17): osie zgodne z ćwiartkami
+   ========================================================================== */
+.mx-wrap { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 420px; gap: 44px; }
+.mx { display: grid; grid-template-columns: 56px 1fr; grid-template-rows: 1fr 56px; min-height: 0; }
+.mx-y { position: relative; }
+.mx-y span { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%) rotate(-90deg); white-space: nowrap; font-size: 22px; font-weight: 700; }
+.mx-y span::after { content: "  →"; white-space: pre; }
+.mx-x { grid-column: 2; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; }
+.mx-x::after { content: "  →"; white-space: pre; }
+.mx-q { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; }
+.q { border-radius: var(--r-l); padding: 22px 28px; display: flex; flex-direction: column; }
+.q h3 { font-family: var(--display); font-weight: 600; font-size: 32px; }
+.q p { font-size: 24px; color: var(--ink-2); margin-top: 8px; line-height: 1.3; }
+.q .ax { margin-top: auto; font-size: 20px; font-weight: 700; color: var(--ink-2); }
+.q-veg { background: var(--fog); } .q-cage { background: var(--butter); }
+.q-haven { background: var(--sky); } .q-lev { background: var(--sage); }
+.mx-side .panel { padding: 32px 34px; }
+.mx-side ol { list-style: none; counter-reset: k; display: flex; flex-direction: column; gap: 16px; margin-top: 18px; }
+.mx-side li { counter-increment: k; font-size: 26px; line-height: 1.3; color: var(--ink-2); display: grid; grid-template-columns: 40px 1fr; }
+.mx-side li::before { content: counter(k); font-family: var(--display); font-weight: 600; color: var(--ink); }
+.mx-side .say { margin-top: 22px; font-size: 26px; font-style: italic; line-height: 1.35; }
+
+/* ==========================================================================
+   KASKADA (slajd 19)
+   ========================================================================== */
+.cascade { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+/* odsłanianie krok po kroku (Dalej / spacja / kliknięcie): slajdy 06, 29 */
+.reveal-item { opacity: .14; filter: grayscale(1); transform: translateY(8px); transition: opacity .35s ease, transform .35s ease, filter .35s ease; }
+.reveal-item.revealed { opacity: 1; filter: none; transform: none; }
+.cascade .reveal-item { border-radius: var(--r-xl); padding: 36px 36px 32px; display: flex; flex-direction: column; }
+.reveal-item.step-1 { background: var(--butter); } .reveal-item.step-2 { background: var(--peach); } .reveal-item.step-3 { background: var(--sage); }
+.hz { font-family: var(--display); font-weight: 600; font-size: 104px; line-height: 1; letter-spacing: -0.03em; }
+.hz small { font-size: 40px; margin-left: 8px; letter-spacing: 0; }
+.reveal-item h3 { font-size: 32px; margin: 22px 0 12px; }
+.reveal-item p { font-size: 27px; font-style: italic; }
+.reveal-item .ex-s { font-style: normal; font-size: 23px; color: var(--ink-2); margin-top: auto; padding-top: 16px; }
+.hint { font-size: 22px; color: var(--mute); margin-top: 16px; }
+
+/* ==========================================================================
+   MODUŁ II: etykiety dowodów, układ trudności, wzór na koszt
+   ========================================================================== */
+.evs { display: flex; align-items: center; gap: 12px; }
+.ev { border-radius: 999px; padding: 6px 16px; font-size: 20px; font-weight: 700; color: var(--ink); }
+.ev-dane { background: var(--sage); }
+.ev-hip { background: var(--butter); }
+.ev-exp { background: var(--lilac); }
+.f-sage { background: var(--sage); }
+.f-peach { background: var(--peach); }
+.f-sky { background: var(--sky); }
+.f-butter { background: var(--butter); }
+.f-rose { background: var(--rose); }
+.f-lilac { background: var(--lilac); }
+.m2 .panel[class*="f-"] .muted, .m2 .panel[class*="f-"] .src { color: var(--ink); }
+.lead.band { display: inline-block; align-self: flex-start; max-width: none; margin-top: 14px; padding: 10px 24px; border-radius: var(--r-m); color: var(--ink); font-size: 30px; }
+.m2 .stat-reveal .src { font-size: 22px; font-style: normal; margin-top: 0; padding-top: 18px; }
+.big-q { font-size: 38px; line-height: 1.25; font-weight: 600; font-style: italic; }
+.m2 .row-3 .fig { font-size: 76px; }
+.tr-q { margin-top: 16px; padding: 12px 24px; border-radius: var(--r-m); font-size: 30px; font-weight: 700; line-height: 1.2; }
+.tr-src { margin-top: 8px; padding-top: 0; }
+.body.tr { margin-top: 28px; }
+.tr .row { flex: 1; min-height: 0; }
+.tr .panel { padding: 32px 34px; }
+.tr .panel h3 { font-size: 30px; }
+.tr .panel p { font-size: 28px; }
+.cost { display: grid; grid-template-columns: 1fr 520px; gap: 40px; margin-top: 24px; }
+.cost-form { display: grid; grid-template-columns: 1fr 190px; gap: 8px 20px; align-items: center; align-content: start; }
+.cost-form label { font-size: 26px; font-weight: 500; }
+.cost-form input { width: 100%; font: inherit; font-size: 26px; font-weight: 700; color: var(--ink); background: var(--surface); border: 2px solid var(--line); border-radius: var(--r-m); padding: 5px 14px; font-variant-numeric: tabular-nums; }
+.cost-result { display: flex; flex-direction: column; gap: 14px; }
+.cost-sum { font-size: 56px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cost-result .small { color: var(--ink-2); }
+.cost-formula { font-weight: 600; }
+.cost-src { color: var(--ink); margin-top: auto; padding-top: 0; }
+.tool-link { margin-top: auto; }
+.tool-link a { justify-content: center; }
+
+/* ==========================================================================
+   ZAMKNIĘCIE
+   ========================================================================== */
+.thesis { font-family: var(--display); font-weight: 600; font-size: 50px; line-height: 1.2; letter-spacing: -0.015em; text-wrap: balance; }
+.qr { background: var(--surface); border-radius: var(--r-l); width: 280px; height: 280px; padding: 16px; display: grid; place-items: center; }
+.qr img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+.qr .empty { font-size: 20px; color: var(--mute); text-align: center; line-height: 1.4; }
+
+/* ==========================================================================
+   DOLNY PASEK
+   ========================================================================== */
+.footbar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 76px; padding: 0 96px;
+  background: var(--bg);
+  display: grid; grid-template-columns: 300px 1fr auto; align-items: center; gap: 36px;
+  font-size: 18px; color: var(--mute);
+}
+.where { color: var(--ink); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.prog { position: relative; display: flex; gap: 5px; height: 12px; }
+.prog > div { border-radius: 999px; background: var(--mod); opacity: .45; }
+.prog > div.pause { background: transparent; box-shadow: inset 0 0 0 2px var(--line); opacity: 1; }
+.prog > div.done { opacity: .8; }
+.prog > div.now { opacity: 1; box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--ink); }
+.clock-mark { position: absolute; top: -9px; width: 4px; height: 30px; border-radius: 4px; background: var(--ink); display: none; transform: translateX(-2px); }
+.clock-mark.on { display: block; }
+.ctrl { display: flex; align-items: center; gap: 28px; white-space: nowrap; }
+.ctrl .count { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--ink); background: none; border: 0; padding: 0; font-size: 18px; cursor: default; }
+.ctrl .count:focus { outline: none; }
+.ctrl .site { font-family: "Sulphur Point", var(--text); font-weight: 400; line-height: 1; color: var(--ink-2); }
+.site-dot { font-family: Verdana, sans-serif; font-size: calc(138em / 60); line-height: 0; color: var(--mod-d); }
+.site-tld { font-weight: 700; }
+
+/* ==========================================================================
+   KOKPIT (T) i WYGASZACZ (B)
+   ========================================================================== */
+#trainerHud {
+  position: fixed; top: 10px; left: 10px; right: 10px; z-index: 30;
+  background: var(--ink); color: #fff; border-radius: 24px; font-family: var(--text);
+  transform: translateY(-130%); visibility: hidden;
+  transition: transform .25s ease, visibility 0s linear .25s;
+}
+#trainerHud.visible { transform: none; visibility: visible; transition: transform .25s ease; box-shadow: 0 18px 40px -18px rgba(0,0,0,.5); }
+.hud { display: grid; grid-template-columns: auto 1fr auto auto; gap: 32px; align-items: center; padding: 16px 24px; }
+.hud-clock { font-family: var(--display); font-weight: 600; font-size: 36px; font-variant-numeric: tabular-nums; line-height: 1; }
+.hud small { display: block; font-size: 12px; color: #A9A5C2; margin-top: 4px; }
+.hud-now { min-width: 0; font-size: 17px; font-weight: 700; line-height: 1.4; }
+.hud-now div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hud-now .nx { font-weight: 400; color: #A9A5C2; font-size: 15px; }
+.hud-time { font-size: 15px; text-align: right; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.hud-time strong { font-size: 19px; }
+.hud-pacing-tag { display: inline-block; margin-top: 4px; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--sage); color: var(--ink); }
+.hud-pacing-tag.behind { background: var(--peach); }
+.hud-pacing-tag.ahead { background: var(--sky); }
+.hud-actions { display: flex; gap: 8px; }
+.btn-hud { background: transparent; border: 1.5px solid #5D5880; color: #fff; border-radius: 999px; padding: 9px 16px; font-size: 15px; font-weight: 700; }
+.btn-hud:hover { border-color: #fff; }
+.btn-hud.primary { background: var(--butter); border-color: var(--butter); color: var(--ink); min-width: 160px; }
+.btn-hud.primary.running { background: transparent; color: var(--butter); }
+
+/* kokpit na telefonie: dwa wiersze danych + rząd przycisków, mieści się na szerokość */
+@media (max-width: 900px), (max-height: 480px) {
+  #trainerHud { top: 6px; left: 6px; right: 6px; border-radius: 16px; }
+  .hud { grid-template-columns: auto 1fr; gap: 6px 14px; padding: 10px 12px; }
+  .hud-clock { font-size: 22px; }
+  .hud small { display: none; }
+  .hud-now { grid-column: 1 / -1; grid-row: 2; font-size: 13px; line-height: 1.35; }
+  .hud-now .nx { font-size: 12px; }
+  .hud-time { grid-column: 2; grid-row: 1; font-size: 12px; line-height: 1.35; display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 2px 10px; }
+  .hud-time br { display: none; }
+  .hud-time strong { font-size: 13px; }
+  .hud-pacing-tag { margin-top: 0; font-size: 11px; padding: 2px 8px; }
+  .hud-actions { grid-column: 1 / -1; grid-row: 3; gap: 6px; flex-wrap: wrap; }
+  .btn-hud { padding: 6px 10px; font-size: 12px; }
+  .btn-hud.primary { min-width: 0; }
+}
+
+#blackoutScreen { position: fixed; inset: 0; z-index: 40; background: #000; display: none; align-items: flex-end; justify-content: center; padding-bottom: 28px; color: #3a3a3a; font-family: var(--text); font-size: 14px; cursor: pointer; }
+#blackoutScreen.active { display: flex; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item, #trainerHud, .t-track i { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="viewport">
+<div id="stage">
+<div id="camera">
+
+<!-- 0 — TYTUŁ -->
+<section class="slide s0 m3 active" data-index="0">
+  <div class="s0-score" aria-hidden="true">
+    <i class="m1" style="--h:270px;--d:0ms"></i>
+    <i class="m2" style="--h:390px;--d:60ms"></i>
+    <i class="m3" style="--h:316px;--d:120ms"></i>
+    <i class="m4" style="--h:502px;--d:180ms"></i>
+    <i class="m5" style="--h:428px;--d:240ms"></i>
+    <i class="m6" style="--h:614px;--d:300ms"></i>
+  </div>
+  <div class="s0-copy">
+    <div class="tag">Centrum Adaptacji Młodzieży, warsztat pilotażowy</div>
+    <div class="s0-title">
+      <h1>Laboratorium<span>Twojej<br>przyszłości</span></h1>
+      <p class="author">Paweł Gębarowski</p>
+    </div>
+  </div>
+</section>
+
+<!-- 1 — PRZEDSTAWMY SIĘ (krótka runda) -->
+<section class="slide m1" data-index="1">
+  <div class="head"><span class="pill"><b>I</b>Przedstawmy się</span><span class="slot">00:00–00:25</span></div>
+  <h2>Przedstawmy się</h2>
+  <p class="lead">Po kolei, krótko.</p>
+  <div class="body" style="margin-top:34px">
+    <ol class="steps">
+      <li><div><h3>Imię albo pseudonim</h3><p>To z karteczki na ubraniu.</p></div></li>
+      <li><div><h3>Szkoła i klasa</h3></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 2 — KARTECZKI Z PYTANIAMI (tablica potrzeb): dostają wszyscy, pisanie dobrowolne; każdy przykleja swoje, prowadzący czyta je z tablicy -->
+<section class="slide m1" data-index="2">
+  <div class="head"><span class="pill"><b>I</b>Tablica pytań</span><span class="slot">00:00–00:25</span></div>
+  <h2>Z czym przychodzisz?</h2>
+  <div class="body">
+    <div style="flex:1;display:grid;grid-template-columns:1.35fr 1fr;gap:28px">
+      <div class="panel" style="background:var(--butter)">
+        <h3>Jeśli chcesz, napisz na żółtych karteczkach, możesz bez podpisu:</h3>
+        <ul class="dots" style="margin-top:30px;--mod-d:var(--ink)">
+          <li><p style="font-weight:600">Z jakim pytaniem przychodzę?</p></li>
+          <li><p style="font-weight:600">Co jest dla mnie najtrudniejsze w wyborze?</p></li>
+          <li><p style="font-weight:600">Z czym chcę stąd wyjść?</p></li>
+        </ul>
+      </div>
+      <div class="panel tint" style="display:flex;flex-direction:column;justify-content:center">
+        <p>Swoje karteczki przyklej na tablicy.</p>
+        <p style="margin-top:22px">Możesz dopisywać nowe przez cały warsztat.</p>
+        <p style="margin-top:22px">Na końcu spotkania omówimy je wspólnie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 — KONTRAKT: same zasady prowadzący spisuje na flipcharcie, slajd jest tylko tłem -->
+<section class="slide m1" data-index="3">
+  <div class="head"><span class="pill"><b>I</b>Kontrakt</span><span class="slot">00:00–00:25</span></div>
+  <h2>Nasz kontrakt</h2>
+  <p class="lead">Spisujemy go razem na flipcharcie.</p>
+  <div class="body" style="margin-top:32px">
+    <div class="pic" style="flex:1;min-height:0"><img src="assets/kontrakt_zespol.jpg" alt="Grupa młodych ludzi kładzie dłonie jedna na drugiej" style="object-position:50% 40%"></div>
+  </div>
+</section>
+
+<!-- 4 — ZAWÓD Z KOSZMARU (runda, bez limitu czasu) -->
+<section class="slide m1" data-index="4">
+  <div class="head"><span class="pill"><b>I</b>Zawód z koszmaru</span><span class="slot">00:00–00:25</span></div>
+  <h2>Zawód z koszmaru</h2>
+  <p class="lead">Po kolei. Zawsze możesz powiedzieć „pas”.</p>
+  <div class="body" style="margin-top:34px">
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 700px;gap:56px;align-items:center">
+      <ol class="steps">
+        <li><div><h3>Czego nie robił(a)byś za nic?</h3></div></li>
+        <li><div><h3>Dlaczego?</h3><p>Jedno zdanie wystarczy.</p></div></li>
+      </ol>
+      <div class="pic" style="height:400px"><img src="assets/antypraca_lew.jpg" alt="Pracownik zoo zamiata klatkę, obok siedzi zadowolony lew"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 — PLAN -->
+<section class="slide m1" data-index="5">
+  <div class="head"><span class="pill"><b>I</b>Plan spotkania</span><span class="slot">4 godziny</span></div>
+  <h2>Plan na dziś</h2>
+  <div class="body">
+    <div class="tl">
+      <div class="m1" style="flex:25">I</div>
+      <div class="m2" style="flex:25">II</div>
+      <div class="m3" style="flex:50">III</div>
+      <div class="brk-t" style="flex:20">przerwa</div>
+      <div class="m4" style="flex:50">IV</div>
+      <div class="brk-t" style="flex:10"></div>
+      <div class="m5" style="flex:35">V</div>
+      <div class="m6" style="flex:25">VI</div>
+    </div>
+    <div class="tl-t"><span>start</span><span>2 godziny</span><span>4 godziny</span></div>
+    <div class="tl-d">
+      <div class="m1"><span><h3>Start</h3><p>zasady i rozgrzewka</p></span></div>
+      <div class="m2"><span><h3>Szkoła a rynek</h3><p>trudności i dane</p></span></div>
+      <div class="m3"><span><h3>Diagnoza</h3><p>RIASEC i wartości</p></span></div>
+      <div class="m4"><span><h3>Laboratorium</h3><p>jeden zawód pod lupą</p></span></div>
+      <div class="m5"><span><h3>Co dalej</h3><p>72 h, 7 dni, 30 dni</p></span></div>
+      <div class="m6"><span><h3>Domknięcie</h3><p>pytania i ankieta</p></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 — NIEPEWNOŚĆ: najpierw pytanie do sali, statystyka po kliknięciu -->
+<section class="slide m2" data-index="6">
+  <div class="head"><span class="pill"><b>II</b>Rozbrajamy bombę</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Nie musisz dziś wiedzieć</h2>
+  <p class="lead band f-rose">„Skoro nie wiem, to coś ze mną jest nie tak”.</p>
+  <div class="body" style="margin-top:24px">
+    <div class="row row-2" style="flex:1">
+      <div class="panel f-butter" style="display:flex;align-items:center"><p class="big-q">Czy wiesz, jaką pracę chcesz mieć, gdy będziesz mieć 30 lat?</p></div>
+      <div class="reveal-item panel f-lilac stat-reveal" style="display:flex;flex-direction:column;justify-content:center"><div class="fig">39%</div><div class="fig-l">piętnastolatków w krajach OECD nie wskazuje konkretnego zawodu</div><p class="src">OECD 2025, dane PISA 2022</p></div>
+    </div>
+    <p class="reveal-item tr-q f-sky">To częste. Warto to sprawdzać, a nie czekać, aż samo się wyjaśni.</p>
+  </div>
+</section>
+
+<!-- 7 — NIE NA CAŁE ŻYCIE -->
+<section class="slide m2" data-index="7">
+  <div class="head"><span class="pill"><b>II</b>Rozbrajamy bombę</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>To nie wybór na całe życie</h2>
+  <p class="lead">Na ile dziedzina wykształcenia zgadza się z pracą osób w wieku 15–34 lata:</p>
+  <div class="body" style="margin-top:28px">
+    <div class="row row-3">
+      <div class="panel f-sage"><div class="fig">46,4%</div><div class="fig-l">w dużym lub bardzo dużym stopniu</div></div>
+      <div class="panel f-butter"><div class="fig">28,5%</div><div class="fig-l">w średnim lub małym stopniu</div></div>
+      <div class="panel f-peach"><div class="fig">13,2%</div><div class="fig-l">wcale</div></div>
+    </div>
+    <p class="tr-q f-sky">Ważna decyzja, ale odwracalna. Zmiana kosztuje czas i pieniądze.</p>
+    <p class="src tr-src">GUS, Osoby młode na rynku pracy w 2024 r., s. 7. Ocena samych badanych.</p>
+  </div>
+</section>
+
+<!-- 8 — PRZYPADEK -->
+<section class="slide m2" data-index="8">
+  <div class="head"><span class="pill"><b>II</b>Rozbrajamy bombę</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Przypadek też jest częścią drogi</h2>
+  <div class="body">
+    <div class="row row-3" style="flex:1">
+      <div class="panel f-lilac" style="display:flex;flex-direction:column"><div class="fig">&gt;60%</div><div class="fig-l">z 682 menedżerów przeżyło istotne zdarzenie losowe w karierze</div><p class="src">Legrand i in., 2023</p></div>
+      <div class="panel f-butter" style="display:flex;flex-direction:column"><div class="fig">68%</div><div class="fig-l">studentów w Turcji wskazuje coś nieplanowanego w wyborze kariery, np. wynik egzaminu</div><p class="src">Ulas-Kilic i in., 2020</p></div>
+      <div class="panel f-sage" style="display:flex;flex-direction:column"><div class="fig" style="font-size:46px">Większość</div><div class="fig-l">szwajcarskich nastolatków mówi o wpływie przypadku na wybór szkoły</div><p class="src" style="color:var(--ink-2)">Hirschi, 2010</p></div>
+    </div>
+    <p class="tr-q f-peach">Przygotowanie nie wyklucza przypadku.</p>
+  </div>
+</section>
+
+<!-- 9 — AI -->
+<section class="slide m2" data-index="9">
+  <div class="head"><span class="pill"><b>II</b>Rozbrajamy bombę</span><span class="evs"><span class="ev ev-dane">dane</span><span class="ev ev-exp">z mojego doświadczenia</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>A co z AI?</h2>
+  <div class="body">
+    <div class="row row-3" style="flex:1">
+      <div class="panel f-rose" style="display:flex;flex-direction:column"><div class="fig">1 na 4</div><div class="fig-l">pracujących na świecie ma zawód w jakimś stopniu narażony na AI</div></div>
+      <div class="panel f-peach" style="display:flex;flex-direction:column"><div class="fig">3,3%</div><div class="fig-l">w grupie najwyższego ryzyka</div></div>
+      <div class="panel f-sky" style="display:flex;flex-direction:column"><h3>Wniosek ILO</h3><p style="margin-top:12px">Większość prac się zmieni, a nie zniknie. Częściowa automatyzacja może jednak obniżyć popyt na niektóre zawody.</p></div>
+    </div>
+    <p class="tr-q f-butter">Patrz na to, co w tej pracy robisz na co dzień, a nie na jej nazwę.</p>
+    <p class="src tr-src">ILO, Generative AI and jobs: A 2025 update, s. 1, 9–10. Narażenie to teoretyczny potencjał.</p>
+  </div>
+</section>
+
+<!-- 10 — PRZEDMIOT I MATURA -->
+<section class="slide m2" data-index="10">
+  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-hip">hipoteza</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Ulubiony przedmiot, wynik z matury</h2>
+  <p class="lead band f-butter">„Mam taki wynik. Gdzie mnie przyjmą?”</p>
+  <div class="body tr">
+    <div class="row row-3">
+      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Zainteresowania to dobry trop, a progi to prawdziwe ograniczenie.</p></div>
+      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Przedmiot w szkole to nie praca. Progi stają się jedynym kryterium.</p></div>
+      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Przeczytaj sylabus i opis zawodu, zanim spojrzysz na progi.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 — STUDIA A PRACA -->
+<section class="slide m2" data-index="11">
+  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-exp">z mojego doświadczenia</span><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Oczekiwania studenta a rzeczywistość pracownika</h2>
+  <p class="lead band f-lilac">„Lubię to na studiach, więc polubię tę pracę”.</p>
+  <div class="body tr">
+    <div class="row row-3">
+      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Studia dają podstawy, a w niektórych zawodach także prawo do ich wykonywania.</p></div>
+      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Studia nie pokazują dnia pracy. Sam program to najczęstszy powód przerwania nauki: 27,5%.</p></div>
+      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Sylabus, opis zawodu i rozmowa z kimś z branży.</p></div>
+    </div>
+      <p class="src tr-src">GUS, Osoby młode na rynku pracy w 2024 r., s. 5. Wszystkie poziomy edukacji.</p>
+  </div>
+</section>
+
+<!-- 12 — OTOCZENIE -->
+<section class="slide m2" data-index="12">
+  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-hip">hipoteza</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Czyj to pomysł?</h2>
+  <p class="lead band f-rose">Rodzice, tradycje rodzinne, presja grupy, znajomi w tym samym mieście.</p>
+  <div class="body tr">
+    <div class="row row-3">
+      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Bliscy Cię znają i mają informacje. Miasto ze znajomymi to też prawdziwy powód.</p></div>
+      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Wybór należy do kogoś innego, a skutki ponosisz Ty.</p></div>
+      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Oddziel to, czego chcesz Ty, od tego, czego chcą dla Ciebie inni.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 — BEZPIECZEŃSTWO -->
+<section class="slide m2" data-index="13">
+  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-dane">dane</span><span class="ev ev-hip">hipoteza</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>„Idź na stabilne studia”</h2>
+  <p class="lead band f-butter">„Po tym kierunku jest praca”.</p>
+  <div class="body tr">
+    <div class="row row-3">
+      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Poczucie bezpieczeństwa jest ważne. To wartość, nie błąd.</p></div>
+      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Może przysłonić to, czego chcesz, i skończyć się wypaleniem.</p></div>
+      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>ELA: zarobki i bezrobocie po kierunku. W 1. roku po dyplomie to niespełna 70% lokalnej średniej płacy.</p></div>
+    </div>
+      <p class="tr-q f-lilac">Gdyby praca była gwarantowana po każdym kierunku, co byś wybrał(a)?</p>
+      <p class="src tr-src">System ELA, rocznik 2014, ela.nauka.gov.pl</p>
+  </div>
+</section>
+
+<!-- 14 — JEDNA ŚCIEŻKA -->
+<section class="slide m2" data-index="14">
+  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Tylko jedna utarta ścieżka</h2>
+  <p class="lead band f-lilac">„Wszyscy idą na studia”. Planuje je 63% uczniów ostatnich klas.</p>
+  <div class="body tr">
+    <div class="row row-3">
+      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Dla wielu osób studia są dobrą drogą.</p></div>
+      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Nie sprawdzasz, dlaczego tam idziesz ani co jeszcze jest możliwe.</p></div>
+      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Szkoła policealna, kurs zawodowy, praca połączona ze studiami.</p></div>
+    </div>
+      <p class="src tr-src">CBOS, Młodzież 2025, s. 18</p>
+  </div>
+</section>
+
+<!-- 15 — DZIEŃ PRACY -->
+<section class="slide m2" data-index="15">
+  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-hip">hipoteza</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Skąd wiesz, jak wygląda ta praca?</h2>
+  <p class="lead band f-rose">Filmy, seriale, „IT to 15 tysięcy na start”.</p>
+  <div class="body tr">
+    <div class="row row-3">
+      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Wyobrażenia dają pierwszy impuls: architekt rysuje domy.</p></div>
+      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Dzień pracy to także przepisy, uzgodnienia, poprawki i klienci.</p></div>
+      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Znajdź opis zawodu i zapytaj kogoś, kto go wykonuje.</p></div>
+    </div>
+      <p class="tr-q f-butter">Jak bym się czuł(a) po ośmiu godzinach takiego dnia?</p>
+  </div>
+</section>
+
+<!-- 16 — KOSZT STUDIÓW: pola zmieniane na żywo -->
+<section class="slide m2" data-index="16">
+  <div class="head"><span class="pill"><b>II</b>Pomocne rzeczy</span><span class="evs"><span class="ev ev-hip">szacunek</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Ile kosztują studia?</h2>
+  <div class="body cost">
+    <form class="cost-form" id="costForm" autocomplete="off">
+      <label for="costRoom">Pokój, zł miesięcznie</label><input id="costRoom" type="number" min="0" step="50" value="1350">
+      <label for="costFood">Jedzenie, zł miesięcznie</label><input id="costFood" type="number" min="0" step="50" value="600">
+      <label for="costTravel">Dojazdy, zł miesięcznie</label><input id="costTravel" type="number" min="0" step="10" value="80">
+      <label for="costOther">Inne, zł miesięcznie</label><input id="costOther" type="number" min="0" step="10" value="1390">
+      <label for="costTuition">Czesne, zł rocznie</label><input id="costTuition" type="number" min="0" step="100" value="0">
+      <label for="costGrant">Stypendium, zł miesięcznie</label><input id="costGrant" type="number" min="0" step="50" value="0">
+      <label for="costEarned">Zarobki na studiach, zł miesięcznie</label><input id="costEarned" type="number" min="0" step="50" value="0">
+      <label for="costYears">Lata studiów</label><input id="costYears" type="number" min="1" max="7" step="1" value="5">
+      <label for="costForgone">Utracone zarobki, zł miesięcznie</label><input id="costForgone" type="number" min="0" step="100" value="0">
+    </form>
+    <div class="panel f-butter cost-result">
+      <h3>Koszt studiów</h3>
+      <div class="fig cost-sum" id="costTotal">–</div>
+      <p class="small" id="costWithForgone">&nbsp;</p>
+      <p class="small cost-formula">lata × (10 miesięcy × koszty + czesne − 10 miesięcy × wpływy)</p>
+      <p class="small">Publiczne studia stacjonarne są bezpłatne. Sprawdź stypendia i akademiki.</p>
+      <p class="src cost-src">Przykład na podstawie Portfela Studenta 2025 (ZBP, WIB), średnie dla Polski</p>
+    </div>
+  </div>
+</section>
+
+<!-- 17 — GDZIE SPRAWDZIĆ -->
+<section class="slide m2" data-index="17">
+  <div class="head"><span class="pill"><b>II</b>Pomocne rzeczy</span><span class="evs"><span class="slot">00:25–00:50</span></span></div>
+  <h2>Gdzie to sprawdzić</h2>
+  <div class="body">
+    <div class="row row-3" style="flex:1">
+      <div class="panel f-sage" style="display:flex;flex-direction:column"><h3>Co będzie na studiach?</h3><p class="muted" style="margin-top:14px">Sylabusy i programy na stronach uczelni.</p></div>
+      <div class="panel f-butter" style="display:flex;flex-direction:column"><h3>Co po tym kierunku?</h3><p class="muted" style="margin-top:14px">Zarobki i ryzyko bezrobocia absolwentów.</p><div class="links tool-link"><a href="https://ela.nauka.gov.pl" target="_blank" rel="noopener">System ELA</a></div></div>
+      <div class="panel f-lilac" style="display:flex;flex-direction:column"><h3>Co robi się w tej pracy?</h3><p class="muted" style="margin-top:14px">Opisy ponad 800 zawodów i rozmowy z ludźmi z branż.</p><div class="links tool-link"><a href="https://mapakarier.org/strefa-mlodziezy/" target="_blank" rel="noopener">Mapa Karier</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 — PYTANIA DO SIEBIE -->
+<section class="slide m2" data-index="18">
+  <div class="head"><span class="pill"><b>II</b>Praca ze sobą</span><span class="evs"><span class="slot">00:25–00:50</span></span></div>
+  <h2>Pytania do siebie</h2>
+  <p class="lead">Zapisz odpowiedź na jedno z nich. Wrócimy do niego po diagnozie.</p>
+  <div class="body" style="margin-top:32px">
+    <div class="row row-2" style="flex:1;grid-template-rows:1fr 1fr">
+      <div class="panel f-butter" style="display:flex;align-items:center"><h3>Czego tak naprawdę chcę od pracy?</h3></div>
+      <div class="panel f-rose" style="display:flex;align-items:center"><h3>Co sprawia mi satysfakcję?</h3></div>
+      <div class="panel f-sage" style="display:flex;align-items:center"><h3>W czym jestem mocny(a)?</h3></div>
+      <div class="panel f-lilac" style="display:flex;align-items:center"><h3>Ile czasu poświęciłem(am) na swoje „dlaczego”?</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 — DWA WYMIARY -->
+<section class="slide m3" data-index="19">
+  <div class="head"><span class="pill"><b>III</b>Diagnoza</span><span class="slot">00:50–01:40</span></div>
+  <h2>Upraszczamy do dwóch wymiarów</h2>
+  <p class="lead">Na wybór wpływa dużo więcej: pieniądze, miejsce, zdrowie, przypadek. Dziś sprawdzamy dwa wymiary.</p>
+  <div class="body" style="margin-top:32px">
+    <div class="row row-2" style="flex:1">
+      <div class="panel tint" style="display:flex;flex-direction:column">
+        <div class="fig" style="font-size:54px">Co robisz</div>
+        <p style="margin-top:22px">Narzędzia, liczby, sztuka, ludzie, zarządzanie czy procedury?</p>
+        <p style="margin-top:auto;font-weight:700">Złe dopasowanie: ciągłe zmęczenie.</p>
+      </div>
+      <div class="panel" style="display:flex;flex-direction:column;background:var(--sky)">
+        <div class="fig" style="font-size:54px">Na jakich warunkach</div>
+        <p style="margin-top:22px">Niezależność, uznanie, dobry szef, spokój po pracy?</p>
+        <p style="margin-top:auto;font-weight:700">Złe dopasowanie: szybkie wypalenie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 20 — ĆWICZENIE RIASEC -->
+<section class="slide m3" data-index="20">
+  <div class="head"><span class="pill"><b>III</b>Ćwiczenie: RIASEC</span><span class="slot">00:50–01:15</span></div>
+  <h2>RIASEC w ciemno</h2>
+  <p class="lead">60 czynności. Oceniasz pierwszy odruch: 0 za karę, 2 obojętne, 4 czysta frajda.</p>
+  <div class="body" style="margin-top:34px">
+    <div class="ex">
+      <ol class="steps">
+        <li><div><h3>1–30 przy osi <small>12 min</small></h3><p>Wpisz ocenę, na „Krok!” stań na osi.</p></div></li>
+        <li><div><h3>31–60 przy stolikach <small>8 min</small></h3><p>Druga połowa arkusza.</p></div></li>
+        <li><div><h3>Sumy w kolumnach <small>5 min</small></h3><p>Potem odsłonimy, co znaczą.</p></div></li>
+      </ol>
+      <div class="timer" data-timer="Riasec" data-min="25" data-step="1" data-label="RIASEC"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 21 — KOD HOLLANDA -->
+<section class="slide m3" data-index="21">
+  <div class="head"><span class="pill"><b>III</b>Wyniki RIASEC</span><span class="slot">00:50–01:40</span></div>
+  <h2>Twój kod to trzy najwyższe kolumny</h2>
+  <div class="body" style="margin-top:32px">
+    <div class="letters">
+      <div class="l-r"><b>R</b><h3>Realistyczny</h3><p>sprzęt, technika, rzemiosło</p></div>
+      <div class="l-i"><b>I</b><h3>Badawczy</h3><p>analiza, nauka, logika</p></div>
+      <div class="l-a"><b>A</b><h3>Artystyczny</h3><p>tworzenie, forma, swoboda</p></div>
+      <div class="l-s"><b>S</b><h3>Społeczny</h3><p>pomaganie, uczenie</p></div>
+      <div class="l-e"><b>E</b><h3>Przedsiębiorczy</h3><p>wpływ, sprzedaż, ryzyko</p></div>
+      <div class="l-c"><b>C</b><h3>Konwencjonalny</h3><p>porządek, liczby, procedury</p></div>
+    </div>
+    <div class="codes">
+      <dl>
+        <dt>I-A-S</dt><dd>badacz UX, badacz rynku</dd>
+        <dt>R-E-C</dt><dd>automatyk, mechatronik, logistyk</dd>
+        <dt>S-E-C</dt><dd>specjalista HR, doradca kariery, trener</dd>
+        <dt>A-E-S</dt><dd>projektant UI/UX, architekt wnętrz</dd>
+      </dl>
+      <div class="links">
+        <a href="https://www.onetonline.org/explore/interests/" target="_blank" rel="noopener">Zawody według kodu<span>onetonline.org</span></a>
+        <a href="https://www.mynextmove.org/explore/ip" target="_blank" rel="noopener">Profil zainteresowań<span>mynextmove.org</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 22 — ĆWICZENIE: WARTOŚCI W PRACY -->
+<section class="slide m3" data-index="22">
+  <div class="head"><span class="pill"><b>III</b>Ćwiczenie: wartości w pracy</span><span class="slot">01:15–01:40</span></div>
+  <h2>Twoje warunki pracy</h2>
+  <p class="lead">20 zdań. Szukasz tego, bez czego nie wytrzymasz w pracy.</p>
+  <div class="body" style="margin-top:34px">
+    <div class="ex">
+      <div class="key-stack">
+      <ol class="steps">
+        <li><div><h3>Wpisz numery do tabeli <small>8 min</small></h3><p>Po 4 w kolumnie, w ciszy. Możesz skreślać.</p></div></li>
+        <li><div><h3>Dwie najważniejsze wartości <small>7 min</small></h3><p>Policz wynik według klucza.</p></div></li>
+        <li><div><h3>Trzy warunki nie do negocjacji <small>5 min</small></h3><p>Zabierasz je do laboratorium.</p></div></li>
+      </ol>
+      <div class="value-key">
+        <table>
+          <thead><tr><th>Wartość</th><th>Numery zdań</th><th>Mnożnik</th></tr></thead>
+          <tbody>
+            <tr><td>Osiągnięcia</td><td>1, 6</td><td>× 3</td></tr>
+            <tr><td>Niezależność</td><td>9, 13, 20</td><td>× 2</td></tr>
+            <tr><td>Uznanie</td><td>4, 5, 12</td><td>× 2</td></tr>
+            <tr><td>Relacje</td><td>8, 11, 15</td><td>× 2</td></tr>
+            <tr><td>Wsparcie</td><td>2, 16, 17</td><td>× 2</td></tr>
+            <tr><td>Warunki pracy</td><td>3, 7, 10, 14, 18, 19</td><td>× 1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div class="timer" data-timer="Wartosci" data-min="20" data-step="1" data-label="Wartości w pracy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 23 — PRACA × WARTOŚCI -->
+<section class="slide m3" data-index="23">
+  <div class="head"><span class="pill"><b>III</b>Synteza</span><span class="slot">00:50–01:40</span></div>
+  <h2>Ta sama praca, inne życie</h2>
+  <div class="body">
+    <div class="row row-2" style="flex:1">
+      <div class="panel" style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:baseline;gap:20px"><span class="fig" style="font-size:80px">I-C</span><span class="small">badawczy i konwencjonalny</span></div>
+        <div class="panel tint" style="padding:22px 28px;border-radius:var(--r-l)"><p><strong>+ niezależność:</strong> zdalny analityk danych</p></div>
+        <div class="panel" style="padding:22px 28px;border-radius:var(--r-l);background:var(--sky)"><p><strong>+ stabilność:</strong> analityk w urzędzie statystycznym</p></div>
+      </div>
+      <div class="panel" style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:baseline;gap:20px"><span class="fig" style="font-size:80px">S-E</span><span class="small">społeczny i przedsiębiorczy</span></div>
+        <div class="panel" style="padding:22px 28px;border-radius:var(--r-l);background:var(--butter)"><p><strong>+ uznanie:</strong> właściciel agencji marketingowej</p></div>
+        <div class="panel" style="padding:22px 28px;border-radius:var(--r-l);background:var(--rose)"><p><strong>+ relacje:</strong> koordynator projektów w fundacji</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 24 — PRZERWA GŁÓWNA -->
+<section class="slide brk" data-index="24">
+  <div class="head"><span class="pill"><b>20 min</b>Przerwa</span><span class="slot">01:40–02:00</span></div>
+  <div class="brk-grid">
+    <div class="timer" data-timer="Break" data-min="20" data-step="1" data-label="Przerwa"></div>
+    <div class="brk-side"><h2>Przerwa na jedzenie</h2><p>Woda, coś ciepłego, świeże powietrze. Potem laboratorium.</p></div>
+  </div>
+</section>
+
+<!-- 25 — LABORATORIUM, CZĘŚĆ 1 -->
+<section class="slide m4" data-index="25">
+  <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 1 z 5</span><span class="slot">02:00–02:04</span></div>
+  <h2>Jeden zawód pod lupą</h2>
+  <p class="lead">Wybierasz roboczo, żeby przećwiczyć metodę. To nie decyzja na całe życie.</p>
+  <div class="body" style="margin-top:34px">
+    <div class="ex">
+      <div class="lab-part">
+      <ol class="steps">
+        <li><div><h3>Wybierz jeden zawód</h3><p>Własny pomysł albo z katalogu hipotez.</p></div></li>
+        <li><div><h3>Wpisz go na górze arkusza</h3><p>Dopisz kod RIASEC i dwie najważniejsze wartości.</p></div></li>
+      </ol>
+      <p class="next-up">Dalej: <strong>Bilans</strong></p>
+      </div>
+      <div class="timer" data-timer="LabChoice" data-min="4" data-step="1" data-label="Wybór zawodu"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 26 — LABORATORIUM, CZĘŚĆ 2 -->
+<section class="slide m4" data-index="26">
+  <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 2 z 5</span><span class="slot">02:04–02:11</span></div>
+  <h2>Bilans</h2>
+  <div class="body" style="margin-top:34px">
+    <div class="ex">
+      <div class="lab-part">
+      <ol class="steps">
+        <li><div><h3>Zarobki na rękę</h3><p>Na start i po 5 latach.</p></div></li>
+        <li><div><h3>Czas pracy</h3><p>Stałe godziny, zmiany, zdalnie?</p></div></li>
+        <li><div><h3>Zmęczenie od 1 do 5</h3><p>Fizyczne i psychiczne.</p></div></li>
+        <li><div><h3>Energia po pracy</h3><p>Co Ci zostaje o 17:00?</p></div></li>
+      </ol>
+      <p class="next-up">Dalej: <strong>Ciemna strona</strong></p>
+      </div>
+      <div class="timer" data-timer="LabBalance" data-min="7" data-step="1" data-label="Bilans"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 27 — LABORATORIUM, CZĘŚĆ 3 -->
+<section class="slide m4" data-index="27">
+  <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 3 z 5</span><span class="slot">02:11–02:18</span></div>
+  <h2>Ciemna strona</h2>
+  <div class="body" style="margin-top:34px">
+    <div class="ex">
+      <div class="lab-part">
+      <ol class="steps">
+        <li><div><h3>Najgorszy wtorek o 14:00</h3><p>Co jest żmudne, nudne albo irytujące?</p></div></li>
+        <li><div><h3>Czego boisz się najbardziej?</h3><p>Jedna konkretna rzecz.</p></div></li>
+        <li><div><h3>Zderzenie z profilem</h3><p>Co kłóci się z Twoim kodem i wartościami?</p></div></li>
+      </ol>
+      <p class="next-up">Dalej: <strong>Otoczenie i plan B</strong></p>
+      </div>
+      <div class="timer" data-timer="LabDark" data-min="7" data-step="1" data-label="Ciemna strona"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 28 — LABORATORIUM, CZĘŚĆ 4 -->
+<section class="slide m4" data-index="28">
+  <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 4 z 5</span><span class="slot">02:18–02:25</span></div>
+  <h2>Otoczenie i plan B</h2>
+  <div class="body" style="margin-top:34px">
+    <div class="ex">
+      <div class="lab-part">
+      <ol class="steps">
+        <li><div><h3>Czyj to scenariusz?</h3><p>Twój, pół na pół czy cudza presja?</p></div></li>
+        <li><div><h3>Próg wejścia</h3><p>Czego wymaga wejście do tego zawodu?</p></div></li>
+        <li><div><h3>Plan B</h3><p>Rezygnujesz po roku. Z czym zostajesz?</p></div></li>
+      </ol>
+      <p class="next-up">Dalej: <strong>Wymiana w parach</strong></p>
+      </div>
+      <div class="timer" data-timer="LabPlanB" data-min="7" data-step="1" data-label="Otoczenie i plan B"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 29 — LABORATORIUM, CZĘŚĆ 5 -->
+<section class="slide m4" data-index="29">
+  <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 5 z 5</span><span class="slot">02:25–02:33</span></div>
+  <h2>Wymiana w parach</h2>
+  <p class="lead">Po 4 minuty na osobę.</p>
+  <div class="body" style="margin-top:34px">
+    <div class="ex">
+      <div class="lab-part">
+      <ol class="steps">
+        <li><div><h3>Opowiedz o swoim zawodzie</h3><p>Partner słucha i nie przerywa.</p></div></li>
+        <li><div><h3>Partner zadaje jedno trudne pytanie</h3><p>Takie, które sprawdza, czy to się trzyma.</p></div></li>
+        <li><div><h3>Zapisz zawód na karteczce</h3><p>Przyda się przy matrycy.</p></div></li>
+      </ol>
+      <p class="next-up">Dalej: <strong>Matryca, razem przy flipcharcie</strong></p>
+      </div>
+      <div class="timer" data-timer="LabPairs" data-min="8" data-step="1" data-label="Pary"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 30 — MATRYCA -->
+<section class="slide m4" data-index="30">
+  <div class="head"><span class="pill"><b>IV</b>Matryca</span><span class="slot">02:33–02:50</span></div>
+  <h2 style="font-size:56px">Gdzie ląduje Twój zawód?</h2>
+  <div class="body" style="margin-top:28px">
+    <div class="mx-wrap">
+      <div class="mx">
+        <div class="mx-y"><span>Spokój i życie po pracy</span></div>
+        <div class="mx-q">
+          <div class="q q-haven"><h3>Bezpieczna przystań</h3><p>Stabilnie, spokojnie, umiarkowanie.</p><div class="ax">dużo spokoju, niższy zwrot</div></div>
+          <div class="q q-lev"><h3>Dźwignia</h3><p>Dobre zarobki i samodzielność.</p><div class="ax">dużo spokoju, wysoki zwrot</div></div>
+          <div class="q q-veg"><h3>Wegetacja</h3><p>Mało pieniędzy, dużo stresu.</p><div class="ax">mało spokoju, niski zwrot</div></div>
+          <div class="q q-cage"><h3>Złota klatka</h3><p>Duże pieniądze, brak życia po pracy.</p><div class="ax">mało spokoju, wysoki zwrot</div></div>
+        </div>
+        <div class="mx-x">Autonomia i zwrot finansowy</div>
+      </div>
+      <div class="mx-side">
+        <div class="panel tint">
+          <h3>Przyklejacie obie karteczki</h3>
+          <ol>
+            <li>Każdy zawód z pary trafia do swojej ćwiartki.</li>
+            <li>Przy każdej karteczce powiedz, dlaczego tam.</li>
+            <li>Mówi rzecznik albo każde z Was o partnerze.</li>
+          </ol>
+          <p class="say">„Ten zawód ląduje tutaj, bo…”</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 31 — PRZERWA TECHNICZNA -->
+<section class="slide brk" data-index="31">
+  <div class="head"><span class="pill"><b>10 min</b>Przerwa opcjonalna</span><span class="slot">02:50–03:00</span></div>
+  <div class="brk-grid">
+    <div class="timer" data-timer="TechBreak" data-min="10" data-step="1" data-label="Przerwa"></div>
+    <div class="brk-side"><h2>Krótka przerwa?</h2><p>Decyduje sala: woda albo od razu ostatni blok.</p></div>
+  </div>
+</section>
+
+<!-- 32 — KASKADA -->
+<section class="slide m5" data-index="32" id="slideCascade">
+  <div class="head"><span class="pill"><b>V</b>Co dalej</span><span class="slot">03:00–03:35</span></div>
+  <h2>Co zrobisz po warsztacie?</h2>
+  <div class="body" style="margin-top:34px">
+    <div class="cascade">
+      <div class="reveal-item step-1" id="revealItem1">
+        <div class="hz">72<small>h</small></div>
+        <h3>Jeden krok, 15 minut</h3>
+        <p>„Jaki darmowy krok zrobisz w 3 dni, żeby sprawdzić dzisiejsze wnioski?”</p>
+        <p class="ex-s">Napisać do kogoś z branży, przeczytać sylabus, przejrzeć 3 ogłoszenia.</p>
+      </div>
+      <div class="reveal-item step-2" id="revealItem2">
+        <div class="hz">7<small>dni</small></div>
+        <h3>Jedna rzecz na ulgę</h3>
+        <p>„Co w tym tygodniu da Ci największą ulgę w temacie przyszłości?”</p>
+      </div>
+      <div class="reveal-item step-3" id="revealItem3">
+        <div class="hz">30<small>dni</small></div>
+        <h3>Sprawdzone albo skreślone</h3>
+        <p>„Co za miesiąc chcesz mieć sprawdzone, a co skreślone?”</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 33 — KARTECZKI + TEZA -->
+<section class="slide m6" data-index="33">
+  <div class="head"><span class="pill"><b>VI</b>Domknięcie</span><span class="slot">03:35–04:00</span></div>
+  <h2>Wracamy do karteczek</h2>
+  <div class="body">
+    <div style="flex:1;display:grid;grid-template-columns:520px 1fr;gap:28px">
+      <div class="panel" style="background:var(--butter)">
+        <h3>Sprawdzamy razem</h3>
+        <ul class="dots" style="margin-top:26px;--mod-d:var(--ink)">
+          <li><p>Czy ten temat jest już jasny?</p></li>
+          <li><p>Co potrzebuje jeszcze minuty?</p></li>
+        </ul>
+      </div>
+      <div class="panel tint" style="display:flex;flex-direction:column;justify-content:center">
+        <p class="thesis">Nie musisz dziś wiedzieć. Wiesz już, jak to sprawdzić.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 34 — DZIĘKUJĘ + ANKIETA -->
+<section class="slide m6" data-index="34">
+  <div class="head"><span class="pill"><b>VI</b>Ankieta</span><span class="slot">03:35–04:00</span></div>
+  <h2 style="font-size:96px">Dziękuję!</h2>
+  <p class="lead">Szczera opinia pomoże poprawić warsztat dla kolejnych grup.</p>
+  <div class="body">
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 340px;gap:28px;align-items:stretch">
+      <div class="panel tint"><h3>Na kartce</h3><p class="muted">Leży na stoliku. Około 3 minut.</p></div>
+      <div class="panel"><h3>W telefonie</h3><p class="muted">Zeskanuj kod. Ankieta jest anonimowa.</p></div>
+      <div class="panel" style="padding:20px;display:grid;place-items:center"><div class="qr" id="qrBox"><div class="empty">Kod QR: zapisz obrazek jako<br><strong>assets/qr_ankieta.png</strong></div></div></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- DOLNY PASEK -->
+<footer class="footbar">
+  <div class="where" id="currentModuleName">Start</div>
+  <div class="prog" id="progModules" aria-hidden="true">
+    <div class="m1" style="flex:25"></div>
+    <div class="m2" style="flex:25"></div>
+    <div class="m3" style="flex:50"></div>
+    <div class="pause" style="flex:20"></div>
+    <div class="m4" style="flex:50"></div>
+    <div class="pause" style="flex:10"></div>
+    <div class="m5" style="flex:35"></div>
+    <div class="m6" style="flex:25"></div>
+    <span class="clock-mark" id="clockMark" title="Czas rzeczywisty warsztatu"></span>
+  </div>
+  <div class="ctrl">
+    <button class="count" id="slideCounter" aria-label="Numer slajdu (dotknięcie otwiera kokpit prowadzącego)">00 / 31</button>
+    <span class="site" id="siteName">gebarowski<span class="site-dot">.</span><span class="site-tld">net</span></span>
+  </div>
+</footer>
+
+</div>
+</div>
+
+<div id="blackoutScreen"><span>Ekran wygaszony. Naciśnij B albo kliknij, żeby wrócić.</span></div>
+
+<aside id="trainerHud" aria-label="Kokpit prowadzącego">
+  <div class="hud">
+    <div><div class="hud-clock" id="hudLiveClock">--:--:--</div><small>godzina</small></div>
+    <div class="hud-now"><div id="hudNow">Laboratorium Twojej przyszłości</div><div class="nx" id="hudNext"></div></div>
+    <div class="hud-time">
+      Upłynęło <strong id="hudElapsedWorkshop">00:00:00</strong><br>
+      Zostało <strong id="hudRemainingWorkshop">240 min</strong><br>
+      <span class="hud-pacing-tag" id="hudPacingTag">W TEMPIE</span>
+    </div>
+    <div class="hud-actions">
+      <button class="btn-hud primary" id="btnMasterTimer">Start warsztatu</button>
+      <button class="btn-hud" id="btnHudPlus">+5 min</button>
+      <button class="btn-hud" id="btnHudMinus">−5 min</button>
+      <button class="btn-hud" id="btnHudClose" title="Schowaj (T)">Zamknij</button>
+    </div>
+  </div>
+</aside>
+
+<script>
+(function () {
+  // ----- 1. Plan czasowy slajdów (kokpit T); targetMin = minuta końca slajdu -----
+  const slideMetadata = [
+    { title: "Otwarcie", time: "Start", targetMin: 0 },
+    { title: "Runda: przedstawmy się", time: "5 min", targetMin: 5 },
+    { title: "Karteczki i czytanie", time: "6 min", targetMin: 11 },
+    { title: "Kontrakt na flipcharcie", time: "5 min", targetMin: 16 },
+    { title: "Runda: zawód z koszmaru", time: "8 min", targetMin: 24 },
+    { title: "Plan spotkania", time: "1 min", targetMin: 25 },
+    { title: "Nie musisz dziś wiedzieć", time: "do ustalenia", targetMin: 27 },
+    { title: "To nie wybór na całe życie", time: "do ustalenia", targetMin: 29 },
+    { title: "Przypadek też jest częścią drogi", time: "do ustalenia", targetMin: 31 },
+    { title: "A co z AI?", time: "do ustalenia", targetMin: 33 },
+    { title: "Ulubiony przedmiot, wynik z matury", time: "do ustalenia", targetMin: 35 },
+    { title: "Oczekiwania studenta a rzeczywistość pracownika", time: "do ustalenia", targetMin: 36 },
+    { title: "Czyj to pomysł?", time: "do ustalenia", targetMin: 38 },
+    { title: "Idź na stabilne studia", time: "do ustalenia", targetMin: 40 },
+    { title: "Tylko jedna utarta ścieżka", time: "do ustalenia", targetMin: 42 },
+    { title: "Skąd wiesz, jak wygląda ta praca?", time: "do ustalenia", targetMin: 43 },
+    { title: "Ile kosztują studia?", time: "do ustalenia", targetMin: 45 },
+    { title: "Gdzie to sprawdzić", time: "do ustalenia", targetMin: 47 },
+    { title: "Pytania do siebie", time: "do ustalenia", targetMin: 50 },
+    { title: "Dwa wymiary dopasowania", time: "5 min", targetMin: 55 },
+    { title: "Ćwiczenie RIASEC", time: "25 min", targetMin: 80 },
+    { title: "Kod Hollanda", time: "5 min", targetMin: 85 },
+    { title: "Ćwiczenie: wartości w pracy (klucz: klawisz K)", time: "15 min", targetMin: 100 },
+    { title: "Praca × wartości", time: "5 min", targetMin: 105 },
+    { title: "Przerwa główna", time: "20 min", targetMin: 125 },
+    { title: "Lab: wybór zawodu", time: "4 min", targetMin: 129 },
+    { title: "Lab: bilans", time: "7 min", targetMin: 136 },
+    { title: "Lab: ciemna strona", time: "7 min", targetMin: 143 },
+    { title: "Lab: otoczenie i plan B", time: "7 min", targetMin: 150 },
+    { title: "Lab: wymiana w parach", time: "8 min", targetMin: 158 },
+    { title: "Matryca: karteczki par", time: "17 min, bez timera", targetMin: 175 },
+    { title: "Przerwa techniczna", time: "10 min", targetMin: 185 },
+    { title: "Kaskada 72 h / 7 dni / 30 dni", time: "30 min", targetMin: 215 },
+    { title: "Karteczki i teza", time: "15 min", targetMin: 230 },
+    { title: "Ankieta i podziękowanie", time: "10 min", targetMin: 240 }
+  ];
+  const slideModule = ["I","I","I","I","I","I","II","II","II","II","II","II","II","II","II","II","II","II","II","III","III","III","III","III","P1","IV","IV","IV","IV","IV","IV","P2","V","VI","VI"];
+  const moduleNames = { I: "I  Otwarcie", II: "II  Szkoła a rynek", III: "III  Diagnoza", P1: "Przerwa", IV: "IV  Laboratorium zawodu", P2: "Przerwa", V: "V  Co dalej", VI: "VI  Domknięcie" };
+  const moduleOrder = ["I","II","III","P1","IV","P2","V","VI"];
+  const WORKSHOP_MIN = 240, PACING_TOLERANCE = 5;
+
+  // ----- 2. Skalowanie sceny 1600×900 -----
+  const stage = document.getElementById('stage');
+  const viewport = document.getElementById('viewport');
+  function fit() {
+    const w = viewport.clientWidth || document.documentElement.clientWidth || window.innerWidth || 1600;
+    const h = window.innerHeight || 0;
+    let s = w / 1600;
+    if (h > 120) s = Math.min(s, h / 900);
+    if (!(s > 0)) s = 1;
+    viewport.style.height = h <= 120 ? Math.round(900 * s) + 'px' : '';
+    stage.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', fit);
+  window.addEventListener('load', fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
+  fit(); setTimeout(fit, 300);
+
+  const FRAME_WIDTH = 1600, FRAME_HEIGHT = 824;
+  const ZOOM_CURVATURE = 1.4, MS_PER_PATH_UNIT = 600, MIN_FLIGHT_MS = 900, MAX_FLIGHT_MS = 2200;
+  const ARC_BEND = 0.12, OVERVIEW_MARGIN = 1.05;
+  const WORLD_HUB = { x: -600, y: 200 };
+
+  const pose = (x, y, scale, rot) => ({ x, y, scale, rot });
+  function nestedIn(parent, localX, localY, scale, turn) {
+    const radians = parent.rot * Math.PI / 180;
+    return pose(
+      parent.x + parent.scale * (localX * Math.cos(radians) - localY * Math.sin(radians)),
+      parent.y + parent.scale * (localX * Math.sin(radians) + localY * Math.cos(radians)),
+      scale,
+      parent.rot + turn
+    );
+  }
+
+  const planPose = pose(-4400, -2700, 1.2, -3);
+  const riasecPose = pose(6300, 300, 1.4, 12);
+  const slidePoses = [
+    pose(-7000, 1200, 1.5, 0),
+    pose(-5000, 400, 0.7, -8),
+    pose(-5400, -700, 0.8, 4),
+    pose(-6900, -1000, 0.9, -6),
+    pose(-6500, -2400, 0.8, 5),
+    planPose,
+    nestedIn(planPose, 470, 300, 0.24, 3),
+    pose(-2600, -3000, 0.6, 4),
+    pose(-1900, -4000, 0.6, 6),
+    pose(-1200, -3000, 0.6, 8),
+    pose(-500, -4100, 0.6, 10),
+    pose(200, -3100, 0.6, 12),
+    pose(900, -4100, 0.6, 14),
+    pose(1600, -3100, 0.6, 16),
+    pose(2300, -4000, 0.6, 18),
+    pose(3000, -3000, 0.6, 20),
+    pose(3700, -3800, 0.6, 22),
+    pose(4400, -2850, 0.6, 24),
+    pose(5100, -3700, 0.6, 26),
+    pose(5600, -1700, 1.1, 30),
+    riasecPose,
+    nestedIn(riasecPose, 470, -195, 0.33, -4),
+    pose(5900, 2200, 1, 20),
+    pose(4200, 3300, 1, 8),
+    pose(2200, 3900, 0.8, 0),
+    pose(300, 3700, 1.1, -10),
+    pose(1100, 5000, 0.8, -6),
+    pose(-300, 5300, 0.8, -8),
+    pose(-1800, 5100, 0.8, -5),
+    pose(-3300, 5000, 0.8, -4),
+    pose(-1900, 4100, 1.1, -4),
+    pose(-3700, 3600, 0.7, 0),
+    pose(-5200, 4100, 1.1, 6),
+    pose(-7500, 3200, 0.9, -8),
+    pose(-600, 200, 1.8, 0)
+  ];
+
+  const cameraEl = document.getElementById('camera');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let cameraPose = cameraFor(slidePoses[0]);
+  let flightId = 0;
+
+  function cameraFor(slidePose) {
+    return { x: slidePose.x, y: slidePose.y, width: slidePose.scale * FRAME_WIDTH, rot: slidePose.rot };
+  }
+  function placeSlide(slide, { x, y, scale, rot }) {
+    slide.style.transform = `translate(${x - FRAME_WIDTH / 2}px, ${y - FRAME_HEIGHT / 2}px) rotate(${rot}deg) scale(${scale})`;
+  }
+  function applyCamera({ x, y, width, rot }) {
+    cameraEl.style.transform =
+      `translate(${FRAME_WIDTH / 2}px, ${FRAME_HEIGHT / 2}px) rotate(${-rot}deg) scale(${FRAME_WIDTH / width}) translate(${-x}px, ${-y}px)`;
+  }
+
+  function createZoomPath(startWidth, endWidth, distance) {
+    const rho = ZOOM_CURVATURE;
+    if (distance < 1e-3) {
+      const direction = endWidth >= startWidth ? 1 : -1;
+      const length = Math.abs(Math.log(endWidth / startWidth)) / rho;
+      return {
+        length,
+        at: s => ({ progress: length ? s / length : 1, width: startWidth * Math.exp(direction * rho * s) })
+      };
+    }
+    const widthGap = endWidth ** 2 - startWidth ** 2;
+    const travel = rho ** 4 * distance ** 2;
+    const startAngle = -Math.asinh((widthGap + travel) / (2 * startWidth * rho ** 2 * distance));
+    const endAngle = -Math.asinh((widthGap - travel) / (2 * endWidth * rho ** 2 * distance));
+    return {
+      length: (endAngle - startAngle) / rho,
+      at(s) {
+        const angle = rho * s + startAngle;
+        const covered = startWidth / rho ** 2 * (Math.cosh(startAngle) * Math.tanh(angle) - Math.sinh(startAngle));
+        return { progress: covered / distance, width: startWidth * Math.cosh(startAngle) / Math.cosh(angle) };
+      }
+    };
+  }
+  const shortestTurn = (from, to) => ((to - from + 540) % 360 + 360) % 360 - 180;
+  function arcOffset(from, to) {
+    const dx = to.x - from.x, dy = to.y - from.y;
+    const outwardness = dy * ((from.x + to.x) / 2 - WORLD_HUB.x) - dx * ((from.y + to.y) / 2 - WORLD_HUB.y);
+    const side = outwardness >= 0 ? 1 : -1;
+    return { x: dy * ARC_BEND * side, y: -dx * ARC_BEND * side };
+  }
+  function createFlight(from, to) {
+    const zoomPath = createZoomPath(from.width, to.width, Math.hypot(to.x - from.x, to.y - from.y));
+    const turn = shortestTurn(from.rot, to.rot);
+    const offset = arcOffset(from, to);
+    return {
+      pathLength: zoomPath.length,
+      durationMs: Math.min(MAX_FLIGHT_MS, Math.max(MIN_FLIGHT_MS, zoomPath.length * MS_PER_PATH_UNIT)),
+      poseAt(eased) {
+        const { progress, width } = zoomPath.at(eased * zoomPath.length);
+        const arc = 2 * progress * (1 - progress);
+        return {
+          x: from.x + (to.x - from.x) * progress + offset.x * arc,
+          y: from.y + (to.y - from.y) * progress + offset.y * arc,
+          width,
+          rot: from.rot + turn * eased
+        };
+      }
+    };
+  }
+  const easeInOut = t => t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
+
+  function landCamera(target) {
+    cameraPose = target;
+    applyCamera(target);
+    cameraEl.classList.remove('flying');
+  }
+  function flyCameraTo(target) {
+    const flight = createFlight(cameraPose, target);
+    const id = ++flightId;
+    if (prefersReducedMotion.matches || flight.pathLength === 0) { landCamera(target); return; }
+    const startTime = performance.now();
+    cameraEl.classList.add('flying');
+    requestAnimationFrame(function step(now) {
+      if (id !== flightId) return;
+      const elapsed = Math.min(1, Math.max(0, (now - startTime) / flight.durationMs));
+      if (elapsed === 1) { landCamera(target); return; }
+      cameraPose = flight.poseAt(easeInOut(elapsed));
+      applyCamera(cameraPose);
+      requestAnimationFrame(step);
+    });
+  }
+
+  function cornersOf({ x, y, scale, rot }) {
+    const radians = rot * Math.PI / 180;
+    const halfW = FRAME_WIDTH * scale / 2, halfH = FRAME_HEIGHT * scale / 2;
+    return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([sx, sy]) => ({
+      x: x + sx * halfW * Math.cos(radians) - sy * halfH * Math.sin(radians),
+      y: y + sx * halfW * Math.sin(radians) + sy * halfH * Math.cos(radians)
+    }));
+  }
+  function overviewCamera() {
+    const corners = slidePoses.flatMap(cornersOf);
+    const xs = corners.map(corner => corner.x), ys = corners.map(corner => corner.y);
+    const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+    const width = Math.max(maxX - minX, (maxY - minY) * FRAME_WIDTH / FRAME_HEIGHT) * OVERVIEW_MARGIN;
+    return { x: (minX + maxX) / 2, y: (minY + maxY) / 2, width, rot: 0 };
+  }
+
+  // ----- 3. Timery -----
+  const timers = {};
+  const fmt = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  const digitsHTML = str => str.split('').map(ch => ch === ':' ? '<span class="c">:</span>' : '<span class="d">' + ch + '</span>').join('');
+
+  document.querySelectorAll('.timer[data-timer]').forEach(el => {
+    const id = el.dataset.timer, duration = parseInt(el.dataset.min, 10) * 60, step = parseInt(el.dataset.step || '1', 10);
+    el.innerHTML =
+      '<div class="t-label"><span>' + (el.dataset.label || '') + '</span><span>' + el.dataset.min + ' min</span></div>' +
+      '<div class="t-digits" id="timerDisplay' + id + '"></div>' +
+      '<div class="t-track"><i></i></div>' +
+      '<div class="t-ctrl"><button class="go" data-act="toggle">Start</button><button data-act="plus">+' + step + ' min</button><button data-act="minus">−' + step + ' min</button><button data-act="reset">Reset</button></div>' +
+      '<div class="t-hint">Klawisz S: start i pauza, R: reset</div>';
+    timers[id] = { el, duration, remaining: duration, endAt: null, running: false, tick: null, step };
+    el.querySelector('[data-act="toggle"]').addEventListener('click', e => { e.stopPropagation(); toggleTimer(id); });
+    el.querySelector('[data-act="plus"]').addEventListener('click', e => { e.stopPropagation(); adjustTimer(id, step * 60); });
+    el.querySelector('[data-act="minus"]').addEventListener('click', e => { e.stopPropagation(); adjustTimer(id, -step * 60); });
+    el.querySelector('[data-act="reset"]').addEventListener('click', e => { e.stopPropagation(); resetTimer(id); });
+  });
+
+  function renderTimer(t) {
+    t.el.querySelector('.t-digits').innerHTML = digitsHTML(fmt(Math.max(0, t.remaining)));
+    t.el.querySelector('.t-track i').style.width = (t.duration ? Math.max(0, Math.min(1, t.remaining / t.duration)) * 100 : 0) + '%';
+    t.el.querySelector('[data-act="toggle"]').textContent = t.running ? 'Pauza' : (t.remaining <= 0 ? 'Od nowa' : (t.remaining < t.duration ? 'Wznów' : 'Start'));
+    t.el.classList.toggle('paused', !t.running && t.remaining > 0 && t.remaining < t.duration);
+  }
+  function playChime() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      [0, 0.45].forEach(o => {
+        const osc = ctx.createOscillator(), g = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime + o);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + o + 0.3);
+        g.gain.setValueAtTime(0.3, ctx.currentTime + o);
+        g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + o + 1.2);
+        osc.connect(g); g.connect(ctx.destination);
+        osc.start(ctx.currentTime + o); osc.stop(ctx.currentTime + o + 1.2);
+      });
+    } catch (e) {}
+  }
+  function tick(t) {
+    t.remaining = Math.max(0, Math.round((t.endAt - Date.now()) / 1000));
+    if (t.remaining <= 0) { clearInterval(t.tick); t.running = false; t.endAt = null; t.el.classList.add('ended'); playChime(); }
+    renderTimer(t);
+  }
+  window.toggleTimer = function (id) {
+    const t = timers[id]; if (!t) return;
+    if (!t.running) {
+      if (t.remaining <= 0) t.remaining = t.duration;
+      t.el.classList.remove('ended');
+      t.running = true; t.endAt = Date.now() + t.remaining * 1000;
+      clearInterval(t.tick); t.tick = setInterval(() => tick(t), 250);
+    } else { tick(t); clearInterval(t.tick); t.running = false; t.endAt = null; }
+    renderTimer(t);
+  };
+  window.adjustTimer = function (id, sec) {
+    const t = timers[id]; if (!t) return;
+    t.remaining = Math.max(0, t.remaining + sec);
+    if (t.running) t.endAt = Date.now() + t.remaining * 1000;
+    if (t.remaining > 0) t.el.classList.remove('ended');
+    renderTimer(t);
+  };
+  window.resetTimer = function (id) {
+    const t = timers[id]; if (!t) return;
+    clearInterval(t.tick); t.running = false; t.endAt = null; t.remaining = t.duration;
+    t.el.classList.remove('ended', 'paused'); renderTimer(t);
+  };
+  Object.values(timers).forEach(renderTimer);
+
+  // ----- 4. Slajdy -----
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  let currentIndex = 0;
+  let overviewShown = false;
+  slides.forEach((slide, i) => placeSlide(slide, slidePoses[i]));
+  applyCamera(cameraPose);
+  const slideCounter = document.getElementById('slideCounter');
+  const currentModuleName = document.getElementById('currentModuleName');
+  const siteName = document.getElementById('siteName');
+  const blackoutScreen = document.getElementById('blackoutScreen'), trainerHud = document.getElementById('trainerHud');
+  const progCells = document.querySelectorAll('#progModules > div');
+
+  let workshopStartTime = null, workshopRunning = false, workshopElapsedSeconds = 0, masterTimerInterval = null;
+
+  let revealed = 0;
+  const revealItems = i => slides[i].querySelectorAll('.reveal-item');
+  function updateSlide(n) {
+    if (n < 0 || n >= totalSlides) return;
+    overviewShown = false;
+    const forward = n > currentIndex || n === 0;
+    slides.forEach((s, i) => { s.classList.toggle('active', i === n); s.classList.toggle('prev', i < n); s.inert = i !== n; });
+    currentIndex = n;
+    slideCounter.textContent = String(n).padStart(2, '0') + ' / ' + String(totalSlides - 1).padStart(2, '0');
+    const mod = slideModule[n], pos = moduleOrder.indexOf(mod);
+    currentModuleName.textContent = n === 0 ? 'Laboratorium Twojej przyszłości' : moduleNames[mod];
+    progCells.forEach((c, i) => { c.classList.toggle('now', n > 0 && i === pos); c.classList.toggle('done', n > 0 && i < pos); });
+    siteName.style.setProperty('--mod-d', getComputedStyle(slides[n]).getPropertyValue('--mod-d'));
+
+
+    // Odsłanianie: wchodząc do przodu wszystko ukryte, wracając wszystko widoczne
+    const items = revealItems(n);
+    revealed = forward ? 0 : items.length;
+    items.forEach((el, i) => el.classList.toggle('revealed', i < revealed));
+    hideValueKey();
+    if (n >= 1 && !workshopRunning && workshopElapsedSeconds === 0) startMasterWorkshopTimer();
+    updateHudText(); updateMasterWorkshopDisplay();
+    flyCameraTo(cameraFor(slidePoses[n]));
+  }
+  const nextSlide = () => { if (currentIndex < totalSlides - 1) updateSlide(currentIndex + 1); };
+  const prevSlide = () => { if (currentIndex > 0) updateSlide(currentIndex - 1); };
+
+  // ----- 5. Odsłanianie kafli (slajdy z .reveal-item: 06, 32) -----
+  function advanceReveal() {
+    const items = revealItems(currentIndex);
+    if (revealed < items.length) { items[revealed].classList.add('revealed'); revealed++; return true; }
+    return false;
+  }
+  function regressReveal() {
+    const items = revealItems(currentIndex);
+    if (revealed > 0) { revealed--; items[revealed].classList.remove('revealed'); return true; }
+    return false;
+  }
+  // Klucz wartości w pracy (slajd 22) tylko pod klawiszem K, żeby nie odsłonić go przypadkiem
+  const valueKeyHere = () => slides[currentIndex].querySelector('.value-key');
+  const toggleValueKey = () => { const key = valueKeyHere(); if (key) key.classList.toggle('shown'); };
+  function hideValueKey() { document.querySelectorAll('.value-key.shown').forEach(key => key.classList.remove('shown')); }
+  slides.forEach(sl => { if (sl.querySelector('.reveal-item')) sl.addEventListener('click', e => { if (e.target.closest('button, a')) return; advanceReveal(); }); });
+  function toggleOverview() {
+    overviewShown = !overviewShown;
+    flyCameraTo(overviewShown ? overviewCamera() : cameraFor(slidePoses[currentIndex]));
+  }
+  const goNext = () => { if (overviewShown) { toggleOverview(); return; } if (advanceReveal()) return; nextSlide(); };
+  const goPrev = () => { if (overviewShown) { toggleOverview(); return; } if (regressReveal()) return; prevSlide(); };
+
+  // ----- 5a. Wzór na koszt studiów (slajd 16): wartości można zmieniać na żywo -----
+  const costMonthsOfStudy = 10, costMonthsOfYear = 12;
+  const costForm = document.getElementById('costForm');
+  const costNumber = id => Number(document.getElementById(id).value) || 0;
+  const formatZloty = value => Math.round(value).toLocaleString('pl-PL') + ' zł';
+  function updateCost() {
+    const years = costNumber('costYears');
+    const monthlyCosts = costNumber('costRoom') + costNumber('costFood') + costNumber('costTravel') + costNumber('costOther');
+    const monthlyIncome = costNumber('costGrant') + costNumber('costEarned');
+    const hasCosts = monthlyCosts > 0 || costNumber('costTuition') > 0;
+    const total = years * (costMonthsOfStudy * (monthlyCosts - monthlyIncome) + costNumber('costTuition'));
+    const forgone = years * costMonthsOfYear * costNumber('costForgone');
+    document.getElementById('costTotal').textContent = hasCosts ? formatZloty(total) : '–';
+    document.getElementById('costWithForgone').textContent = hasCosts && forgone > 0 ? 'z utraconymi zarobkami: ' + formatZloty(total + forgone) : '\u00a0';
+  }
+  costForm.addEventListener('input', updateCost);
+  costForm.addEventListener('submit', e => e.preventDefault());
+  updateCost();
+
+  // ----- 6. Wygaszacz i kokpit -----
+  window.toggleBlackout = () => blackoutScreen.classList.toggle('active');
+  window.toggleTrainerHud = () => trainerHud.classList.toggle('visible');
+  blackoutScreen.addEventListener('click', toggleBlackout);
+  // Dotknięcie numeru slajdu w stopce otwiera kokpit (przydatne na telefonie i tablecie)
+  document.getElementById('slideCounter').addEventListener('click', toggleTrainerHud);
+  document.getElementById('btnHudClose').addEventListener('click', toggleTrainerHud);
+  document.getElementById('btnHudPlus').addEventListener('click', () => adjustMasterWorkshop(5));
+  document.getElementById('btnHudMinus').addEventListener('click', () => adjustMasterWorkshop(-5));
+  document.getElementById('btnMasterTimer').addEventListener('click', () => toggleMasterWorkshopTimer());
+
+  function updateLiveClock() { document.getElementById('hudLiveClock').textContent = new Date().toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
+  setInterval(updateLiveClock, 1000); updateLiveClock();
+  function updateHudText() {
+    const m = slideMetadata[currentIndex] || { title: '', time: '' };
+    document.getElementById('hudNow').textContent = String(currentIndex).padStart(2, '0') + '  ' + m.title + '  (plan: ' + m.time + ', do ' + m.targetMin + '. min)';
+    const nx = slideMetadata[currentIndex + 1];
+    document.getElementById('hudNext').textContent = nx ? 'Następny: ' + nx.title : 'Ostatni slajd';
+  }
+
+  const btnMaster = document.getElementById('btnMasterTimer');
+  function startMasterWorkshopTimer() {
+    if (workshopRunning) return;
+    workshopRunning = true; workshopStartTime = Date.now() - workshopElapsedSeconds * 1000;
+    btnMaster.textContent = 'Pauza warsztatu'; btnMaster.classList.add('running');
+    clearInterval(masterTimerInterval); masterTimerInterval = setInterval(updateMasterWorkshop, 1000);
+    updateMasterWorkshopDisplay();
+  }
+  window.startMasterWorkshopTimer = startMasterWorkshopTimer;
+  window.toggleMasterWorkshopTimer = function () {
+    if (!workshopRunning) { startMasterWorkshopTimer(); return; }
+    updateMasterWorkshop(); workshopRunning = false; clearInterval(masterTimerInterval);
+    btnMaster.textContent = 'Wznów warsztat'; btnMaster.classList.remove('running');
+  };
+  window.adjustMasterWorkshop = function (min) {
+    workshopElapsedSeconds = Math.max(0, workshopElapsedSeconds + min * 60);
+    if (workshopRunning) workshopStartTime = Date.now() - workshopElapsedSeconds * 1000;
+    updateMasterWorkshopDisplay();
+  };
+  function updateMasterWorkshop() { if (!workshopRunning) return; workshopElapsedSeconds = Math.floor((Date.now() - workshopStartTime) / 1000); updateMasterWorkshopDisplay(); }
+  function updateMasterWorkshopDisplay() {
+    const total = WORKSHOP_MIN * 60, rem = Math.max(0, total - workshopElapsedSeconds);
+    const h = Math.floor(workshopElapsedSeconds / 3600), m = Math.floor((workshopElapsedSeconds % 3600) / 60), s = workshopElapsedSeconds % 60;
+    document.getElementById('hudElapsedWorkshop').textContent = [h, m, s].map(v => String(v).padStart(2, '0')).join(':');
+    document.getElementById('hudRemainingWorkshop').textContent = Math.ceil(rem / 60) + ' min';
+    const mark = document.getElementById('clockMark');
+    mark.classList.toggle('on', workshopElapsedSeconds > 0);
+    mark.style.left = Math.min(100, workshopElapsedSeconds / total * 100) + '%';
+    const tag = document.getElementById('hudPacingTag');
+    const diff = Math.floor(workshopElapsedSeconds / 60) - (slideMetadata[currentIndex]?.targetMin || 0);
+    if (!workshopRunning && workshopElapsedSeconds === 0) { tag.textContent = 'STOPER NIE RUSZYŁ'; tag.className = 'hud-pacing-tag ahead'; }
+    else if (diff > PACING_TOLERANCE) { tag.textContent = 'OPÓŹNIENIE +' + diff + ' min'; tag.className = 'hud-pacing-tag behind'; }
+    else if (diff < -PACING_TOLERANCE) { tag.textContent = 'ZAPAS ' + Math.abs(diff) + ' min'; tag.className = 'hud-pacing-tag ahead'; }
+    else { tag.textContent = 'W TEMPIE (±' + PACING_TOLERANCE + ' min)'; tag.className = 'hud-pacing-tag'; }
+  }
+
+  // ----- 7. Klawiatura i dotyk -----
+  const timerHere = () => { const el = slides[currentIndex].querySelector('.timer[data-timer]'); return el ? el.dataset.timer : null; };
+  window.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('input')) return;
+    if (blackoutScreen.classList.contains('active') && e.key !== 'F12') { toggleBlackout(); return; }
+    if (e.target.closest && e.target.closest('button') && (e.key === ' ' || e.key === 'Enter')) return;
+    switch (e.key) {
+      case 'ArrowRight': case ' ': case 'PageDown': e.preventDefault(); goNext(); break;
+      case 'ArrowLeft': case 'Backspace': case 'PageUp': e.preventDefault(); goPrev(); break;
+      case 'b': case 'B': e.preventDefault(); toggleBlackout(); break;
+      case 't': case 'T': e.preventDefault(); toggleTrainerHud(); break;
+      case 'o': case 'O': e.preventDefault(); toggleOverview(); break;
+      case 'k': case 'K': if (valueKeyHere()) { e.preventDefault(); toggleValueKey(); } break;
+      case 's': case 'S': { const id = timerHere(); if (id) { e.preventDefault(); toggleTimer(id); } break; }
+      case 'r': case 'R': { const id = timerHere(); if (id) { e.preventDefault(); resetTimer(id); } break; }
+      case 'f': case 'F':
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+        else document.exitFullscreen().catch(() => {});
+        break;
+      case 'Home': e.preventDefault(); updateSlide(0); break;
+      case 'End': e.preventDefault(); updateSlide(totalSlides - 1); break;
+    }
+  });
+  let tx = null, ty = null;
+  window.addEventListener('touchstart', e => { if (e.target.closest('button, a, input')) { tx = null; return; } tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  window.addEventListener('touchend', e => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+    dx < 0 ? goNext() : goPrev();
+  }, { passive: true });
+
+  // ----- 8. Kod QR: wystarczy obrazek assets/qr_ankieta.png -----
+  const qr = new Image(); qr.alt = 'Kod QR do ankiety';
+  qr.onload = () => { const box = document.getElementById('qrBox'); box.innerHTML = ''; box.appendChild(qr); };
+  qr.src = 'assets/qr_ankieta.png';
+
+  updateSlide(0);
+})();
+</script>
+</body>
+</html>
