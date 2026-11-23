@@ -2,9 +2,9 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="referrer" content="no-referrer">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Laboratorium Twojej przyszłości</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -261,16 +261,16 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
    KASKADA (slajd 19)
    ========================================================================== */
 .cascade { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-/* odsłanianie krok po kroku (Dalej / spacja / kliknięcie): slajdy 06, 29 */
+/* odsłanianie krok po kroku (Dalej / spacja / kliknięcie): slajdy 06–15, 29 */
 .reveal-item { opacity: .14; filter: grayscale(1); transform: translateY(8px); transition: opacity .35s ease, transform .35s ease, filter .35s ease; }
 .reveal-item.revealed { opacity: 1; filter: none; transform: none; }
 .cascade .reveal-item { border-radius: var(--r-xl); padding: 36px 36px 32px; display: flex; flex-direction: column; }
 .reveal-item.step-1 { background: var(--butter); } .reveal-item.step-2 { background: var(--peach); } .reveal-item.step-3 { background: var(--sage); }
 .hz { font-family: var(--display); font-weight: 600; font-size: 104px; line-height: 1; letter-spacing: -0.03em; }
 .hz small { font-size: 40px; margin-left: 8px; letter-spacing: 0; }
-.reveal-item h3 { font-size: 32px; margin: 22px 0 12px; }
-.reveal-item p { font-size: 27px; font-style: italic; }
-.reveal-item .ex-s { font-style: normal; font-size: 23px; color: var(--ink-2); margin-top: auto; padding-top: 16px; }
+.cascade .reveal-item h3 { font-size: 32px; margin: 22px 0 12px; }
+.cascade .reveal-item p { font-size: 27px; font-style: italic; }
+.cascade .reveal-item .ex-s { font-style: normal; font-size: 23px; color: var(--ink-2); margin-top: auto; padding-top: 16px; }
 .hint { font-size: 22px; color: var(--mute); margin-top: 16px; }
 
 /* ==========================================================================
@@ -393,6 +393,62 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
 @media (prefers-reduced-motion: reduce) {
   .reveal-item, #trainerHud, .t-track i { transition: none !important; }
 }
+
+/* ==========================================================================
+   MODUŁ II, wersja 4: trzy style tekstu, tylko na slajdach .v4 (moduł II i slajd 16, który go kontynuuje)
+   ========================================================================== */
+.v4 .pill { font-weight: 700; }
+.v4 .slot { font-weight: 400; }
+.v4 .lead { font-size: 30px; }
+.v4 h3 { font-size: 30px; line-height: 1.2; font-weight: 700; letter-spacing: normal; }
+.v4 .fig { font-size: 76px; white-space: nowrap; }
+.v4 .fig-l { font-size: 30px; font-weight: 700; margin-top: 20px; line-height: 1.2; }
+.v4 .ev { font-size: 22px; font-weight: 400; }
+.v4 .panel p { font-size: 26px; line-height: 1.35; color: var(--ink); font-style: normal; }
+.v4 .panel p.src, .v4 .src { font-size: 22px; line-height: 1.3; color: var(--ink-2); margin-top: auto; padding-top: 18px; font-style: normal; }
+.v4 .panel p.big-q { font-size: 40px; line-height: 1.25; font-weight: 700; }
+.plain .fig-l, .plain .tr-q, .plain .motive .panel p.say { font-weight: 400; }
+.plain .panel p.big-q { font-size: 30px; line-height: 1.2; font-weight: 400; }
+.plain .panel p.quote-big { font-weight: 400; }
+.row-4 { grid-template-columns: repeat(4, 1fr); }
+.row-4 .panel { padding: 24px 26px; }
+.part-no { font-family: var(--display); font-size: 56px; font-weight: 600; line-height: 1; }
+.part .panel h3 { margin-top: 14px; }
+.part .panel p { margin-top: 10px; }
+.motive .panel { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+.motive .panel p.say { font-size: 30px; font-weight: 700; line-height: 1.2; }
+.motive .panel p.note { margin-top: 10px; }
+.motive .panel p.tag { font-size: 22px; color: var(--ink-2); }
+.motive .nest { background: var(--ink); transition: background .9s ease, opacity .35s ease, transform .35s ease, filter .35s ease; }
+.motive .nest.nest-open { background: var(--bg); }
+.slide.nested { transition: opacity .35s ease; }
+.slide.nested h2 { transform-origin: 0 0; transition: transform .9s ease, color .9s ease; }
+.slide.nested .head, .slide.nested .body { transition: opacity .5s ease .6s, visibility 0s linear .6s; }
+.slide.nest-waiting { opacity: 0; }
+/* 770 px po skali 1.75 to szerokość wnętrza kafla na slajdzie, z którego wyrasta slajd zagnieżdżony */
+.slide.nest-title h2 { color: var(--surface); transform: translate(30px, -96px) scale(1.75); max-width: 770px; }
+.slide.nest-title .head, .slide.nest-title .body { opacity: 0; visibility: hidden; transition-delay: 0s; }
+.breaker { flex: 1; display: flex; align-items: center; justify-content: center; }
+.breaker h2 { font-size: 120px; text-align: center; }
+.breaker.photo { position: relative; border-radius: var(--r-xl); overflow: hidden; align-items: flex-start; }
+.breaker.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.breaker.photo h2 { position: relative; margin-top: 40px; font-size: 96px; color: var(--surface); }
+.panel p.quote-big { font-size: 40px; line-height: 1.3; font-weight: 700; }
+.dimension { display: grid; grid-template-rows: 1fr auto 1fr; }
+.dimension > div { display: flex; flex-direction: column; }
+.v4 .dimension p { margin-top: 10px; }
+.v4 .dimension p.misfit { margin-top: auto; font-weight: 700; }
+/* Slajd .twin leży dokładnie na poprzednim: kamera stoi, stary tekst (.morph) gaśnie, pytania podjeżdżają, potem pojawia się nowy tekst */
+.slide .morph { transition: opacity .7s ease .75s; }
+.slide.twin:not(.active), .slide:has(+ .twin.active) { visibility: hidden; transition: visibility 0s linear 1.2s; }
+.slide.twin:not(.active) .morph, .slide:has(+ .twin.active) .morph { opacity: 0; transition: opacity .4s ease; }
+/* 193 px to odległość pytania od górnej krawędzi wnętrza kafla, gdy stoi pośrodku (wnętrze 422 px, pytanie 36 px) */
+.twin .dimension { display: flex; flex-direction: column; --rise: 193px; }
+.twin .dimension > div { flex: 1; }
+.twin .dimension h3 { transition: transform .8s cubic-bezier(.4,0,.2,1) .2s; }
+.twin:not(.active) .dimension h3 { transform: translateY(var(--rise)); transition-delay: 0s; }
+.dimension h3 { transition: visibility 0s linear .8s; }
+.slide:has(+ .twin.active) .dimension h3 { visibility: hidden; transition: none; }
 </style>
 </head>
 <body>
@@ -509,232 +565,148 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 6 — NIEPEWNOŚĆ: najpierw pytanie do sali, statystyka po kliknięciu -->
-<section class="slide m2" data-index="6">
-  <div class="head"><span class="pill"><b>II</b>Rozbrajamy bombę</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
+<!-- 6 — MAPA CZĘŚCI II -->
+<section class="slide m2 v4" data-index="6">
+  <div class="head"><span class="pill"><b>II</b>Szkoła a rynek</span><span class="evs"><span class="slot">00:25–00:50</span></span></div>
+  <h2>Cztery rzeczy, zanim wybierzesz</h2>
+  <div class="body part" style="margin-top:28px">
+    <div class="row row-4" style="flex:1">
+      <div class="panel f-sky"><div class="part-no">1</div><h3>Nie wiesz?<br>To normalne</h3><p>Wiele osób w Twoim wieku też nie wie.</p></div>
+      <div class="panel f-sage"><div class="part-no">2</div><h3>Wybór,<br>nie wyrok</h3><p>Zmiana kosztuje czas i pieniądze.</p></div>
+      <div class="panel f-rose"><div class="part-no">3</div><h3>Nie wszystko przewidzisz</h3><p>Przypadek i AI zmieniają plany.</p></div>
+      <div class="panel f-butter"><div class="part-no">4</div><h3>Co Tobą kieruje?</h3><p>Co Cię ciekawi i czego chcesz od pracy?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 — 1. NIE WIESZ? TO NORMALNE -->
+<section class="slide m2 v4 plain" data-index="7">
+  <div class="head"><span class="pill"><b>II</b>1. Nie wiesz? To normalne</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
   <h2>Nie musisz dziś wiedzieć</h2>
-  <p class="lead band f-rose">„Skoro nie wiem, to coś ze mną jest nie tak”.</p>
-  <div class="body" style="margin-top:24px">
+  <div class="body" style="margin-top:28px">
     <div class="row row-2" style="flex:1">
       <div class="panel f-butter" style="display:flex;align-items:center"><p class="big-q">Czy wiesz, jaką pracę chcesz mieć, gdy będziesz mieć 30 lat?</p></div>
-      <div class="reveal-item panel f-lilac stat-reveal" style="display:flex;flex-direction:column;justify-content:center"><div class="fig">39%</div><div class="fig-l">piętnastolatków w krajach OECD nie wskazuje konkretnego zawodu</div><p class="src">OECD 2025, dane PISA 2022</p></div>
+      <div class="reveal-item panel f-lilac" style="display:flex;flex-direction:column;justify-content:center"><div class="fig">39%</div><div class="fig-l">piętnastolatków w krajach OECD nie umie wskazać zawodu, w którym spodziewa się pracować w&nbsp;wieku 30&nbsp;lat</div><p class="src">OECD 2025, dane PISA 2022</p></div>
     </div>
-    <p class="reveal-item tr-q f-sky">To częste. Warto to sprawdzać, a nie czekać, aż samo się wyjaśni.</p>
+    <p class="reveal-item tr-q f-sage">To częste. Nie jesteś w tym sam(a).</p>
   </div>
 </section>
 
-<!-- 7 — NIE NA CAŁE ŻYCIE -->
-<section class="slide m2" data-index="7">
-  <div class="head"><span class="pill"><b>II</b>Rozbrajamy bombę</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
-  <h2>To nie wybór na całe życie</h2>
-  <p class="lead">Na ile dziedzina wykształcenia zgadza się z pracą osób w wieku 15–34 lata:</p>
+<!-- 8 — 2. WYBÓR, NIE WYROK -->
+<section class="slide m2 v4 plain" data-index="8">
+  <div class="head"><span class="pill"><b>II</b>2. Wybór, nie wyrok</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Wybór, nie wyrok</h2>
   <div class="body" style="margin-top:28px">
-    <div class="row row-3">
-      <div class="panel f-sage"><div class="fig">46,4%</div><div class="fig-l">w dużym lub bardzo dużym stopniu</div></div>
-      <div class="panel f-butter"><div class="fig">28,5%</div><div class="fig-l">w średnim lub małym stopniu</div></div>
-      <div class="panel f-peach"><div class="fig">13,2%</div><div class="fig-l">wcale</div></div>
+    <div class="row row-3" style="flex:1">
+      <div class="reveal-item panel f-sage" style="display:flex;flex-direction:column"><div class="fig">46,4%</div><div class="fig-l">młodych pracuje w dużej zgodzie ze swoją dziedziną</div><p class="src">GUS 2025, 15–34 lata, s. 7</p></div>
+      <div class="reveal-item panel f-peach" style="display:flex;flex-direction:column"><div class="fig">co 8.</div><div class="fig-l">pracuje zupełnie poza swoją dziedziną (13,2%)</div><p class="src">GUS 2025, 15–34 lata, s. 7</p></div>
+      <div class="reveal-item panel f-butter" style="display:flex;flex-direction:column"><div class="fig">22,8%</div><div class="fig-l">pracujących młodych ze studiami ma pracę, która studiów nie wymaga</div><p class="src">Eurostat 2025, 20–34 lata</p></div>
     </div>
-    <p class="tr-q f-sky">Ważna decyzja, ale odwracalna. Zmiana kosztuje czas i pieniądze.</p>
-    <p class="src tr-src">GUS, Osoby młode na rynku pracy w 2024 r., s. 7. Ocena samych badanych.</p>
+    <p class="reveal-item tr-q f-sky">Ważna decyzja, ale odwracalna. Wiele osób pracuje dziś gdzie indziej, niż planowało.</p>
   </div>
 </section>
 
-<!-- 8 — PRZYPADEK -->
-<section class="slide m2" data-index="8">
-  <div class="head"><span class="pill"><b>II</b>Rozbrajamy bombę</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
+<!-- 9 — 2. KOSZT ZMIANY -->
+<section class="slide m2 v4 plain" data-index="9">
+  <div class="head"><span class="pill"><b>II</b>2. Wybór, nie wyrok</span><span class="evs"><span class="ev ev-dane">dane</span><span class="ev ev-hip">szacunek</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Ale zmiana kosztuje</h2>
+  <div class="body">
+    <div class="row row-3" style="flex:1">
+      <div class="reveal-item panel f-sage" style="display:flex;flex-direction:column"><div class="fig">7,4%</div><div class="fig-l">młodych przerwało naukę (586 tys.), prawie 6 na 10 z nich na studiach</div><p class="src">GUS 2025, s. 4</p></div>
+      <div class="reveal-item panel f-peach" style="display:flex;flex-direction:column"><div class="fig">27,5%</div><div class="fig-l">przerwało przez sam program nauki: to najczęstszy powód</div><p class="src">GUS 2025, s. 5</p></div>
+      <div class="reveal-item panel f-butter" style="display:flex;flex-direction:column"><div class="fig">34 tys. zł</div><div class="fig-l">mniej więcej tyle kosztuje rok życia na studiach poza domem, bez czesnego</div><p class="src">10 miesięcy × ok. 3400 zł, Portfel Studenta 2025 (do sprawdzenia)</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 — 3. PRZYPADEK -->
+<section class="slide m2 v4 plain" data-index="10">
+  <div class="head"><span class="pill"><b>II</b>3. Nie wszystko przewidzisz</span><span class="evs"><span class="ev ev-dane">dane</span><span class="ev ev-exp">z mojego doświadczenia</span><span class="slot">00:25–00:50</span></span></div>
   <h2>Przypadek też jest częścią drogi</h2>
   <div class="body">
     <div class="row row-3" style="flex:1">
-      <div class="panel f-lilac" style="display:flex;flex-direction:column"><div class="fig">&gt;60%</div><div class="fig-l">z 682 menedżerów przeżyło istotne zdarzenie losowe w karierze</div><p class="src">Legrand i in., 2023</p></div>
-      <div class="panel f-butter" style="display:flex;flex-direction:column"><div class="fig">68%</div><div class="fig-l">studentów w Turcji wskazuje coś nieplanowanego w wyborze kariery, np. wynik egzaminu</div><p class="src">Ulas-Kilic i in., 2020</p></div>
-      <div class="panel f-sage" style="display:flex;flex-direction:column"><div class="fig" style="font-size:46px">Większość</div><div class="fig-l">szwajcarskich nastolatków mówi o wpływie przypadku na wybór szkoły</div><p class="src" style="color:var(--ink-2)">Hirschi, 2010</p></div>
+      <div class="reveal-item panel f-sage" style="display:flex;flex-direction:column"><div class="fig">62%</div><div class="fig-l">z 682 menedżerów przeżyło w karierze ważne zdarzenie losowe</div><p class="src">Legrand i in., 2023</p></div>
+      <div class="reveal-item panel f-butter" style="display:flex;flex-direction:column"><div class="fig">68%</div><div class="fig-l">studentów ostatniego roku wskazuje coś nieplanowanego w wyborze, np. wynik egzaminu</div><p class="src">Ulas-Kilic i in., 2020</p></div>
+      <div class="reveal-item panel f-lilac" style="display:flex;flex-direction:column"><div class="fig">Staż</div><div class="fig-l">pierwszy płatny dostałem z polecenia kolegi z Samorządu Studentów, z którym organizowałem Rajd</div></div>
     </div>
-    <p class="tr-q f-peach">Przygotowanie nie wyklucza przypadku.</p>
+    <p class="reveal-item tr-q f-peach">Wiele dróg zaczyna się od przypadku.</p>
   </div>
 </section>
 
-<!-- 9 — AI -->
-<section class="slide m2" data-index="9">
-  <div class="head"><span class="pill"><b>II</b>Rozbrajamy bombę</span><span class="evs"><span class="ev ev-dane">dane</span><span class="ev ev-exp">z mojego doświadczenia</span><span class="slot">00:25–00:50</span></span></div>
-  <h2>A co z AI?</h2>
+<!-- 11 — 3. RYNEK SIĘ ZMIENIA -->
+<section class="slide m2 v4 plain" data-index="11">
+  <div class="head"><span class="pill"><b>II</b>3. Nie wszystko przewidzisz</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Nikt nie wie, jaki będzie rynek pracy za 5 lat</h2>
   <div class="body">
     <div class="row row-3" style="flex:1">
-      <div class="panel f-rose" style="display:flex;flex-direction:column"><div class="fig">1 na 4</div><div class="fig-l">pracujących na świecie ma zawód w jakimś stopniu narażony na AI</div></div>
-      <div class="panel f-peach" style="display:flex;flex-direction:column"><div class="fig">3,3%</div><div class="fig-l">w grupie najwyższego ryzyka</div></div>
-      <div class="panel f-sky" style="display:flex;flex-direction:column"><h3>Wniosek ILO</h3><p style="margin-top:12px">Większość prac się zmieni, a nie zniknie. Częściowa automatyzacja może jednak obniżyć popyt na niektóre zawody.</p></div>
+      <div class="reveal-item panel f-sky" style="display:flex;flex-direction:column"><div class="fig">1 na 4</div><div class="fig-l">pracujących ma zawód narażony na AI. Większość tych prac się zmieni, a nie zniknie</div><p class="src">ILO 2025</p></div>
+      <div class="reveal-item panel f-rose" style="display:flex;flex-direction:column"><div class="fig">12,2%</div><div class="fig-l">bezrobocie wśród 15–24-latków w Polsce. Wśród dorosłych: 2,5%</div><p class="src">Eurostat 2025</p></div>
+      <div class="reveal-item panel f-peach" style="display:flex;flex-direction:column"><div class="fig">−19%</div><div class="fig-l">zatrudnienia 22–25-latków w zawodach narażonych na AI. U starszych tego nie ma</div><p class="src">Brynjolfsson i in., Stanford 2026, dane z USA</p></div>
     </div>
-    <p class="tr-q f-butter">Patrz na to, co w tej pracy robisz na co dzień, a nie na jej nazwę.</p>
-    <p class="src tr-src">ILO, Generative AI and jobs: A 2025 update, s. 1, 9–10. Narażenie to teoretyczny potencjał.</p>
+    <p class="reveal-item tr-q f-butter">Przypadku i rynku nie przewidzisz. Siebie możesz poznać lepiej.</p>
   </div>
 </section>
 
-<!-- 10 — PRZEDMIOT I MATURA -->
-<section class="slide m2" data-index="10">
-  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-hip">hipoteza</span><span class="slot">00:25–00:50</span></span></div>
-  <h2>Ulubiony przedmiot, wynik z matury</h2>
-  <p class="lead band f-butter">„Mam taki wynik. Gdzie mnie przyjmą?”</p>
-  <div class="body tr">
-    <div class="row row-3">
-      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Zainteresowania to dobry trop, a progi to prawdziwe ograniczenie.</p></div>
-      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Przedmiot w szkole to nie praca. Progi stają się jedynym kryterium.</p></div>
-      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Przeczytaj sylabus i opis zawodu, zanim spojrzysz na progi.</p></div>
-    </div>
-  </div>
+<!-- 12 — 4. PRZERYWNIK -->
+<section class="slide m2 v4" data-index="12">
+  <div class="head"><span class="pill"><b>II</b>4. Co Tobą kieruje?</span><span class="evs"><span class="slot">00:25–00:50</span></span></div>
+  <div class="breaker photo"><img src="assets/morfeusz.jpg" alt="Dwie otwarte dłonie: na jednej czerwona, na drugiej niebieska kapsułka"><h2>Czym się kierować?</h2></div>
 </section>
 
-<!-- 11 — STUDIA A PRACA -->
-<section class="slide m2" data-index="11">
-  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-exp">z mojego doświadczenia</span><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
-  <h2>Oczekiwania studenta a rzeczywistość pracownika</h2>
-  <p class="lead band f-lilac">„Lubię to na studiach, więc polubię tę pracę”.</p>
-  <div class="body tr">
-    <div class="row row-3">
-      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Studia dają podstawy, a w niektórych zawodach także prawo do ich wykonywania.</p></div>
-      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Studia nie pokazują dnia pracy. Sam program to najczęstszy powód przerwania nauki: 27,5%.</p></div>
-      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Sylabus, opis zawodu i rozmowa z kimś z branży.</p></div>
-    </div>
-      <p class="src tr-src">GUS, Osoby młode na rynku pracy w 2024 r., s. 5. Wszystkie poziomy edukacji.</p>
-  </div>
-</section>
-
-<!-- 12 — OTOCZENIE -->
-<section class="slide m2" data-index="12">
-  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-hip">hipoteza</span><span class="slot">00:25–00:50</span></span></div>
-  <h2>Czyj to pomysł?</h2>
-  <p class="lead band f-rose">Rodzice, tradycje rodzinne, presja grupy, znajomi w tym samym mieście.</p>
-  <div class="body tr">
-    <div class="row row-3">
-      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Bliscy Cię znają i mają informacje. Miasto ze znajomymi to też prawdziwy powód.</p></div>
-      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Wybór należy do kogoś innego, a skutki ponosisz Ty.</p></div>
-      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Oddziel to, czego chcesz Ty, od tego, czego chcą dla Ciebie inni.</p></div>
+<!-- 13 — 4. DLACZEGO WYBRAŁEM INFORMATYKĘ -->
+<section class="slide m2 v4 plain" data-index="13">
+  <div class="head"><span class="pill"><b>II</b>4. Co Tobą kieruje?</span><span class="evs"><span class="ev ev-exp">z mojego doświadczenia</span><span class="slot">00:25–00:50</span></span></div>
+  <h2 style="max-width:none">Dlaczego wybrałem informatykę?</h2>
+  <div class="body motive" style="margin-top:24px">
+    <div class="row row-3" style="flex:1;grid-template-rows:1fr 1fr">
+      <div class="reveal-item panel f-sky"><div><p class="say">„Idą tam najzdolniejsi”.</p><p class="note">Nie dostałem się.</p></div><p class="tag">ego</p></div>
+      <div class="reveal-item panel f-sage"><p class="say">„Rodzice opowiadali o studiach na AGH jak o czymś wyjątkowym”.</p><p class="tag">wpojony pomysł</p></div>
+      <div class="reveal-item panel f-lilac"><p class="say">„Nerdzi, którzy każdy problem rozwiążą przy komputerze. Neo z Matrixa”.</p><p class="tag">wyobrażenie o pracy</p></div>
+      <div class="reveal-item panel f-butter"><p class="say">„Po informatyce będzie kasa. Z gitary nikt się nie utrzyma”.</p><p class="tag">utarta ścieżka</p></div>
+      <div class="reveal-item panel f-peach"><div><p class="say">„Lubię fizykę, to wydział fizyki będzie dobry”.</p><p class="note">Bez zrozumienia, z czym ten wydział się wiąże.</p></div><p class="tag">ulubiony przedmiot</p></div>
+      <div class="reveal-item panel nest" data-nest="14"></div>
     </div>
   </div>
 </section>
 
-<!-- 13 — BEZPIECZEŃSTWO -->
-<section class="slide m2" data-index="13">
-  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-dane">dane</span><span class="ev ev-hip">hipoteza</span><span class="slot">00:25–00:50</span></span></div>
-  <h2>„Idź na stabilne studia”</h2>
-  <p class="lead band f-butter">„Po tym kierunku jest praca”.</p>
-  <div class="body tr">
-    <div class="row row-3">
-      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Poczucie bezpieczeństwa jest ważne. To wartość, nie błąd.</p></div>
-      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Może przysłonić to, czego chcesz, i skończyć się wypaleniem.</p></div>
-      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>ELA: zarobki i bezrobocie po kierunku. W 1. roku po dyplomie to niespełna 70% lokalnej średniej płacy.</p></div>
-    </div>
-      <p class="tr-q f-lilac">Gdyby praca była gwarantowana po każdym kierunku, co byś wybrał(a)?</p>
-      <p class="src tr-src">System ELA, rocznik 2014, ela.nauka.gov.pl</p>
+<!-- 14 — 4. CO BY MI WTEDY POMOGŁO -->
+<section class="slide m2 v4 plain nested" data-index="14">
+  <div class="head"><span class="pill"><b>II</b>4. Co Tobą kieruje?</span><span class="evs"><span class="ev ev-exp">z mojego doświadczenia</span><span class="slot">00:25–00:50</span></span></div>
+  <h2>Co by mi wtedy pomogło</h2>
+  <div class="body" style="margin-top:28px">
+    <div class="panel f-sky" style="flex:1;display:flex;align-items:center"><p class="quote-big">„Jak będzie wyglądał mój dzień w&nbsp;pracy i&nbsp;jak będę się po nim czuł?<br>Z&nbsp;czego będę zadowolony po powrocie do domu?”</p></div>
+    <p class="reveal-item tr-q f-butter">Da się skręcić po drodze. Łatwiej, gdy wcześniej wiesz, czego szukasz.</p>
   </div>
 </section>
 
-<!-- 14 — JEDNA ŚCIEŻKA -->
-<section class="slide m2" data-index="14">
-  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-dane">dane</span><span class="slot">00:25–00:50</span></span></div>
-  <h2>Tylko jedna utarta ścieżka</h2>
-  <p class="lead band f-lilac">„Wszyscy idą na studia”. Planuje je 63% uczniów ostatnich klas.</p>
-  <div class="body tr">
-    <div class="row row-3">
-      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Dla wielu osób studia są dobrą drogą.</p></div>
-      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Nie sprawdzasz, dlaczego tam idziesz ani co jeszcze jest możliwe.</p></div>
-      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Szkoła policealna, kurs zawodowy, praca połączona ze studiami.</p></div>
-    </div>
-      <p class="src tr-src">CBOS, Młodzież 2025, s. 18</p>
-  </div>
-</section>
-
-<!-- 15 — DZIEŃ PRACY -->
-<section class="slide m2" data-index="15">
-  <div class="head"><span class="pill"><b>II</b>Trudności</span><span class="evs"><span class="ev ev-hip">hipoteza</span><span class="slot">00:25–00:50</span></span></div>
-  <h2>Skąd wiesz, jak wygląda ta praca?</h2>
-  <p class="lead band f-rose">Filmy, seriale, „IT to 15 tysięcy na start”.</p>
-  <div class="body tr">
-    <div class="row row-3">
-      <div class="panel f-sage"><h3>Co w tym sensownego</h3><p class="muted">Wyobrażenia dają pierwszy impuls: architekt rysuje domy.</p></div>
-      <div class="panel f-peach"><h3>Co może pójść źle</h3><p class="muted">Dzień pracy to także przepisy, uzgodnienia, poprawki i klienci.</p></div>
-      <div class="panel f-sky"><h3>Jak to sprawdzić</h3><p>Znajdź opis zawodu i zapytaj kogoś, kto go wykonuje.</p></div>
-    </div>
-      <p class="tr-q f-butter">Jak bym się czuł(a) po ośmiu godzinach takiego dnia?</p>
-  </div>
-</section>
-
-<!-- 16 — KOSZT STUDIÓW: pola zmieniane na żywo -->
-<section class="slide m2" data-index="16">
-  <div class="head"><span class="pill"><b>II</b>Pomocne rzeczy</span><span class="evs"><span class="ev ev-hip">szacunek</span><span class="slot">00:25–00:50</span></span></div>
-  <h2>Ile kosztują studia?</h2>
-  <div class="body cost">
-    <form class="cost-form" id="costForm" autocomplete="off">
-      <label for="costRoom">Pokój, zł miesięcznie</label><input id="costRoom" type="number" min="0" step="50" value="1350">
-      <label for="costFood">Jedzenie, zł miesięcznie</label><input id="costFood" type="number" min="0" step="50" value="600">
-      <label for="costTravel">Dojazdy, zł miesięcznie</label><input id="costTravel" type="number" min="0" step="10" value="80">
-      <label for="costOther">Inne, zł miesięcznie</label><input id="costOther" type="number" min="0" step="10" value="1390">
-      <label for="costTuition">Czesne, zł rocznie</label><input id="costTuition" type="number" min="0" step="100" value="0">
-      <label for="costGrant">Stypendium, zł miesięcznie</label><input id="costGrant" type="number" min="0" step="50" value="0">
-      <label for="costEarned">Zarobki na studiach, zł miesięcznie</label><input id="costEarned" type="number" min="0" step="50" value="0">
-      <label for="costYears">Lata studiów</label><input id="costYears" type="number" min="1" max="7" step="1" value="5">
-      <label for="costForgone">Utracone zarobki, zł miesięcznie</label><input id="costForgone" type="number" min="0" step="100" value="0">
-    </form>
-    <div class="panel f-butter cost-result">
-      <h3>Koszt studiów</h3>
-      <div class="fig cost-sum" id="costTotal">–</div>
-      <p class="small" id="costWithForgone">&nbsp;</p>
-      <p class="small cost-formula">lata × (10 miesięcy × koszty + czesne − 10 miesięcy × wpływy)</p>
-      <p class="small">Publiczne studia stacjonarne są bezpłatne. Sprawdź stypendia i akademiki.</p>
-      <p class="src cost-src">Przykład na podstawie Portfela Studenta 2025 (ZBP, WIB), średnie dla Polski</p>
-    </div>
-  </div>
-</section>
-
-<!-- 17 — GDZIE SPRAWDZIĆ -->
-<section class="slide m2" data-index="17">
-  <div class="head"><span class="pill"><b>II</b>Pomocne rzeczy</span><span class="evs"><span class="slot">00:25–00:50</span></span></div>
-  <h2>Gdzie to sprawdzić</h2>
-  <div class="body">
-    <div class="row row-3" style="flex:1">
-      <div class="panel f-sage" style="display:flex;flex-direction:column"><h3>Co będzie na studiach?</h3><p class="muted" style="margin-top:14px">Sylabusy i programy na stronach uczelni.</p></div>
-      <div class="panel f-butter" style="display:flex;flex-direction:column"><h3>Co po tym kierunku?</h3><p class="muted" style="margin-top:14px">Zarobki i ryzyko bezrobocia absolwentów.</p><div class="links tool-link"><a href="https://ela.nauka.gov.pl" target="_blank" rel="noopener">System ELA</a></div></div>
-      <div class="panel f-lilac" style="display:flex;flex-direction:column"><h3>Co robi się w tej pracy?</h3><p class="muted" style="margin-top:14px">Opisy ponad 800 zawodów i rozmowy z ludźmi z branż.</p><div class="links tool-link"><a href="https://mapakarier.org/strefa-mlodziezy/" target="_blank" rel="noopener">Mapa Karier</a></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 18 — PYTANIA DO SIEBIE -->
-<section class="slide m2" data-index="18">
-  <div class="head"><span class="pill"><b>II</b>Praca ze sobą</span><span class="evs"><span class="slot">00:25–00:50</span></span></div>
-  <h2>Pytania do siebie</h2>
-  <p class="lead">Zapisz odpowiedź na jedno z nich. Wrócimy do niego po diagnozie.</p>
-  <div class="body" style="margin-top:32px">
-    <div class="row row-2" style="flex:1;grid-template-rows:1fr 1fr">
-      <div class="panel f-butter" style="display:flex;align-items:center"><h3>Czego tak naprawdę chcę od pracy?</h3></div>
-      <div class="panel f-rose" style="display:flex;align-items:center"><h3>Co sprawia mi satysfakcję?</h3></div>
-      <div class="panel f-sage" style="display:flex;align-items:center"><h3>W czym jestem mocny(a)?</h3></div>
-      <div class="panel f-lilac" style="display:flex;align-items:center"><h3>Ile czasu poświęciłem(am) na swoje „dlaczego”?</h3></div>
-    </div>
-  </div>
-</section>
-
-<!-- 19 — DWA WYMIARY -->
-<section class="slide m3" data-index="19">
-  <div class="head"><span class="pill"><b>III</b>Diagnoza</span><span class="slot">00:50–01:40</span></div>
-  <h2>Upraszczamy do dwóch wymiarów</h2>
-  <p class="lead">Na wybór wpływa dużo więcej: pieniądze, miejsce, zdrowie, przypadek. Dziś sprawdzamy dwa wymiary.</p>
-  <div class="body" style="margin-top:32px">
+<!-- 15 — 4. CO TOBĄ KIERUJE: slajd 16 leży w tym samym miejscu i podmienia tekst -->
+<section class="slide m2 v4" data-index="15">
+  <div class="head morph"><span class="pill"><b>II</b>4. Co Tobą kieruje?</span><span class="evs"><span class="slot">00:25–00:50</span></span></div>
+  <h2>Co Tobą kieruje?</h2>
+  <p class="lead" style="visibility:hidden" aria-hidden="true">Upraszczamy do dwóch wymiarów</p>
+  <div class="body" style="margin-top:28px">
     <div class="row row-2" style="flex:1">
-      <div class="panel tint" style="display:flex;flex-direction:column">
-        <div class="fig" style="font-size:54px">Co robisz</div>
-        <p style="margin-top:22px">Narzędzia, liczby, sztuka, ludzie, zarządzanie czy procedury?</p>
-        <p style="margin-top:auto;font-weight:700">Złe dopasowanie: ciągłe zmęczenie.</p>
-      </div>
-      <div class="panel" style="display:flex;flex-direction:column;background:var(--sky)">
-        <div class="fig" style="font-size:54px">Na jakich warunkach</div>
-        <p style="margin-top:22px">Niezależność, uznanie, dobry szef, spokój po pracy?</p>
-        <p style="margin-top:auto;font-weight:700">Złe dopasowanie: szybkie wypalenie.</p>
-      </div>
+      <div class="panel f-sage dimension"><span></span><h3>Co Cię naprawdę ciekawi?</h3><div></div></div>
+      <div class="panel f-peach dimension"><span></span><h3>Czego chcesz od pracy?</h3><div></div></div>
     </div>
   </div>
 </section>
 
-<!-- 20 — ĆWICZENIE RIASEC -->
-<section class="slide m3" data-index="20">
+<!-- 16 — DWA WYMIARY: podmiana tekstu na slajdzie 15, bez przelotu kamery -->
+<section class="slide m3 v4 twin" data-index="16">
+  <div class="head morph"><span class="pill"><b>III</b>Diagnoza</span><span class="slot">00:50–01:40</span></div>
+  <h2>Co Tobą kieruje?</h2>
+  <p class="lead morph">Upraszczamy do dwóch wymiarów</p>
+  <div class="body" style="margin-top:28px">
+    <div class="row row-2" style="flex:1">
+      <div class="panel f-sage dimension"><span></span><h3>Co Cię naprawdę ciekawi?</h3><div class="morph"><p>Narzędzia, liczby, sztuka, ludzie, zarządzanie czy procedury?</p><p class="misfit">Złe dopasowanie: ciągłe zmęczenie.</p></div></div>
+      <div class="panel f-peach dimension"><span></span><h3>Czego chcesz od pracy?</h3><div class="morph"><p>Niezależność, uznanie, dobry szef, spokój po pracy?</p><p class="misfit">Złe dopasowanie: szybkie wypalenie.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 — ĆWICZENIE RIASEC -->
+<section class="slide m3" data-index="17">
   <div class="head"><span class="pill"><b>III</b>Ćwiczenie: RIASEC</span><span class="slot">00:50–01:15</span></div>
   <h2>RIASEC w ciemno</h2>
   <p class="lead">60 czynności. Oceniasz pierwszy odruch: 0 za karę, 2 obojętne, 4 czysta frajda.</p>
@@ -750,8 +722,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 21 — KOD HOLLANDA -->
-<section class="slide m3" data-index="21">
+<!-- 18 — KOD HOLLANDA -->
+<section class="slide m3" data-index="18">
   <div class="head"><span class="pill"><b>III</b>Wyniki RIASEC</span><span class="slot">00:50–01:40</span></div>
   <h2>Twój kod to trzy najwyższe kolumny</h2>
   <div class="body" style="margin-top:32px">
@@ -778,8 +750,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 22 — ĆWICZENIE: WARTOŚCI W PRACY -->
-<section class="slide m3" data-index="22">
+<!-- 19 — ĆWICZENIE: WARTOŚCI W PRACY -->
+<section class="slide m3" data-index="19">
   <div class="head"><span class="pill"><b>III</b>Ćwiczenie: wartości w pracy</span><span class="slot">01:15–01:40</span></div>
   <h2>Twoje warunki pracy</h2>
   <p class="lead">20 zdań. Szukasz tego, bez czego nie wytrzymasz w pracy.</p>
@@ -810,8 +782,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 23 — PRACA × WARTOŚCI -->
-<section class="slide m3" data-index="23">
+<!-- 20 — PRACA × WARTOŚCI -->
+<section class="slide m3" data-index="20">
   <div class="head"><span class="pill"><b>III</b>Synteza</span><span class="slot">00:50–01:40</span></div>
   <h2>Ta sama praca, inne życie</h2>
   <div class="body">
@@ -830,8 +802,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 24 — PRZERWA GŁÓWNA -->
-<section class="slide brk" data-index="24">
+<!-- 21 — PRZERWA GŁÓWNA -->
+<section class="slide brk" data-index="21">
   <div class="head"><span class="pill"><b>20 min</b>Przerwa</span><span class="slot">01:40–02:00</span></div>
   <div class="brk-grid">
     <div class="timer" data-timer="Break" data-min="20" data-step="1" data-label="Przerwa"></div>
@@ -839,8 +811,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 25 — LABORATORIUM, CZĘŚĆ 1 -->
-<section class="slide m4" data-index="25">
+<!-- 22 — LABORATORIUM, CZĘŚĆ 1 -->
+<section class="slide m4" data-index="22">
   <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 1 z 5</span><span class="slot">02:00–02:04</span></div>
   <h2>Jeden zawód pod lupą</h2>
   <p class="lead">Wybierasz roboczo, żeby przećwiczyć metodę. To nie decyzja na całe życie.</p>
@@ -858,8 +830,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 26 — LABORATORIUM, CZĘŚĆ 2 -->
-<section class="slide m4" data-index="26">
+<!-- 23 — LABORATORIUM, CZĘŚĆ 2 -->
+<section class="slide m4" data-index="23">
   <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 2 z 5</span><span class="slot">02:04–02:11</span></div>
   <h2>Bilans</h2>
   <div class="body" style="margin-top:34px">
@@ -878,8 +850,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 27 — LABORATORIUM, CZĘŚĆ 3 -->
-<section class="slide m4" data-index="27">
+<!-- 24 — LABORATORIUM, CZĘŚĆ 3 -->
+<section class="slide m4" data-index="24">
   <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 3 z 5</span><span class="slot">02:11–02:18</span></div>
   <h2>Ciemna strona</h2>
   <div class="body" style="margin-top:34px">
@@ -897,8 +869,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 28 — LABORATORIUM, CZĘŚĆ 4 -->
-<section class="slide m4" data-index="28">
+<!-- 25 — LABORATORIUM, CZĘŚĆ 4 -->
+<section class="slide m4" data-index="25">
   <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 4 z 5</span><span class="slot">02:18–02:25</span></div>
   <h2>Otoczenie i plan B</h2>
   <div class="body" style="margin-top:34px">
@@ -916,8 +888,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 29 — LABORATORIUM, CZĘŚĆ 5 -->
-<section class="slide m4" data-index="29">
+<!-- 26 — LABORATORIUM, CZĘŚĆ 5 -->
+<section class="slide m4" data-index="26">
   <div class="head"><span class="pill"><b>IV</b>Laboratorium: część 5 z 5</span><span class="slot">02:25–02:33</span></div>
   <h2>Wymiana w parach</h2>
   <p class="lead">Po 4 minuty na osobę.</p>
@@ -936,8 +908,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 30 — MATRYCA -->
-<section class="slide m4" data-index="30">
+<!-- 27 — MATRYCA -->
+<section class="slide m4" data-index="27">
   <div class="head"><span class="pill"><b>IV</b>Matryca</span><span class="slot">02:33–02:50</span></div>
   <h2 style="font-size:56px">Gdzie ląduje Twój zawód?</h2>
   <div class="body" style="margin-top:28px">
@@ -967,8 +939,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 31 — PRZERWA TECHNICZNA -->
-<section class="slide brk" data-index="31">
+<!-- 28 — PRZERWA TECHNICZNA -->
+<section class="slide brk" data-index="28">
   <div class="head"><span class="pill"><b>10 min</b>Przerwa opcjonalna</span><span class="slot">02:50–03:00</span></div>
   <div class="brk-grid">
     <div class="timer" data-timer="TechBreak" data-min="10" data-step="1" data-label="Przerwa"></div>
@@ -976,8 +948,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 32 — KASKADA -->
-<section class="slide m5" data-index="32" id="slideCascade">
+<!-- 29 — KASKADA -->
+<section class="slide m5" data-index="29" id="slideCascade">
   <div class="head"><span class="pill"><b>V</b>Co dalej</span><span class="slot">03:00–03:35</span></div>
   <h2>Co zrobisz po warsztacie?</h2>
   <div class="body" style="margin-top:34px">
@@ -1002,8 +974,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 33 — KARTECZKI + TEZA -->
-<section class="slide m6" data-index="33">
+<!-- 30 — KARTECZKI + TEZA -->
+<section class="slide m6" data-index="30">
   <div class="head"><span class="pill"><b>VI</b>Domknięcie</span><span class="slot">03:35–04:00</span></div>
   <h2>Wracamy do karteczek</h2>
   <div class="body">
@@ -1022,8 +994,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   </div>
 </section>
 
-<!-- 34 — DZIĘKUJĘ + ANKIETA -->
-<section class="slide m6" data-index="34">
+<!-- 31 — DZIĘKUJĘ + ANKIETA -->
+<section class="slide m6" data-index="31">
   <div class="head"><span class="pill"><b>VI</b>Ankieta</span><span class="slot">03:35–04:00</span></div>
   <h2 style="font-size:96px">Dziękuję!</h2>
   <p class="lead">Szczera opinia pomoże poprawić warsztat dla kolejnych grup.</p>
@@ -1091,19 +1063,16 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
     { title: "Kontrakt na flipcharcie", time: "5 min", targetMin: 16 },
     { title: "Runda: zawód z koszmaru", time: "8 min", targetMin: 24 },
     { title: "Plan spotkania", time: "1 min", targetMin: 25 },
-    { title: "Nie musisz dziś wiedzieć", time: "do ustalenia", targetMin: 27 },
-    { title: "To nie wybór na całe życie", time: "do ustalenia", targetMin: 29 },
-    { title: "Przypadek też jest częścią drogi", time: "do ustalenia", targetMin: 31 },
-    { title: "A co z AI?", time: "do ustalenia", targetMin: 33 },
-    { title: "Ulubiony przedmiot, wynik z matury", time: "do ustalenia", targetMin: 35 },
-    { title: "Oczekiwania studenta a rzeczywistość pracownika", time: "do ustalenia", targetMin: 36 },
-    { title: "Czyj to pomysł?", time: "do ustalenia", targetMin: 38 },
-    { title: "Idź na stabilne studia", time: "do ustalenia", targetMin: 40 },
-    { title: "Tylko jedna utarta ścieżka", time: "do ustalenia", targetMin: 42 },
-    { title: "Skąd wiesz, jak wygląda ta praca?", time: "do ustalenia", targetMin: 43 },
-    { title: "Ile kosztują studia?", time: "do ustalenia", targetMin: 45 },
-    { title: "Gdzie to sprawdzić", time: "do ustalenia", targetMin: 47 },
-    { title: "Pytania do siebie", time: "do ustalenia", targetMin: 50 },
+    { title: "Cztery rzeczy, zanim wybierzesz", time: "2 min", targetMin: 27 },
+    { title: "Nie musisz dziś wiedzieć", time: "2 min", targetMin: 29 },
+    { title: "Wybór, nie wyrok", time: "2 min", targetMin: 31 },
+    { title: "Ale zmiana kosztuje", time: "2 min", targetMin: 33 },
+    { title: "Przypadek też jest częścią drogi", time: "2 min", targetMin: 35 },
+    { title: "Rynek się zmienia", time: "3 min", targetMin: 38 },
+    { title: "Czym się kierować?", time: "1 min", targetMin: 39 },
+    { title: "Dlaczego wybrałem informatykę?", time: "3 min", targetMin: 42 },
+    { title: "Co by mi wtedy pomogło", time: "2 min", targetMin: 44 },
+    { title: "Co Tobą kieruje?", time: "2 min", targetMin: 46 },
     { title: "Dwa wymiary dopasowania", time: "5 min", targetMin: 55 },
     { title: "Ćwiczenie RIASEC", time: "25 min", targetMin: 80 },
     { title: "Kod Hollanda", time: "5 min", targetMin: 85 },
@@ -1121,7 +1090,7 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
     { title: "Karteczki i teza", time: "15 min", targetMin: 230 },
     { title: "Ankieta i podziękowanie", time: "10 min", targetMin: 240 }
   ];
-  const slideModule = ["I","I","I","I","I","I","II","II","II","II","II","II","II","II","II","II","II","II","II","III","III","III","III","III","P1","IV","IV","IV","IV","IV","IV","P2","V","VI","VI"];
+  const slideModule = ["I","I","I","I","I","I","II","II","II","II","II","II","II","II","II","II","III","III","III","III","III","P1","IV","IV","IV","IV","IV","IV","P2","V","VI","VI"];
   const moduleNames = { I: "I  Otwarcie", II: "II  Szkoła a rynek", III: "III  Diagnoza", P1: "Przerwa", IV: "IV  Laboratorium zawodu", P2: "Przerwa", V: "V  Co dalej", VI: "VI  Domknięcie" };
   const moduleOrder = ["I","II","III","P1","IV","P2","V","VI"];
   const WORKSHOP_MIN = 240, PACING_TOLERANCE = 5;
@@ -1170,19 +1139,16 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
     pose(-6500, -2400, 0.8, 5),
     planPose,
     nestedIn(planPose, 470, 300, 0.24, 3),
-    pose(-2600, -3000, 0.6, 4),
-    pose(-1900, -4000, 0.6, 6),
-    pose(-1200, -3000, 0.6, 8),
-    pose(-500, -4100, 0.6, 10),
-    pose(200, -3100, 0.6, 12),
-    pose(900, -4100, 0.6, 14),
-    pose(1600, -3100, 0.6, 16),
-    pose(2300, -4000, 0.6, 18),
-    pose(3000, -3000, 0.6, 20),
-    pose(3700, -3800, 0.6, 22),
-    pose(4400, -2850, 0.6, 24),
-    pose(5100, -3700, 0.6, 26),
-    pose(5600, -1700, 1.1, 30),
+    pose(-1500, -3700, 0.6, 9),
+    pose(-300, -3300, 0.6, -8),
+    pose(500, -4300, 0.6, 12),
+    pose(1700, -4600, 0.6, -5),
+    pose(2600, -3700, 0.6, 14),
+    pose(1900, -2600, 0.6, -10),
+    pose(3100, -2100, 0.6, 7),
+    nestedIn(pose(3100, -2100, 0.6, 7), 478.5, 263, 0.6 * 431 / 1600, 0),
+    pose(4300, -2800, 0.6, -12),
+    pose(4300, -2800, 0.6, -12),
     riasecPose,
     nestedIn(riasecPose, 470, -195, 0.33, -4),
     pose(5900, 2200, 1, 20),
@@ -1390,7 +1356,14 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   let workshopStartTime = null, workshopRunning = false, workshopElapsedSeconds = 0, masterTimerInterval = null;
 
   let revealed = 0;
-  const revealItems = i => slides[i].querySelectorAll('.reveal-item');
+  const revealItems = i => {
+    const steps = [];
+    slides[i].querySelectorAll('.reveal-item').forEach(el => {
+      if (el.hasAttribute('data-with-prev') && steps.length) steps[steps.length - 1].push(el);
+      else steps.push([el]);
+    });
+    return steps;
+  };
   function updateSlide(n) {
     if (n < 0 || n >= totalSlides) return;
     overviewShown = false;
@@ -1407,7 +1380,8 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
     // Odsłanianie: wchodząc do przodu wszystko ukryte, wracając wszystko widoczne
     const items = revealItems(n);
     revealed = forward ? 0 : items.length;
-    items.forEach((el, i) => el.classList.toggle('revealed', i < revealed));
+    items.forEach((step, i) => step.forEach(el => el.classList.toggle('revealed', i < revealed)));
+    syncNestedSlides();
     hideValueKey();
     if (n >= 1 && !workshopRunning && workshopElapsedSeconds === 0) startMasterWorkshopTimer();
     updateHudText(); updateMasterWorkshopDisplay();
@@ -1416,18 +1390,29 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   const nextSlide = () => { if (currentIndex < totalSlides - 1) updateSlide(currentIndex + 1); };
   const prevSlide = () => { if (currentIndex > 0) updateSlide(currentIndex - 1); };
 
-  // ----- 5. Odsłanianie kafli (slajdy z .reveal-item: 06, 32) -----
+  // ----- 5. Odsłanianie kafli (slajdy z .reveal-item: moduł II, 29) -----
+  function syncNestedSlides() {
+    document.querySelectorAll('[data-nest]').forEach(tile => {
+      const nestedIndex = Number(tile.dataset.nest);
+      const entered = currentIndex >= nestedIndex;
+      const parentIndex = [...slides].indexOf(tile.closest('.slide'));
+      if (currentIndex === parentIndex) slides[nestedIndex].inert = false;
+      tile.classList.toggle('nest-open', entered);
+      slides[nestedIndex].classList.toggle('nest-title', !entered);
+      slides[nestedIndex].classList.toggle('nest-waiting', !entered && !tile.classList.contains('revealed'));
+    });
+  }
   function advanceReveal() {
     const items = revealItems(currentIndex);
-    if (revealed < items.length) { items[revealed].classList.add('revealed'); revealed++; return true; }
+    if (revealed < items.length) { items[revealed].forEach(el => el.classList.add('revealed')); revealed++; syncNestedSlides(); return true; }
     return false;
   }
   function regressReveal() {
     const items = revealItems(currentIndex);
-    if (revealed > 0) { revealed--; items[revealed].classList.remove('revealed'); return true; }
+    if (revealed > 0) { revealed--; items[revealed].forEach(el => el.classList.remove('revealed')); syncNestedSlides(); return true; }
     return false;
   }
-  // Klucz wartości w pracy (slajd 22) tylko pod klawiszem K, żeby nie odsłonić go przypadkiem
+  // Klucz wartości w pracy (slajd 19) tylko pod klawiszem K, żeby nie odsłonić go przypadkiem
   const valueKeyHere = () => slides[currentIndex].querySelector('.value-key');
   const toggleValueKey = () => { const key = valueKeyHere(); if (key) key.classList.toggle('shown'); };
   function hideValueKey() { document.querySelectorAll('.value-key.shown').forEach(key => key.classList.remove('shown')); }
@@ -1439,24 +1424,6 @@ h3 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01
   const goNext = () => { if (overviewShown) { toggleOverview(); return; } if (advanceReveal()) return; nextSlide(); };
   const goPrev = () => { if (overviewShown) { toggleOverview(); return; } if (regressReveal()) return; prevSlide(); };
 
-  // ----- 5a. Wzór na koszt studiów (slajd 16): wartości można zmieniać na żywo -----
-  const costMonthsOfStudy = 10, costMonthsOfYear = 12;
-  const costForm = document.getElementById('costForm');
-  const costNumber = id => Number(document.getElementById(id).value) || 0;
-  const formatZloty = value => Math.round(value).toLocaleString('pl-PL') + ' zł';
-  function updateCost() {
-    const years = costNumber('costYears');
-    const monthlyCosts = costNumber('costRoom') + costNumber('costFood') + costNumber('costTravel') + costNumber('costOther');
-    const monthlyIncome = costNumber('costGrant') + costNumber('costEarned');
-    const hasCosts = monthlyCosts > 0 || costNumber('costTuition') > 0;
-    const total = years * (costMonthsOfStudy * (monthlyCosts - monthlyIncome) + costNumber('costTuition'));
-    const forgone = years * costMonthsOfYear * costNumber('costForgone');
-    document.getElementById('costTotal').textContent = hasCosts ? formatZloty(total) : '–';
-    document.getElementById('costWithForgone').textContent = hasCosts && forgone > 0 ? 'z utraconymi zarobkami: ' + formatZloty(total + forgone) : '\u00a0';
-  }
-  costForm.addEventListener('input', updateCost);
-  costForm.addEventListener('submit', e => e.preventDefault());
-  updateCost();
 
   // ----- 6. Wygaszacz i kokpit -----
   window.toggleBlackout = () => blackoutScreen.classList.toggle('active');
