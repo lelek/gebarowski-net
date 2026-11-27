@@ -7,19 +7,50 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <meta name="description" content="Paweł Gębarowski kieruje zespołem inżynierów w Ocado Technology, a w branży technologicznej pracuje od ponad 15 lat. Prowadzi warsztaty o informacji zwrotnej.">
+    <meta name="description" content="Paweł Gębarowski kieruje zespołem inżynierów w Ocado Technology. Warsztaty o informacji zwrotnej i wyborze drogi zawodowej, narzędzia do wyboru zawodu.">
     <link rel="canonical" href="https://gebarowski.net/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="gebarowski.net">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:url" content="https://gebarowski.net/">
+    <meta property="og:title" content="Paweł Gębarowski">
+    <meta property="og:description" content="Paweł Gębarowski kieruje zespołem inżynierów w Ocado Technology. Warsztaty o informacji zwrotnej i wyborze drogi zawodowej, narzędzia do wyboru zawodu.">
+    <meta property="og:image" content="https://gebarowski.net/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="gebarowski.net, Paweł Gębarowski, rozwój zawodowy">
+    <meta name="twitter:card" content="summary_large_image">
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Paweł Gębarowski",
-        "url": "https://gebarowski.net/",
-        "image": "https://gebarowski.net/images/portrait.jpg",
-        "description": "Kieruje zespołem inżynierów w Ocado Technology. Prowadzi warsztaty o informacji zwrotnej i o wyborze drogi zawodowej.",
-        "worksFor": { "@type": "Organization", "name": "Ocado Technology" },
-        "sameAs": ["https://www.linkedin.com/in/pawel-gebarowski/"]
+      "@type": "WebSite",
+      "@id": "https://gebarowski.net/#website",
+      "url": "https://gebarowski.net/",
+      "name": "gebarowski.net",
+      "inLanguage": "pl",
+      "publisher": {
+        "@id": "https://gebarowski.net/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://gebarowski.net/#person",
+      "name": "Paweł Gębarowski",
+      "url": "https://gebarowski.net/",
+      "image": "https://gebarowski.net/images/portrait.jpg",
+          "description": "Kieruje zespołem inżynierów w Ocado Technology. Prowadzi warsztaty o informacji zwrotnej i o wyborze drogi zawodowej.",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Ocado Technology"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/pawel-gebarowski/"
+      ]
     }
+  ]
+}
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,6 +103,7 @@
         #link-about { top: 20%; left: 15%; }
         #link-contact { top: 75%; right: 20%; }
         #link-workshops { bottom: 15%; left: 30%; }
+        #link-tools { bottom: 6%; left: 37%; }
 
         .card {
             border: none;
@@ -190,7 +222,8 @@
 
         @media (max-width: 600px) {
             #link-about { top: 18%; left: auto; right: 10%; }
-            #link-workshops { top: 66%; bottom: auto; left: 8%; }
+            #link-workshops { top: 64%; bottom: auto; left: 8%; }
+            #link-tools { top: 73%; bottom: auto; left: 18%; }
             #link-contact { top: auto; bottom: 12%; right: auto; left: 10%; }
         }
 
@@ -211,7 +244,8 @@
 
     <a href="#about" class="link" id="link-about" data-card="card-about">o mnie</a>
     <a href="#contact" class="link" id="link-contact" data-card="card-contact">kontakt</a>
-    <a href="workshops.html" class="link" id="link-workshops">warsztaty</a>
+    <a href="workshops.html" class="link" id="link-workshops" data-line="workshops">warsztaty</a>
+    <a href="tools/" class="link" id="link-tools" data-line="tools">narzędzia</a>
 
     <dialog class="card" id="card-about" aria-labelledby="card-about-title">
         <div class="card-body">
@@ -246,16 +280,20 @@
             <linearGradient id="grad-contact" gradientUnits="userSpaceOnUse"></linearGradient>
             <linearGradient id="grad-about" gradientUnits="userSpaceOnUse"></linearGradient>
             <linearGradient id="grad-workshops" gradientUnits="userSpaceOnUse"></linearGradient>
+            <linearGradient id="grad-tools" gradientUnits="userSpaceOnUse"></linearGradient>
         </defs>
         <path id="path-contact" fill="none" stroke="url(#grad-contact)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0, 12" />
         <path id="path-about" fill="none" stroke="url(#grad-about)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0, 12" />
         <path id="path-workshops" fill="none" stroke="url(#grad-workshops)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0, 12" />
+        <path id="path-tools" fill="none" stroke="url(#grad-tools)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0, 12" />
     </svg>
 
     <script>
         const LOGO_LINE_GAP = 24;
         const CORNER_RADIUS = 29;
         const LINK_GAP = 18;
+        const LETTER_W = 6;
+        const LETTER_S = 7;
         const LETTER_K = 8;
 
         function letterBounds(word, letterIndex) {
@@ -309,7 +347,8 @@
             const levels = logoTextLevels(name);
             drawLineToLink('about', { x: letterCenterX(name, 2), y: levels.top - LOGO_LINE_GAP });
             drawLineToLink('contact', { x: letterCenterX(domain, 0), y: levels.baseline + LOGO_LINE_GAP });
-            drawLineToLink('workshops', { x: letterCenterX(name, 6), y: levels.baseline + LOGO_LINE_GAP });
+            drawLineToLink('workshops', { x: letterCenterX(name, LETTER_W), y: levels.baseline + LOGO_LINE_GAP });
+            drawLineToLink('tools', { x: letterCenterX(name, LETTER_S), y: levels.baseline + LOGO_LINE_GAP });
         }
 
         function setGradient(id, startPoint, endPoint) {
@@ -382,7 +421,7 @@
         }
 
         async function leaveThroughLine(link) {
-            const dots = document.getElementById('path-workshops');
+            const dots = document.getElementById(`path-${link.dataset.line}`);
             dots.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -48 }], {
                 duration: motionDuration(700),
                 easing: 'ease-in'
@@ -397,12 +436,18 @@
             window.location.href = link.href;
         }
 
-        document.querySelectorAll('[data-card]').forEach(connectCard);
+        function openCardFromAddress() {
+            const link = location.hash && document.querySelector(`[data-card][href="${location.hash}"]`);
+            if (link) openCard(link, document.getElementById(link.dataset.card));
+        }
 
-        document.getElementById('link-workshops').addEventListener('click', event => {
+        document.querySelectorAll('[data-card]').forEach(connectCard);
+        openCardFromAddress();
+
+        document.querySelectorAll('[data-line]').forEach(link => link.addEventListener('click', event => {
             event.preventDefault();
             leaveThroughLine(event.currentTarget);
-        });
+        }));
 
         window.addEventListener('pageshow', event => {
             if (event.persisted) document.body.getAnimations().forEach(animation => animation.cancel());

@@ -7,7 +7,19 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <meta name="description" content="Czterogodzinny warsztat dla licealistów prowadzony przez Pawła Gębarowskiego: zainteresowania, wartości w pracy i sprawdzenie, czy dany zawód jest dla Ciebie. Program, zasady i prowadzący.">
+    <meta name="description" content="Czterogodzinny warsztat dla uczniów szkół średnich: zainteresowania, wartości w pracy i sprawdzenie, czy dany zawód jest dla Ciebie. Program i prowadzący.">
+    <link rel="canonical" href="https://gebarowski.net/workshops.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="gebarowski.net">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:url" content="https://gebarowski.net/workshops.html">
+    <meta property="og:title" content="Warsztat o wyborze drogi zawodowej">
+    <meta property="og:description" content="Czterogodzinny warsztat dla uczniów szkół średnich: zainteresowania, wartości w pracy i sprawdzenie, czy dany zawód jest dla Ciebie. Program i prowadzący.">
+    <meta property="og:image" content="https://gebarowski.net/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="gebarowski.net, Paweł Gębarowski, rozwój zawodowy">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
@@ -56,7 +68,7 @@
             gap: 56px;
         }
 
-        .site-header a {
+        .site-header > a {
             display: inline-block;
         }
 
@@ -98,6 +110,11 @@
         a:focus-visible {
             outline: 2px solid var(--mark);
             outline-offset: 3px;
+        }
+
+        .intro {
+            padding-bottom: 24px;
+            border-bottom: 3px solid var(--mark);
         }
 
         section, .intro {
@@ -320,26 +337,48 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="menu.css">
+    <script src="menu.js" defer></script>
 </head>
 <body>
     <div class="page">
 
         <header class="site-header">
-            <a href="index.html" aria-label="gebarowski.net, strona główna"><img src="logo.svg" alt="gebarowski.net"></a>
+            <a href="index.html" aria-label="gebarowski.net, strona główna"><img src="logo-small.svg" alt="gebarowski.net"></a>
+            <div class="menu">
+                <button class="menu-button" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
+                <nav class="menu-panel" id="site-menu" aria-label="Menu strony">
+                    <ul>
+                        <li><a href="index.html">Strona główna</a></li>
+                        <li><a href="workshops.html" aria-current="page">Warsztat</a></li>
+                        <li><a href="tools/">Narzędzia</a></li>
+                        <li class="menu-sub"><a href="tools/interests.html">Zainteresowania zawodowe</a></li>
+                        <li class="menu-sub"><a href="tools/work-values.html">Wartości w&nbsp;pracy</a></li>
+                        <li><a href="index.html#about">O mnie</a></li>
+                        <li><a href="index.html#contact">Kontakt</a></li>
+                    </ul>
+                </nav>
+            </div>
         </header>
 
         <div class="intro">
             <p class="eyebrow">Warsztat dla licealistów</p>
             <h1>Wybór drogi zawodowej</h1>
-            <p class="lead">Czterogodzinny warsztat dla uczniów, którzy zastanawiają się, co dalej po szkole. Nie wybieramy za nikogo zawodu. Ćwiczymy, jak sprawdzić jeden pomysł, zanim zainwestuje się w niego kilka lat nauki.</p>
+            <p class="lead">Czterogodzinny warsztat dla uczniów, którzy zastanawiają się, co dalej po szkole. Nie wybieramy za nikogo zawodu. Ćwiczymy, jak sprawdzić pomysł na zawód, zanim zainwestuje się w&nbsp;niego kilka lat.</p>
             <dl class="facts">
                 <div><dt>Dla kogo</dt><dd>uczniowie szkół średnich, ok. 17–18 lat</dd></div>
                 <div><dt>Grupa</dt><dd>do ok. 10 osób</dd></div>
                 <div><dt>Czas</dt><dd>4 godziny, w tym dwie przerwy</dd></div>
                 <div><dt>Forma</dt><dd>praca na papierze, bez telefonów i ekranów</dd></div>
-                <div><dt>Pierwsza edycja</dt><dd>grudzień 2026, bezpłatnie</dd></div>
+                <div><dt>Pierwsza edycja</dt><dd>8 grudnia 2026, Centrum Adaptacji Młodzieży w&nbsp;Krośnie, bezpłatnie</dd></div>
             </dl>
         </div>
+
+        <section>
+            <h2>Nie musisz dziś wiedzieć</h2>
+            <p>Wiele osób pod koniec szkoły nie wie, co chce robić, i&nbsp;to normalne. Wybór szkoły czy studiów to nie wyrok, bo da się skręcić po drodze. Każda zmiana kosztuje jednak czas i&nbsp;pieniądze, a&nbsp;tego, jak będzie wyglądał rynek pracy za kilka lat, nikt nie wie.</p>
+            <p>Dlatego zajmujemy się tym, co da się sprawdzić już teraz: co Cię naprawdę ciekawi, czego chcesz od pracy i&nbsp;jak wygląda zwykły dzień w&nbsp;zawodzie, który rozważasz. Nie musisz dziś wiedzieć. Po warsztacie wiesz, jak to sprawdzić.</p>
+        </section>
 
         <section>
             <h2>Z czym wychodzisz</h2>
@@ -370,31 +409,31 @@
                 <li>
                     <span class="minutes">25 min</span>
                     <h3>Otwarcie</h3>
-                    <p>Poznajemy się, ustalamy zasady pracy, a każdy mówi, jakiego zawodu nie chciałby wykonywać.</p>
+                    <p>Poznajemy się i&nbsp;ustalamy zasady. Na karteczkach zapisujesz pytania, z&nbsp;którymi przychodzisz, a&nbsp;każdy mówi, jakiego zawodu nie chciałby wykonywać.</p>
                 </li>
                 <li>
                     <span class="minutes">25 min</span>
-                    <h3>Szkoła a rynek pracy</h3>
-                    <p>Częste pułapki przy wyborze kierunku i pytania, które warto zadać, zanim złożysz dokumenty.</p>
+                    <h3>Cztery rzeczy, zanim wybierzesz</h3>
+                    <p>Niewiedza jest normalna, wybór to nie wyrok, ale zmiana kosztuje, a&nbsp;przypadku i&nbsp;rynku pracy nie da się przewidzieć. Pokazuję dane i&nbsp;opowiadam, dlaczego sam wybrałem informatykę i&nbsp;co by mi wtedy pomogło.</p>
                 </li>
                 <li>
                     <span class="minutes">25 min</span>
                     <h3>Zainteresowania</h3>
-                    <p>Przy 60 czynnościach zaznaczasz, czy lubisz je robić. Z odpowiedzi wychodzą trzy rodzaje zadań, które najbardziej Ci odpowiadają.</p>
+                    <p>Przy 60 czynnościach zaznaczasz, czy lubił(a)byś je robić w&nbsp;pracy. Nazwy kategorii poznajesz dopiero po zliczeniu. Trzy najwyższe wyniki to Twój kod zainteresowań.</p>
                 </li>
                 <li>
                     <span class="minutes">25 min</span>
-                    <h3>Wartości w pracy</h3>
-                    <p>Układasz 20 zdań o idealnej pracy od najważniejszego do najmniej ważnego i liczysz, które dwie wartości wychodzą najwyżej.</p>
+                    <h3>Wartości w&nbsp;pracy</h3>
+                    <p>Układasz 20 zdań o&nbsp;idealnej pracy od najważniejszych do najmniej ważnych. Dwie najwyżej ocenione wartości bierzesz dalej jako warunki nie do negocjacji. Na przykładach widać, że te same zainteresowania z&nbsp;innymi wartościami prowadzą do zupełnie innej pracy.</p>
                 </li>
                 <li class="pause">
                     <span class="minutes">20 min</span>
-                    <h3>Przerwa</h3>
+                    <h3>Przerwa na jedzenie</h3>
                 </li>
                 <li>
                     <span class="minutes">50 min</span>
                     <h3>Laboratorium zawodu</h3>
-                    <p>Jeden zawód sprawdzony na arkuszu: zarobki, zmęczenie, najgorszy zwykły dzień, próg wejścia i plan B. Potem rozmowa w parach i wspólna matryca na tablicy.</p>
+                    <p>Jeden zawód pod lupą: zarobki i&nbsp;zmęczenie, ciemna strona i&nbsp;najgorszy zwykły dzień, zdanie otoczenia i&nbsp;plan B. Potem rozmowa w&nbsp;parach i&nbsp;wspólna mapa na tablicy: gdzie ląduje Twój zawód.</p>
                 </li>
                 <li class="pause">
                     <span class="minutes">10 min</span>
@@ -403,12 +442,12 @@
                 <li>
                     <span class="minutes">35 min</span>
                     <h3>Trzy kroki</h3>
-                    <p>Każdy planuje jeden krok na 72 godziny, jeden na tydzień i jeden na miesiąc, a potem sprawdza w małej grupie, czy są konkretne i wykonalne.</p>
+                    <p>Co zrobisz po warsztacie? Planujesz jeden mały krok na najbliższe 72 godziny, jeden na tydzień i&nbsp;jeden na miesiąc. Kto chce, mówi o&nbsp;swoim kroku na forum.</p>
                 </li>
                 <li>
                     <span class="minutes">25 min</span>
-                    <h3>Pytania i zamknięcie</h3>
-                    <p>Odpowiedzi na pytania zebrane na początku warsztatu i krótka anonimowa ankieta.</p>
+                    <h3>Pytania i&nbsp;zamknięcie</h3>
+                    <p>Wracamy do karteczek z&nbsp;początku i&nbsp;odpowiadam na pytania. Każdy kończy jednym zdaniem: z&nbsp;jaką myślą wychodzi. Na koniec krótka anonimowa ankieta.</p>
                 </li>
             </ol>
             <p class="note">Po zakończeniu zostaję jeszcze do 30 minut dla osób, które chcą porozmawiać. Program pierwszej edycji może się zmienić po próbie.</p>
@@ -422,6 +461,7 @@
                 <li>Nie oceniamy cudzych planów ani obaw.</li>
                 <li>Telefony są schowane. W pilnej sprawie można wyjść bez pytania.</li>
             </ul>
+            <p class="note">Pozostałe zasady dopisujemy razem na początku warsztatu.</p>
         </section>
 
         <section>
@@ -452,26 +492,37 @@
                 </li>
                 <li>
                     <div>
+                        <h3>Zainteresowania zawodowe</h3>
+                        <p class="meta">60 czynności i liczenie wyniku. PDF, A4, trzy strony. Licencja O*NET Tools Developer License.</p>
+                    </div>
+                    <a class="download" href="materials/riasec.pdf" download>Pobierz PDF</a>
+                </li>
+                <li>
+                    <div>
                         <h3>Wartości w pracy</h3>
                         <p class="meta">20 zdań do ułożenia i liczenie wyniku z kluczem. PDF, A4, dwie strony. Licencja CC BY 4.0.</p>
                     </div>
-                    <span class="download unavailable" aria-disabled="true">Wkrótce</span>
+                    <a class="download" href="materials/work-values.pdf" download>Pobierz PDF</a>
                 </li>
             </ul>
-            <p class="note">Materiały, w tym polskie tłumaczenie listy zainteresowań, udostępnię po pierwszej edycji warsztatu.</p>
 
             <h3>Gdzie sprawdzać dalej</h3>
             <ul class="marked">
-                <li><a href="https://mapakarier.org/strefa-mlodziezy/" target="_blank" rel="noopener noreferrer">Mapa Karier</a>, opisy zawodów po polsku.</li>
+                <li><a href="https://mapakarier.org/sciezki-kariery/" target="_blank" rel="noopener noreferrer">Mapa Karier</a>, opisy zawodów po polsku.</li>
                 <li><a href="https://ela.nauka.gov.pl/" target="_blank" rel="noopener noreferrer">Ekonomiczne Losy Absolwentów</a>, dane o zarobkach i zatrudnieniu absolwentów polskich uczelni.</li>
             </ul>
+        </section>
+
+        <section id="online">
+            <h2>Formularze online</h2>
+            <p>Zainteresowania zawodowe i&nbsp;wartości w&nbsp;pracy możesz też wypełnić w&nbsp;przeglądarce, w&nbsp;dziale <a href="tools/">Narzędzia</a>. Wynik policzy się sam.</p>
         </section>
 
         <section class="licenses" id="licenses">
             <h2>Prawa autorskie i licencje</h2>
             <p><strong>Laboratorium zawodu i bilet 72 h.</strong> © 2026 Paweł Gębarowski. Licencja <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.pl" target="_blank" rel="noopener noreferrer">CC BY-NC 4.0</a>: możesz kopiować, drukować i przerabiać arkusz do celów niekomercyjnych, podając autora. Do użycia komercyjnego, np. na płatnych zajęciach, potrzebna jest moja zgoda.</p>
             <p><strong>Wartości w pracy.</strong> Polskie tłumaczenie i wersja papierowa narzędzia <a href="https://www.careeronestop.org/Toolkit/Careers/work-values-matcher.aspx" target="_blank" rel="noopener noreferrer">Work Values Matcher</a> z serwisu CareerOneStop, sponsorowanego przez U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). Narzędzie opiera się na O*NET® Work Importance Locator™ i jest udostępniane na licencji <a href="https://creativecommons.org/licenses/by/4.0/deed.pl" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Na tej samej licencji udostępniam arkusz. Zmiany: tłumaczenie na polski i wpisywanie numerów zdań do tabeli zamiast układania kart. USDOL/ETA i CareerOneStop nie zatwierdziły tej wersji.</p>
-            <p><strong>Lista zainteresowań używana na warsztacie</strong> to tłumaczenie O*NET® Interest Profiler Short Form na licencji <a href="https://www.onetcenter.org/license_tools.html" target="_blank" rel="noopener noreferrer">O*NET Tools Developer License</a>. Nie jest jeszcze udostępniana do pobrania.</p>
+            <p><strong>Lista zainteresowań używana na warsztacie</strong> to tłumaczenie O*NET® Interest Profiler Short Form na licencji <a href="https://www.onetcenter.org/license_tools.html" target="_blank" rel="noopener noreferrer">O*NET Tools Developer License</a>. Jest dostępna jako <a href="tools/interests.html">formularz online</a>.</p>
             <p>O*NET® jest znakiem towarowym USDOL/ETA. Użycie tej nazwy nie oznacza, że USDOL/ETA popiera ten warsztat. Treść tej strony: © 2026 Paweł Gębarowski.</p>
         </section>
 

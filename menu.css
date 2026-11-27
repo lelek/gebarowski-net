@@ -1,0 +1,119 @@
+.site-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 20px;
+}
+
+.menu {
+    position: relative;
+}
+
+.menu-button {
+    display: grid;
+    place-content: center;
+    gap: 4px;
+    width: 44px;
+    height: 44px;
+    margin-block: -7px;
+    margin-right: -12px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.menu-button span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+}
+
+.menu-button:focus-visible {
+    outline: 2px solid var(--mark);
+    outline-offset: 2px;
+}
+
+.menu-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+    width: max-content;
+    min-width: 15rem;
+    max-width: calc(100vw - 32px);
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--mark);
+    border-radius: 12px;
+    background: var(--bg);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+}
+
+.menu.open .menu-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+@media (hover: hover) {
+    .menu:hover .menu-panel {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    .menu:hover .menu-button {
+        color: var(--link);
+    }
+}
+
+.menu-panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu-panel a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--fg);
+    text-decoration: none;
+}
+
+.menu-panel a:hover,
+.menu-panel a:focus-visible {
+    background: var(--tint, #e4f7fd);
+    outline: none;
+}
+
+.menu-panel a[aria-current="page"] {
+    color: var(--link);
+    font-weight: 600;
+}
+
+.menu-panel .menu-sub a {
+    padding-left: 28px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .menu-panel {
+        transition: none;
+    }
+}
+
+@media print {
+    .menu {
+        display: none;
+    }
+}

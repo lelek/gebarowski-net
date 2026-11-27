@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Zainteresowania zawodowe: formularz | Paweł Gębarowski</title>
+    <meta name="description" content="Polski formularz na podstawie O*NET® Interest Profiler Short Form: 60 czynności, sześć typów zainteresowań i trzyliterowy kod. Działa w całości w przeglądarce.">
+    <link rel="canonical" href="https://gebarowski.net/tools/interests.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="gebarowski.net">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:url" content="https://gebarowski.net/tools/interests.html">
+    <meta property="og:title" content="Zainteresowania zawodowe: formularz">
+    <meta property="og:description" content="Polski formularz na podstawie O*NET® Interest Profiler Short Form: 60 czynności, sześć typów zainteresowań i trzyliterowy kod. Działa w całości w przeglądarce.">
+    <meta property="og:image" content="https://gebarowski.net/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="gebarowski.net, Paweł Gębarowski, rozwój zawodowy">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tools.css">
+    <script type="module" src="interests.js"></script>
+    <link rel="stylesheet" href="../menu.css">
+    <script src="../menu.js" defer></script>
+</head>
+<body>
+    <div class="page">
+
+        <header class="site-header">
+            <a href="../index.html" aria-label="gebarowski.net, strona główna"><img src="../logo-small.svg" alt="gebarowski.net"></a>
+            <div class="menu">
+                <button class="menu-button" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
+                <nav class="menu-panel" id="site-menu" aria-label="Menu strony">
+                    <ul>
+                        <li><a href="../index.html">Strona główna</a></li>
+                        <li><a href="../workshops.html">Warsztat</a></li>
+                        <li><a href="../tools/">Narzędzia</a></li>
+                        <li class="menu-sub"><a href="../tools/interests.html" aria-current="page">Zainteresowania zawodowe</a></li>
+                        <li class="menu-sub"><a href="../tools/work-values.html">Wartości w&nbsp;pracy</a></li>
+                        <li><a href="../index.html#about">O mnie</a></li>
+                        <li><a href="../index.html#contact">Kontakt</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="intro">
+            <p class="eyebrow">Formularz 1 z&nbsp;2</p>
+            <h1>Zainteresowania zawodowe</h1>
+            <p>Co Cię naprawdę ciekawi: narzędzia, liczby, sztuka, ludzie, zarządzanie czy procedury? Praca, która Cię nie ciekawi, męczy, nawet gdy dobrze płaci.</p>
+            <p>Przy 60 czynnościach zaznaczasz, czy lubił(a)byś je robić w&nbsp;pracy. Z&nbsp;odpowiedzi wychodzi sześć wyników i&nbsp;kod z&nbsp;trzech liter: typy zainteresowań, które wyszły najwyżej. Ten kod pomaga znaleźć zawody do sprawdzenia.</p>
+            <p class="privacy">Twoje odpowiedzi nie opuszczają Twojej przeglądarki. Strona nic nie wysyła i&nbsp;nie zbiera statystyk. Zapamiętuje odpowiedzi tylko do zamknięcia karty.</p>
+        </div>
+
+        <section id="questionnaire" aria-labelledby="questionnaire-title">
+            <h2 id="questionnaire-title" class="visually-hidden">Pytania</h2>
+            <ul class="marked">
+                <li>Przy każdej czynności wybierz jedną odpowiedź, która najlepiej opisuje, czy lubił(a)byś to robić w&nbsp;pracy.</li>
+                <li>Nie myśl o&nbsp;tym, ile trzeba się uczyć, czy już to umiesz ani ile się za to zarabia. Nie ma dobrych ani złych odpowiedzi.</li>
+            </ul>
+            <div class="progress" aria-live="polite">
+                <div class="actions"><strong id="screen-label"></strong><span id="progress-label"></span></div>
+                <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+            </div>
+            <div class="sticky-head">
+                <div class="scale-header" aria-hidden="true">
+                    <div class="scale-labels"><span>zdecydowanie nie lubię</span><span>nie lubię</span><span>nie wiem</span><span>lubię</span><span>bardzo lubię</span></div>
+                </div>
+            </div>
+            <ul class="questions" id="questions"></ul>
+            <div class="actions">
+                <button type="button" class="button secondary" id="back">Wstecz</button>
+                <button type="button" class="button" id="next">Dalej</button>
+                <span class="status missing" id="missing" role="alert"></span>
+            </div>
+        </section>
+
+        <div class="result" id="result" hidden>
+            <section aria-labelledby="result-title">
+                <h2 id="result-title">Twój wynik</h2>
+                <p>Każdy wynik to suma odpowiedzi przy 10 czynnościach jednego typu, od 0 do 40.</p>
+                <ul class="bars" id="bars"></ul>
+                <div class="result-box">
+                    <h2>Kod zainteresowań</h2>
+                    <div class="code" id="code"></div>
+                    <p id="code-text"></p>
+                    <div id="tie"></div>
+                </div>
+            </section>
+
+            <section aria-labelledby="reading-title">
+                <h2 id="reading-title">Jak czytać wynik</h2>
+                <ul class="marked">
+                    <li>Kod to trzy typy z&nbsp;najwyższymi wynikami, od najwyższego. Zawodów warto szukać po dwóch lub trzech literach, nie tylko po pierwszej.</li>
+                    <li>Wynik to punkt wyjścia do sprawdzania zawodów, a&nbsp;nie wyrok. Mówi, co Cię ciekawi, a&nbsp;nie, w&nbsp;czym jesteś dobry(a) ani gdzie znajdziesz pracę.</li>
+                    <li>Te same zainteresowania z&nbsp;innymi wartościami prowadzą do innej pracy. Dlatego drugi formularz dotyczy <a href="work-values.html">wartości w&nbsp;pracy</a>.</li>
+                </ul>
+            </section>
+
+            <section aria-labelledby="occupations-title">
+                <h2 id="occupations-title">Gdzie szukać zawodów do tego kodu</h2>
+                <ul class="marked">
+                    <li><a id="onet-link" href="https://www.onetonline.org/explore/interests/" target="_blank" rel="noopener noreferrer">O*NET OnLine, zawody dla kodu <span id="onet-code">zainteresowań</span></a>: lista z&nbsp;kodem każdego zawodu i&nbsp;poziomem przygotowania. Po angielsku.</li>
+                    <li><a href="https://www.mynextmove.org/" target="_blank" rel="noopener noreferrer">My Next Move</a>: zawody według zainteresowań i&nbsp;poziomu przygotowania. Po angielsku.</li>
+                    <li><a href="https://mapakarier.org/sciezki-kariery/" target="_blank" rel="noopener noreferrer">Mapa Karier</a>: opisy zawodów po polsku, bez kodów zainteresowań.</li>
+                    <li><a href="https://ela.nauka.gov.pl/" target="_blank" rel="noopener noreferrer">Ekonomiczne Losy Absolwentów</a>: zarobki i&nbsp;zatrudnienie absolwentów polskich uczelni.</li>
+                </ul>
+                <div class="actions no-print">
+                    <button type="button" class="button" id="print">Drukuj wynik</button>
+                    <button type="button" class="button secondary" id="edit">Popraw odpowiedzi</button>
+                    <button type="button" class="button secondary" id="restart">Zacznij od nowa</button>
+                </div>
+            </section>
+        </div>
+
+        <section aria-labelledby="types-title">
+            <h2 id="types-title">Sześć typów zainteresowań</h2>
+            <table>
+                <thead><tr><th>Typ</th><th>Krótko</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>R</strong> Realistyczny</td><td>sprzęt, technika, rzemiosło</td></tr>
+                    <tr><td><strong>I</strong> Badawczy</td><td>analiza, nauka, logika</td></tr>
+                    <tr><td><strong>A</strong> Artystyczny</td><td>tworzenie, forma, swoboda</td></tr>
+                    <tr><td><strong>S</strong> Społeczny</td><td>pomaganie, uczenie</td></tr>
+                    <tr><td><strong>E</strong> Przedsiębiorczy</td><td>wpływ, sprzedaż, ryzyko</td></tr>
+                    <tr><td><strong>C</strong> Konwencjonalny</td><td>porządek, liczby, procedury</td></tr>
+                </tbody>
+            </table>
+            <p class="note">Czynności z&nbsp;różnych typów są celowo wymieszane: oceniasz każdą osobno, a&nbsp;nie całą kategorię.</p>
+        </section>
+
+        <section aria-labelledby="about-title">
+            <h2 id="about-title">Skąd pochodzi i&nbsp;czego nie mówi</h2>
+            <p>To polskie tłumaczenie O*NET® Interest Profiler Short Form, kwestionariusza z&nbsp;amerykańskiego systemu informacji o&nbsp;zawodach O*NET. Zachowuje 60 czynności, ich kolejność, pięciostopniową skalę i&nbsp;sposób liczenia wyniku.</p>
+            <p>Polska wersja nie była jeszcze badana. Nie wiemy, czy daje te same wyniki co oryginał ani jak wypadają polscy uczniowie. Dlatego wynik to punkt wyjścia do rozmowy, a&nbsp;nie diagnoza. Formularz nie zastępuje rozmowy z&nbsp;doradcą zawodowym.</p>
+        </section>
+
+        <section class="license" id="license" aria-labelledby="license-title">
+            <h2 id="license-title">Licencja i&nbsp;zmiany</h2>
+            <p>Tłumaczenie i&nbsp;wersja internetowa: Paweł Gębarowski, na licencji <a href="https://www.onetcenter.org/license_tools.html" target="_blank" rel="noopener noreferrer">O*NET Tools Developer License</a>. Zmiany względem oryginału: tłumaczenie na polski, forma internetowa na gebarowski.net. O*NET® jest znakiem towarowym USDOL/ETA. Użycie tej nazwy nie oznacza, że USDOL/ETA popiera tę stronę.</p>
+            <p class="legal" lang="en">This product includes information from the O*NET Career Exploration Tools by the U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). Used under the <a href="https://www.onetcenter.org/license_tools.html" target="_blank" rel="noopener noreferrer">O*NET Tools Developer License</a>. O*NET® is a&nbsp;trademark of USDOL/ETA. Paweł Gębarowski has modified all or some of this information. USDOL/ETA has not approved, endorsed, or tested these modifications.</p>
+            <p class="legal" lang="en">Modifications and disclaimers: Paweł Gębarowski has modified all of, a&nbsp;portion of, or the purpose of the O*NET® Career Exploration Tools (Polish translation, web version on gebarowski.net). The U.S. Department of Labor, Employment and Training Administration (USDOL/ETA) has not approved, endorsed, or tested these modifications. As such, USDOL/ETA will not be liable to any third party or end-user for any damages arising out of or from the use or misuse of the modified O*NET Career Exploration Tools or any products incorporating or containing the modified O*NET Career Exploration Tools.</p>
+        </section>
+
+        <footer>
+            <span>© 2026 Paweł Gębarowski</span>
+            <a href="index.html">Narzędzia</a>
+            <a href="../workshops.html">Warsztat</a>
+            <a href="../index.html">Strona główna</a>
+        </footer>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Wartości w pracy: formularz | Paweł Gębarowski</title>
+    <meta name="description" content="Polski formularz na podstawie Work Values Matcher z CareerOneStop: 20 zdań o idealnej pracy i dwie najważniejsze wartości w pracy. Działa w całości w przeglądarce.">
+    <link rel="canonical" href="https://gebarowski.net/tools/work-values.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="gebarowski.net">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:url" content="https://gebarowski.net/tools/work-values.html">
+    <meta property="og:title" content="Wartości w pracy: formularz">
+    <meta property="og:description" content="Polski formularz na podstawie Work Values Matcher z CareerOneStop: 20 zdań o idealnej pracy i dwie najważniejsze wartości w pracy. Działa w całości w przeglądarce.">
+    <meta property="og:image" content="https://gebarowski.net/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="gebarowski.net, Paweł Gębarowski, rozwój zawodowy">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tools.css">
+    <script type="module" src="work-values.js"></script>
+    <link rel="stylesheet" href="../menu.css">
+    <script src="../menu.js" defer></script>
+</head>
+<body>
+    <div class="page">
+
+        <header class="site-header">
+            <a href="../index.html" aria-label="gebarowski.net, strona główna"><img src="../logo-small.svg" alt="gebarowski.net"></a>
+            <div class="menu">
+                <button class="menu-button" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
+                <nav class="menu-panel" id="site-menu" aria-label="Menu strony">
+                    <ul>
+                        <li><a href="../index.html">Strona główna</a></li>
+                        <li><a href="../workshops.html">Warsztat</a></li>
+                        <li><a href="../tools/">Narzędzia</a></li>
+                        <li class="menu-sub"><a href="../tools/interests.html">Zainteresowania zawodowe</a></li>
+                        <li class="menu-sub"><a href="../tools/work-values.html" aria-current="page">Wartości w&nbsp;pracy</a></li>
+                        <li><a href="../index.html#about">O mnie</a></li>
+                        <li><a href="../index.html#contact">Kontakt</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="intro">
+            <p class="eyebrow">Formularz 2 z&nbsp;2</p>
+            <h1>Wartości w&nbsp;pracy</h1>
+            <p>Czego chcesz od pracy: niezależności, uznania, dobrego szefa, spokoju po pracy? Praca, która tego nie daje, szybko wypala, nawet gdy jest ciekawa.</p>
+            <p>Układasz 20 zdań o&nbsp;idealnej pracy w&nbsp;pięciu grupach, od najważniejszych do najmniej ważnych. W&nbsp;każdej grupie mieszczą się dokładnie 4 zdania, więc musisz wybierać. Z&nbsp;ułożenia wychodzi sześć wartości w&nbsp;pracy i&nbsp;dwie najważniejsze dla Ciebie.</p>
+            <p class="privacy">Twoje odpowiedzi nie opuszczają Twojej przeglądarki. Strona nic nie wysyła i&nbsp;nie zbiera statystyk. Zapamiętuje odpowiedzi tylko do zamknięcia karty.</p>
+        </div>
+
+        <section id="sorting" aria-labelledby="sorting-title">
+            <h2 id="sorting-title">W&nbsp;mojej idealnej pracy…</h2>
+            <p>Przy każdym zdaniu wybierz, jak ważne by było. Gdy grupa ma już 4 zdania, nie da się do niej dodać kolejnego. Żeby zrobić miejsce, kliknij numer zdania w&nbsp;grupie albo jeszcze raz jego zaznaczoną odpowiedź. Zdanie wróci do nieułożonych.</p>
+            <div class="sticky-head">
+                <div class="board" id="board" aria-label="Ułożenie zdań w grupach"></div>
+                <div class="scale-header" aria-hidden="true">
+                    <div class="scale-labels"><span>najważniejsze<br>5 pkt</span><span>bardziej ważne<br>4 pkt</span><span>średnio ważne<br>3 pkt</span><span>mniej ważne<br>2 pkt</span><span>najmniej ważne<br>1 pkt</span></div>
+                </div>
+            </div>
+            <ul class="questions" id="sentences"></ul>
+            <div class="actions">
+                <button type="button" class="button" id="show-result" disabled>Pokaż wynik</button>
+                <button type="button" class="button secondary" id="clear">Wyczyść</button>
+                <span class="status" id="placed-label" aria-live="polite"></span>
+            </div>
+        </section>
+
+        <div class="result" id="result" hidden>
+            <section aria-labelledby="result-title">
+                <h2 id="result-title">Twój wynik</h2>
+                <p>Każda wartość ma wynik od 6 do 30: punkty grup, w&nbsp;których stoją jej zdania, razy mnożnik. Mnożnik wyrównuje to, że wartości mają różną liczbę zdań.</p>
+                <ul class="bars" id="bars"></ul>
+                <div class="result-box">
+                    <h2>Moje dwie najważniejsze wartości</h2>
+                    <ol class="top-values" id="top-values"></ol>
+                    <div id="tie"></div>
+                </div>
+            </section>
+
+            <section aria-labelledby="reading-title">
+                <h2 id="reading-title">Jak czytać wynik</h2>
+                <ul class="marked">
+                    <li>Dwie najwyżej ocenione wartości traktuj jak warunki nie do negocjacji. Gdy sprawdzasz zawód, zapytaj osobę, która go wykonuje, czy ta praca je daje.</li>
+                    <li>Wynik to punkt wyjścia do sprawdzania zawodów, a&nbsp;nie wyrok. Odpowiedzi mogą się zmienić po pierwszej pracy lub praktykach, więc warto wtedy wrócić do formularza.</li>
+                    <li>Te same zainteresowania z&nbsp;innymi wartościami prowadzą do innej pracy. Połącz wynik z&nbsp;kodem z&nbsp;formularza <a href="interests.html">Zainteresowania zawodowe</a>.</li>
+                </ul>
+            </section>
+
+            <section aria-labelledby="key-title">
+                <h2 id="key-title">Z&nbsp;czego wyszedł wynik</h2>
+                <table>
+                    <thead><tr><th>Wartość</th><th>Zdanie: punkty</th><th>Mnożnik</th></tr></thead>
+                    <tbody id="key"></tbody>
+                </table>
+                <div class="actions no-print">
+                    <button type="button" class="button" id="print">Drukuj wynik</button>
+                    <button type="button" class="button secondary" id="edit">Popraw ułożenie</button>
+                    <button type="button" class="button secondary" id="restart">Zacznij od nowa</button>
+                </div>
+            </section>
+        </div>
+
+        <section aria-labelledby="about-title">
+            <h2 id="about-title">Skąd pochodzi i&nbsp;czego nie mówi</h2>
+            <p>To polskie tłumaczenie Work Values Matcher z&nbsp;serwisu CareerOneStop, który sponsoruje Departament Pracy USA. Narzędzie opiera się na O*NET® Work Importance Locator™. Zachowuje 20 zdań, pięć grup po cztery zdania i&nbsp;sposób liczenia wyniku.</p>
+            <p>Polska wersja nie była jeszcze badana. Dlatego wynik to punkt wyjścia do rozmowy, a&nbsp;nie diagnoza. Formularz nie zastępuje rozmowy z&nbsp;doradcą zawodowym.</p>
+        </section>
+
+        <section class="license" id="license" aria-labelledby="license-title">
+            <h2 id="license-title">Licencja i&nbsp;zmiany</h2>
+            <p>Na podstawie <a href="https://www.careeronestop.org/Toolkit/Careers/work-values-matcher.aspx" target="_blank" rel="noopener noreferrer">Work Values Matcher</a> z&nbsp;serwisu CareerOneStop, sponsorowanego przez U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). Narzędzie opiera się na O*NET® Work Importance Locator™ i&nbsp;jest udostępniane na licencji <a href="https://creativecommons.org/licenses/by/4.0/deed.pl" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Na tej samej licencji udostępniam ten formularz.</p>
+            <p>Zmiany: tłumaczenie na polski (Paweł Gębarowski) i&nbsp;forma internetowa na gebarowski.net z&nbsp;wyborem grupy przy każdym zdaniu zamiast układania kart. USDOL/ETA i&nbsp;CareerOneStop nie zatwierdziły tej wersji. O*NET® jest znakiem towarowym USDOL/ETA. Użycie tej nazwy nie oznacza, że USDOL/ETA popiera tę stronę.</p>
+        </section>
+
+        <footer>
+            <span>© 2026 Paweł Gębarowski</span>
+            <a href="index.html">Narzędzia</a>
+            <a href="../workshops.html">Warsztat</a>
+            <a href="../index.html">Strona główna</a>
+        </footer>
+
+    </div>
+</body>
+</html>
